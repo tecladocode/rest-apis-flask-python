@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 stores = [{
     'name': 'My Store',
-    'items': {'name':'my item', 'price': 15.99 }
+    'items': [{'name':'my item', 'price': 15.99 }]
 }]
 
 @app.route('/')
