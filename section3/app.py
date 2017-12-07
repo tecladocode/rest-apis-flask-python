@@ -35,7 +35,7 @@ def get_store(name):
 #get /store
 @app.route('/store')
 def get_stores():
-  return  jsonify(stores)
+  return jsonify({'stores': stores})
   #pass
 
 #post /store/<name> data: {name :}
