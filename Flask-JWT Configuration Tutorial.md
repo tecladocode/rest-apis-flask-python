@@ -5,6 +5,7 @@ Flask-JWT adds JWT functionality to Flask in an easy to use manner. It gives you
 * Change the authentication endpoint (by default, `/auth`);
 * Change the token expiration time (by default, `5 minutes`);
 * Change the authentication key name (by default, `username`).
+* Change the authentication response body (by default, only contains `access_token`).
 
 In addition, it covers how to retrieve the **currently logged in user** from any of our Flask app endpoints.
 
