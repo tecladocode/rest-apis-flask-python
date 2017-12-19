@@ -43,16 +43,14 @@ def identity(payload):
 
 ### Authentication URL
 
-If we want to change the url to the authentication endpoint, for instance, we want to use ```/login``` instead of ```/auth```, we can do something like this:
+If we want to change the url to the authentication endpoint, for instance, we want to use `/login` instead of `/auth`, we can do something like this:
 
 ```python
 app.config['JWT_AUTH_URL_RULE'] = '/login'
 jwt = JWT(app, authenticate, identity)
 ```
 
-**Important**: We added the second line of code to emphasize that we must change the JWT authentication URL first, **before creating the `JWT` instance**. Otherwise, our confuguration won't take effect. However, it is only required for configuring the auth URL, the following confurations will still take effect after requesting the `JWT` instance.
-
-If you want to change multiple configurations, make sure to put them all before creating the `JWT` instance.
+**Important**: We added the second line of code to emphasize that we must change the JWT authentication URL first, **before creating the `JWT` instance**. Otherwise, our configuration won't take effect. However, it is only required for configuring the auth URL, the following confurations will still take effect after requesting the `JWT` instance.
 
 ### Token Expiration Time
 
@@ -73,18 +71,44 @@ app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
 Sometimes we may want to include more information in the authentication response body, not just the `access_token`. For example, we may also want to include the user's ID in the response body. In this case, we can do something like this:
 
 ```python
-# customize JWT auth response, include userID in response body
+# customize JWT auth response, include user_id in response body
 from flask import jsonify
+from flask_jwt import JWT
+
+from security import authenticate, identity as identity_function
+jwt = JWT(app, authenticate, identity_function)
 
 @jwt.auth_response_handler
-def customized_response_handler(access_token,identity):
+def customized_response_handler(access_token, identity):
     return jsonify({
-                    'access_token': access_token.decode('utf-8'),
-                    'userID':identity.id
-                    })
+                        'access_token': access_token.decode('utf-8'),
+                        'user_id': identity.id
+                   })
 ```
 
-Remember that the `identity` should be what you've returned by the `authenticate()` method, and in our sample, it is a `UserModel` object which contains a field `id`. So please make sure the response body is accessing a corresponding field in your `identity` model. Moreover, it is generally not recommended to include information that is encrypted in the access_token since it may introduce security issues.
+Remember that the `identity` should be what you've returned by the `authenticate()` function, and in our sample, it is a `UserModel` object which contains a field `id`. Make sure to only access valid fields in your `identity` model!
+
+Moreover, it is generally not recommended to include information that is encrypted in the `access_token` since it may introduce security issues.
+
+### Error handler
+
+By default, Flask-JWT raises `JWTError` when an error occurs within any of the handlers (e.g. during authentication, identity, or creating the response). In some cases we may want to customize what our Flask app does when such an error occurs. We can do it this way:
+
+```python
+# customize JWT auth response, include user_id in response body
+from flask import jsonify
+from flask_jwt import JWT
+
+from security import authenticate, identity as identity_function
+jwt = JWT(app, authenticate, identity_function)
+
+@jwt.error_handler
+def customized_error_handler(error):
+    return jsonify({
+                       'message': error.description,
+                       'code': error.status_code
+                   }), error.status_code
+```
 
 ### Other Configurations
 
@@ -96,10 +120,10 @@ Please refer to the \<Configuration Options> section.
 
 ### Retrieving User From Token
 
-Another frequently asked question is: *how can I get the user's identity from an access token (JWT)?* Since in some cases, we not only want to guarantee that only our users can access this endpoint, we may want to access the user's data as well. For example, you want to restrict the access to a certain user group, not for every user. In this case, you can do something like this:
+Another frequently asked question is: *how can I get the user's identity from an access token (JWT)?* Since in some cases, we not only want to guarantee that only our users can access an endpoint, but we may want to access the user's data as well. For example, if you want to restrict the access to a certain user group, not for every user. In this case, you can do something like this:
 
 ```python
-from flask_jwt import jwt_required,current_identity
+from flask_jwt import jwt_required, current_identity
 
 
 class User(Resource):
