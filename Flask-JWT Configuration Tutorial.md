@@ -49,7 +49,7 @@ app.config['JWT_AUTH_URL_RULE'] = '/login'
 jwt = JWT(app, authenticate, identity)
 ```
 
-**Important**: We added the second line of code to emphasize that we must change the JWT configuration parameters first, **before creating the `JWT` instance**. Otherwise, our confuguration won't take effect. All of the following configurations follow the same principle.
+**Important**: We added the second line of code to emphasize that we must change the JWT authentication URL first, **before creating the `JWT` instance**. Otherwise, our confuguration won't take effect. However, it is only required for configuring the auth URL, the following confurations will still take effect after requesting the `JWT` instance.
 
 If you want to change multiple configurations, make sure to put them all before creating the `JWT` instance.
 
@@ -58,8 +58,6 @@ If you want to change multiple configurations, make sure to put them all before 
 ```python
 # config JWT to expire within half an hour
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)
-
-jwt = JWT(app, authenticate, identity)
 ```
 
 ### Authentication Key Name
@@ -67,9 +65,25 @@ jwt = JWT(app, authenticate, identity)
 ```python
 # config JWT auth key name to be 'email' instead of default 'username'
 app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
-
-jwt = JWT(app, authenticate, identity)
 ```
+
+### Authentication Response Handler
+
+Sometimes we may want to include more information in the authentication response body, not just the `access_token`. For example, we may also want to include the user's ID in the response body. In this case, we can do something like this:
+
+```python
+# customize JWT auth response, include userID in response body
+from flask import jsonify
+
+@jwt.auth_response_handler
+def customized_response_handler(access_token,identity):
+    return jsonify({
+                    'access_token': access_token.decode('utf-8'),
+                    'userID':identity.id
+                    })
+```
+
+Remember that the `identity` should be what you've returned by the `authenticate()` method, and in our sample, it is a `UserModel` object which contains a field `id`. So please make sure the response body is accessing a corresponding field in your `identity` model. Moreover, it is generally not recommended to include information that is encrypted in the access_token since it may introduce security issues.
 
 ### Other Configurations
 
