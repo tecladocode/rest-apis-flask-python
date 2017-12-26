@@ -84,7 +84,7 @@ apt-get install postgresql postgresql-contrib
 
 ## Creating another user
 
-Since the `root` user is the most powerful, we may want to limit access to it to improve security. So in this section, we will create a new user and config it to "act like" a `root` user but with certain limitation. And we will be logging as this user from now on. It is highly recommended to do so, but if you choose not to follow and simply want to login as the `root` user nonetheless, you may click [here to skip to the next section](DigitalOcean Tutorial.md#Providing user with additional privilege).
+Since the `root` user is the most powerful, we may want to limit access to it to improve security. So in this section, we will create a new user and config it to "act like" a `root` user but with certain limitation. And we will be logging as this user from now on. It is highly recommended to do so, but if you choose not to follow and simply want to login as the `root` user nonetheless, you may click [here to skip to the next section]("DigitalOcean Tutorial.md#Providing user with additional privilege").
 
 ### Hello John Doe
 
