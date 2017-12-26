@@ -20,7 +20,7 @@ DigitalOcean is a cloud infrastructure provider focused on simplifying web infra
 
 In this tutorial, we'll be offering you a $10 coupon, which can cover the cost of the most basic tier of server for 2 months. And of course you may choose to use it for higher tiers but for a shorter period. Simply click this link to create your account to get the $10 coupon: [https://m.do.co/c/d54c088544ed](https://m.do.co/c/d54c088544ed). If the link doesn't work, simply paste it into your browser.
 
-![Create an account](guides/assets/DigitalOcean/create_account.png)
+![Create an account](https://github.com/CristianoYL/rest-api-sections/blob/master/guides/assets/DigitalOcean/create_account.png)
 
 After clicking the link, you should be seeing a page like above. Simply create your account at the left-bottom corner and you'll receive the $10 coupon automatically. Beware that you'll be asked to provide payment info when creating the account, since all services (you chose) in DigitalOcean will be charged.
 
