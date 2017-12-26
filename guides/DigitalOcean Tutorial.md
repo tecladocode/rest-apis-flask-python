@@ -48,7 +48,7 @@ In our example, we do not need to add any other services such as block storage o
 
 ![DigitalOcean Access Console](assets/DigitalOcean/access_console.png)
 
-Once you've created your `Droplet`, you will receive an email containing your login (`root`) and initial password for it. Now click the "Access Console" option in the dropdown menu associated with your `Droplet` as shown in above picture.
+Once you've created your `Droplet`, you will receive an email containing your login (`root`) and initial password for it. Now click the "Access Console" option in the dropdown menu associated with your `Droplet` as shown in above image.
 
 ### Change your password
 
@@ -84,7 +84,7 @@ apt-get install postgresql postgresql-contrib
 
 ## Creating another user
 
-Since the `root` user is the most powerful, we may want to limit access to it to improve security. So in this section, we will create a new user and config it to "act like" a `root` user but with certain limitation. And we will be logging as this user from now on. It is highly recommended to do so, but if you choose not to follow and simply want to login as the `root` user nonetheless, you may click [here to skip to the next section](lin_to_next_section).
+Since the `root` user is the most powerful, we may want to limit access to it to improve security. So in this section, we will create a new user and config it to "act like" a `root` user but with certain limitation. And we will be logging as this user from now on. It is highly recommended to do so, but if you choose not to follow and simply want to login as the `root` user nonetheless, you may click [here to skip to the next section](#Providing user with additional privilege).
 
 ### Hello John Doe
 
