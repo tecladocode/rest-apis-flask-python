@@ -4,12 +4,12 @@ This is a tutorial on deploying our sample app onto DigitalOcean, a cloud comput
 
 ## Quick links
 If you are a first time learner, we do encourage you to go through the whole tutorial. However, if you are just looking for help on a specific task, here are the links to the sections you may want to refer to:
-- [DigitalOcean set-up]()
-- [App deployment (applies to any hosting platform)]()
-  - [Creating a user]()
-  - [PostgreSQL user configuration]()
-  - [Setting up nginx]()
-  - [Setting up uWSGI]()
+- [DigitalOcean set-up](DigitalOcean%20Tutorial.md#digitalocean)
+- [App deployment (applies to any hosting platform)](DigitalOcean%20Tutorial.md#deploying-applications-onto-our-server)
+  - [Creating a user](DigitalOcean%20Tutorial.md#creating-another-user)
+  - [PostgreSQL user configuration](DigitalOcean%20Tutorial.md#configuring-our-user-for-postgresql)
+  - [Setting up nginx](DigitalOcean%20Tutorial.md#setting-up-nginx)
+  - [Setting up uWSGI](DigitalOcean%20Tutorial.md#setting-up-uwsgi)
 
 # DigitalOcean
 ## Introduction
