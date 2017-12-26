@@ -3,7 +3,7 @@
 This is a tutorial on deploying our sample app onto DigitalOcean, a cloud computing platform. We will walk through whole process from creating an account to setting up a server instance and running your app on it. The process should be similar for any cloud computing services, more specifically, once you set up your server on any platform of your choice, the remaining deploying steps should be identical. So this tutorial may serve as a general guide on deploying your python app onto any hosting platforms.
 
 ## Quick links
-If you are a first time learner, we do encourage you to go through the whole tutorial. However, if you are just trying to find the last piece of your puzzle, here are the links to the sections you may want to refer to:
+If you are a first time learner, we do encourage you to go through the whole tutorial. However, if you are just looking for help on a specific task, here are the links to the sections you may want to refer to:
 - [DigitalOcean set-up]()
 - [App deployment (applies to any hosting platform)]()
   - [Creating a user]()
@@ -18,11 +18,11 @@ DigitalOcean is a cloud infrastructure provider focused on simplifying web infra
 
 ## Creating an account
 
-In this tutorial, we'll be offering you a $10 coupon, which can cover the cost of the most basic tier of server for 2 months. And of course you may choose to use it for higher tiers but for a shorter period. Simply click this link to create your account to get the $10 coupon: [https://m.do.co/c/d54c088544ed](https://m.do.co/c/d54c088544ed). If the link doesn't work, simply paste it into your browser and it should work.
+In this tutorial, we'll be offering you a $10 coupon, which can cover the cost of the most basic tier of server for 2 months. And of course you may choose to use it for higher tiers but for a shorter period. Simply click this link to create your account to get the $10 coupon: [https://m.do.co/c/d54c088544ed](https://m.do.co/c/d54c088544ed). If the link doesn't work, simply paste it into your browser.
 
-![Create an account](guide/assets/DigitalOcean/create_account.png)
+![Create an account](guides/assets/DigitalOcean/create_account.png)
 
-After clicking the link, you should be seeing a page like this. Simply create your account at the left-bottom corner and you'll recieve the $10 coupon automatically. Beware that you'll be asked to provide payment info when creating the account, since all services (you chose) in DigitalOcean will be charged.
+After clicking the link, you should be seeing a page like above. Simply create your account at the left-bottom corner and you'll receive the $10 coupon automatically. Beware that you'll be asked to provide payment info when creating the account, since all services (you chose) in DigitalOcean will be charged.
 
 ## Creating a Droplet
 
@@ -30,11 +30,11 @@ A server instance in DigitalOcean is called a `Droplet`. It's just a name that m
 
 ### Choosing an image
 
-To create a `Droplet`, we must first specify an image, that is, choosing what Operating System you want for the server. We recommand to use Ubuntu LTS (Long Term Support) distribution. For more info on Ubuntu life time, please refer to the [offcial Ubuntu end of life page here](https://www.ubuntu.com/info/release-end-of-life). In our example, we'll use `Ubuntu 16.04.* x64`, which is a LTS distribution.
+To create a `Droplet`, we must first specify an image, that is, choosing what Operating System you want for the server. We recommend to use Ubuntu LTS (Long Term Support) distribution. For more info on Ubuntu life time, please refer to the [official Ubuntu end of life page here](https://www.ubuntu.com/info/release-end-of-life). In our example, we'll use `Ubuntu 16.04.* x64`, which is a LTS distribution.
 
 ### Choosing a size
 
-Next, we need to choose the specs for our server. In this tutorial, we'll be using the most basic tier of a Standard `Droplet`, which offers a single CPU with 512MB RAM, 20GB SSD and 1000 GB transfer at $5 per month. Generally, it's more than enough for testing personal applications, you may also run serveral services at a single Droplet.
+Next, we need to choose the specs for our server. In this tutorial, we'll be using the most basic tier of a Standard `Droplet`, which offers a single CPU with 512MB RAM, 20GB SSD and 1000 GB transfer at $5 per month. Generally, it's more than enough for testing personal applications, you may also run several services at a single Droplet.
 
 ### Choosing a datacenter region
 
@@ -48,19 +48,19 @@ In our example, we do not need to add any other services such as block storage o
 
 <img src='access-consle' width=300>
 
-Once you've created your `Droplet`, you will receive an email containing your login (`root`) and intial password for it. Now click the "Access Console" option in the dropdown menu associated with your `Droplet` as shown in above picture.
+Once you've created your `Droplet`, you will receive an email containing your login (`root`) and initial password for it. Now click the "Access Console" option in the dropdown menu associated with your `Droplet` as shown in above picture.
 
 ### Change your password
 
 Now you will be prompt a console connected to your `Droplet`. Use the login `root` and the password received in your email to login. Then you will be ask to provide your password again and change it to a new password. Notice that all password field will not show any modification when you are typing, there is nothing wrong with your console, it's just a Ubuntu security feature. After changing your password, you are now logged in as the root user on your server.
 
-If you have successfully followed the tutorial so far, then you have finished all the setting-ups that are specific to DigitalOcean. The following sections can serve as a standalone tutorial and can be applied to deployment onto any other paltforms as well.
+If you have successfully followed the tutorial so far, then you have finished all the setting-ups that are specific to DigitalOcean. The following sections can serve as a standalone tutorial and can be applied to deployment onto any other platforms as well.
 
 # Deploying Applications Onto Our Server
 
 ## Connecting to our server
 
-First, we need to SSH our server. Simply use the recommand:
+First, we need to SSH our server. Simply use the recommend:
 
 ```
 ssh root@<your server ip>
@@ -123,7 +123,7 @@ root ALL=(ALL:ALL) ALL
 johndoe ALL=(ALL:ALL) ALL
 ```
 
-Remeber that the `ALL` has to be ***all-caps***, otherwise it will raise syntax error.
+Remember that the `ALL` has to be ***all-caps***, otherwise it will raise syntax error.
 
 After finishing adding this line, we use `ctrl + o` to save and press `ENTER` to overwrite, then we press `ctrl + x` to quit.
 
@@ -172,18 +172,18 @@ sudo -i -u postgres
 createuser johndoe -P
 ```
 
-After inputing and confirming the password, we now have created a postgres user. Notice that we use the same username `johndoe` to create the PostgreSQL user, since by default, postgres only allows the unix user with the same name as its postgres user to interact with it.
+After inputing and confirming the password, we now have created a Postgres user. Notice that we use the same username `johndoe` to create the PostgreSQL user, since by default, Postgres only allows the unix user with the same name as its Postgres user to interact with it.
 
 ### Creating a PostgreSQL database for our user
 
-After having created the postgres user, we use the command
+After having created the Postgres user, we use the command
 
 ```
 createdb johndoe
 ```
- to create a databse also name `johndoe`. And now we will explain the reason behind all these names.
+ to create a database also name `johndoe`. And now we will explain the reason behind all these names.
 
- In postgres, it allows a user to connect to the database with the same name by default, that is the postgres `johndoe` user can always access the database named `johndoe`. And by default, postgres only allows the unix user with the same name as its postgres user to interact with it.
+ In Postgres, it allows a user to connect to the database with the same name by default, that is the Postgres `johndoe` user can always access the database named `johndoe`. And by default, Postgres only allows the unix user with the same name as its Postgres user to interact with it.
 
  So now, our unix user `johndoe` can directly interact with the PostgreSQL database named `johndoe` using command
 
@@ -191,14 +191,14 @@ createdb johndoe
  psql
  ```
 
- Also, here are some useful postgres commands:
+ Also, here are some useful Postgres commands:
 
  To ouput the current connection info, use:
  ```
  \conninfo
  ```
 
- To quit postgres:
+ To quit Postgres:
 
  ```
  \q
@@ -206,7 +206,7 @@ createdb johndoe
 
 ### Improve security on our PostgreSQL database
 
-However, we may notice that we've created a password for the postgres user but never have to use it just because we used the same username in unix and postgres. It is not really safe, so let's fix it. Use the below command to configure postgre security options.
+However, we may notice that we've created a password for the Postgres user but never have to use it just because we used the same username in unix and Postgres. It is not really safe, so let's fix it. Use the below command to configure Postgres security options.
 
 ```
 sudo vi /etc/postgresql/9.5/main/pg_hba.conf
@@ -266,7 +266,7 @@ sudo ufw add 'Nginx HTTP'
 sudo ufw add ssh
 ```
 
-Remeber that the second line is just a precaution, it should be added already, but we don't want to get blocked out of the server!
+Remember that the second line is just a precaution, it should be added already, but we don't want to get blocked out of the server!
 
 At last, if the UFW (Ubuntu Firewall) is inactive, use the command below to activate it:
 
