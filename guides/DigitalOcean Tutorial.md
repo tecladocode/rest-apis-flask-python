@@ -201,7 +201,8 @@ createdb johndoe
 
  Also, here are some useful Postgres commands:
 
- To ouput the current connection info, use:
+ To output the current connection info, use:
+
  ```
  \conninfo
  ```
@@ -254,6 +255,7 @@ to enable password authentication.
 ## Nginx
 
 Nginx [engine x] is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server. In this tutorial, we use nginx to direct traffic to our server. Nginx can be really helpful in scenarios like running our app on multiple thread, and it is of great performance that we do not need to worry about it slowing our app down. More details about nginx can be found [here](https://nginx.org/en/).
+
 ### Installing nginx
 
 ```
@@ -289,11 +291,12 @@ And at last, if we want to check if nginx is running, we may use the command:
 systemctl status nginx
 ```
 
-Some other helful command options for system controller are:
+Some other helpful command options for system controller are:
 
 ```
 systemctl start <service_name>
 systemctl restart <service_name>
+systemctl reload <service_name>
 systemctl stop <service_name>
 ```
 
@@ -366,7 +369,7 @@ cd /var/www/html/items-rest/
 git clone https://github.com/schoolofcode-me/stores-rest-api.git .
 ```
 
-Note that there's a trailing space and period (` .`)at the end, which tells git the destination is the current folder. If you're not in this folder `/var/www/html/items-rest/`, remember to switch to it or explicitly specify it in the git command. And for the following commands in this section, we all assume that we are inside the folder `/var/www/html/items-rest/` unless specified otherwirse.
+Note that there's a trailing space and period (` .`)at the end, which tells git the destination is the current folder. If you're not in this folder `/var/www/html/items-rest/`, remember to switch to it or explicitly specify it in the git command. And for the following commands in this section, we all assume that we are inside the folder `/var/www/html/items-rest/` unless specified otherwise.
 
 In order to store logs, we need to create a log folder, (under `/var/www/html/items-rest/`):
 
@@ -386,21 +389,21 @@ Next, to install `virtualenv`:
 pip install virtualenv
 ```
 
-After it is installed, we can create a virtualenv:
+After it is installed, we can create a `virtualenv`:
 
 ```
 virtualenv venv --python==python3.5
 ```
 
-Note that Ubuntu usually comes with `Python3.5` and it is what we used in the sample code, if you choose to use different version of Python, feel free to change it accordingly, and it will be the Python version inside your virtualenv.
+Note that Ubuntu usually comes with `Python3.5` and it is what we used in the sample code, if you choose to use different version of Python, feel free to change it accordingly, and it will be the Python version inside your `virtualenv`.
 
-To activate virtualenv:
+To activate `virtualenv`:
 
 ```
 source venv/bin/activate
 ```
 
-You should see `(venv)` appears at the start of your command line now. And we assume that we are in virtualenv for all the following commands in this section unless specified otherwise.
+You should see `(venv)` appears at the start of your command line now. And we assume that we are in `virtualenv` for all the following commands in this section unless specified otherwise.
 
 Next, use the command below to install the specified dependencies:
 
@@ -451,7 +454,7 @@ The `Service` section contains several properties related to our app. The `Envir
 <database_type>://<db_username>:<db_user_password>@localhost:<db_port>/<db_name>
 ```
 
-The `ExecStart` proterty informs uWSGI on how to run our app as well as log it.
+The `ExecStart` property informs uWSGI on how to run our app as well as log it.
 
 At last, the `WantedBy` property in `Install` section allows the service to run as soon as the server boots up.
 
