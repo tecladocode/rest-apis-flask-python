@@ -7,9 +7,9 @@ If you are a first time learner, we do encourage you to go through the whole tut
 - [DigitalOcean set-up](DigitalOcean%20Tutorial.md#digitalocean)
 - [App deployment (applies to any hosting platform)](DigitalOcean%20Tutorial.md#deploying-applications-onto-our-server)
   - [Creating a unix user](DigitalOcean%20Tutorial.md#creating-another-user)
-  - [PostgreSQL user configuration](DigitalOcean%20Tutorial.md#configuring-our-user-for-postgresql)
-  - [Setting up nginx](DigitalOcean%20Tutorial.md#setting-up-nginx)
-  - [Setting up uWSGI](DigitalOcean%20Tutorial.md#setting-up-uwsgi)
+  - [Postgres configuration](DigitalOcean%20Tutorial.md#configuring-postgres)
+  - [Setting up nginx](DigitalOcean%20Tutorial.md#nginx)
+  - [Setting up uWSGI](DigitalOcean%20Tutorial.md#uwsgi)
 
 # DigitalOcean
 ## Introduction
@@ -60,31 +60,33 @@ If you have successfully followed the tutorial so far, then you have finished al
 
 ## Connecting to our server
 
-First, we need to SSH our server. Simply use the recommend:
+First, we need to SSH our server. Simply use the command:
 
 ```
 ssh root@<your server ip>
 ```
 
-and you will be asked for the root password. Beware that `SSH` command only works on Mac, not on windows. However, there are plenty of softwares that you can use to SSH from windows, `putty` is one popular option.
+and you will be asked for the root password. Beware that `SSH` command only works on Unix, not on Windows. However, there are plenty of softwares that you can use to SSH from Windows, [putty](http://www.putty.org/) is one popular choice.
 
 ## Installing required packages
 
-After connecting to our server and logged in as root user, it is recommended to run the command
+After connecting to our server and logged in as root user, it is recommended to run the command below first to get all the available updates:
 
 ```
 apt-get update
 ```
 
-first to get all the available updates. Then we use the following command to install our required packages:
+Then we use the following command to install our required packages:
 
 ```
 apt-get install postgresql postgresql-contrib
 ```
 
+Note that this is a just an example to install different packages using one command, we may need more packages in the following sections.
+
 ## Creating another user
 
-Since the `root` user is the most powerful, we may want to limit access to it to improve security. So in this section, we will create a new user and config it to "act like" a `root` user but with certain limitation. And we will be logging as this user from now on. It is highly recommended to do so, but if you choose not to follow and simply want to login as the `root` user nonetheless, you may click [here to skip to the next section](DigitalOcean%20Tutorial.md#configuring-our-user-for-postgresql).
+Since the `root` user is the most powerful, we may want to limit access to it to improve security. So in this section, we will create a new user and config it to "act like" a `root` user but with certain limitation. And we will be logging as this user from now on. It is highly recommended to do so, but if you choose not to follow and simply want to login as the `root` user anyway, you may click [here to skip to the next section](DigitalOcean%20Tutorial.md#configuring-postgres).
 
 ### Hello John Doe
 
@@ -159,11 +161,17 @@ to enable our modifications.
 
 Now we've created a new user `johndoe`, given it temporary super user privilege and enabled SSH for this user. Next, we'll be learning to link this user to our PostgreSQL database.
 
-## Configuring our user for PostgreSQL
+## Configuring Postgres
 
-Since PostgreSQL allows its own user to interact with the database, we will need to create an according user and configure it to access the database.
+Since Postgres allows its own user to interact with the database, we will need to create an according user and configure it to access the database.
 
-### Creating a PostgreSQL user
+### Installing PostgreSQL
+
+```
+apt-get install postgresql postgresql-contrib
+```
+
+### Creating a Postgres user
 
 We use the following command to create the user:
 
@@ -172,7 +180,7 @@ sudo -i -u postgres
 createuser johndoe -P
 ```
 
-After inputing and confirming the password, we now have created a Postgres user. Notice that we use the same username `johndoe` to create the PostgreSQL user, since by default, Postgres only allows the unix user with the same name as its Postgres user to interact with it.
+After inputing and confirming the password, we now have created a Postgres user. Notice that we use the same username `johndoe` to create the Postgres user, since by default, Postgres only allows the unix user with the same name as its Postgres user to interact with it.
 
 ### Creating a PostgreSQL database for our user
 
@@ -243,8 +251,9 @@ to enable password authentication.
 
 *** important: *** SQLAlchemy will ***NOT*** work unless we do this modification.
 
-## Setting up nginx
+## Nginx
 
+Nginx [engine x] is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server. In this tutorial, we use nginx to direct traffic to our server. Nginx can be really helpful in scenarios like running our app on multiple thread, and it is of great performance that we do not need to worry about it slowing our app down. More details about nginx can be found [here](https://nginx.org/en/).
 ### Installing nginx
 
 ```
@@ -266,7 +275,7 @@ sudo ufw add 'Nginx HTTP'
 sudo ufw add ssh
 ```
 
-Remember that the second line is just a precaution, it should be added already, but we don't want to get blocked out of the server!
+***important:*** Remember that the second line, adding SSH rules, is not related to nginx configuration, but since we're activating the firewall, we don't want to get blocked out of the server!
 
 At last, if the UFW (Ubuntu Firewall) is inactive, use the command below to activate it:
 
@@ -274,7 +283,200 @@ At last, if the UFW (Ubuntu Firewall) is inactive, use the command below to acti
 sudo ufw enable
 ```
 
+And at last, if we want to check if nginx is running, we may use the command:
+
+```
+systemctl status nginx
+```
+
+Some other helful command options for system controller are:
+
+```
+systemctl start <service_name>
+systemctl restart <service_name>
+systemctl stop <service_name>
+```
+
+### Configure nginx for our app
+
+Before deploying our app onto the server, we need to configure nginx for our app. Use the below command to create a config file for our app:
+
+```
+sudo vi /etc/nginx/sites-available/items-rest.conf
+```
+
+Note that `items-rest` is what we named our service, you may change it accordingly, but remember to remain consistent throughout the configurations.
+
+Next, we input the below text into `items-rest.conf` file. ***Remember to change your service name accordingly in this file as well***
+
+```
+server {
+listen 80;
+real_ip_header X-Forwarded-For;
+set_real_ip_from 127.0.0.1;
+server_name localhost;
+
+location / {
+include uwsgi_params;
+uwsgi_pass unix:/var/www/html/items-rest/socket.sock;
+uwsgi_modifier1 30;
+}
+
+error_page 404 /404.html;
+location = /404.html {
+root /usr/share/nginx/html;
+}
+
+error_page 500 502 503 504 /50x.html;
+location = /50x.html {
+root /usr/share/nginx/html;
+}
+
+}
+```
+
+Basically, the above config allows nginx to send the request, coming from our user, to our app. It also sets up some error pages for our service using nginx predefined pages.
+
+And at last, in order to enable our configuration, we need to do something like this:
+
+```
+sudo ln -s /etc/nginx/sites-available/items-rest.conf /etc/nginx/sites-enabled/
+```
+
+### Setting up our app folder
+
+First, we create a folder for our app:
+
+```
+sudo mkdir /var/www/html/items-rest
+```
+
+Since the folder is owned by root user, and if we are using another user, we need to transfer ownership to our current user:
+
+```
+sudo chown johndoe:johndoe /var/www/html/items-rest
+```
+
+Remember that `johndoe` is the username in our tutorial, make sure you change it to yours accordingly. Same goes for `items-rest`.
+
+Next, we get our app from Git:
+
+```
+cd /var/www/html/items-rest/
+git clone https://github.com/schoolofcode-me/stores-rest-api.git .
+```
+
+Note that there's a trailing space and period (` .`)at the end, which tells git the destination is the current folder. If you're not in this folder `/var/www/html/items-rest/`, remember to switch to it or explicitly specify it in the git command. And for the following commands in this section, we all assume that we are inside the folder `/var/www/html/items-rest/` unless specified otherwirse.
+
+In order to store logs, we need to create a log folder, (under `/var/www/html/items-rest/`):
+
+```
+mkdir log
+```
+
+Then we will install a bunch of tools we need to set up our app:
+
+```
+sudo apt-get install python-pip python3-dev libpq-dev
+```
+
+Next, to install `virtualenv`:
+
+```
+pip install virtualenv
+```
+
+After it is installed, we can create a virtualenv:
+
+```
+virtualenv venv --python==python3.5
+```
+
+Note that Ubuntu usually comes with `Python3.5` and it is what we used in the sample code, if you choose to use different version of Python, feel free to change it accordingly, and it will be the Python version inside your virtualenv.
+
+To activate virtualenv:
+
+```
+source venv/bin/activate
+```
+
+You should see `(venv)` appears at the start of your command line now. And we assume that we are in virtualenv for all the following commands in this section unless specified otherwise.
+
+Next, use the command below to install the specified dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+Note that `requirement.txt` is a text file that includes all the dependencies that we created in our Git folder. If you haven't done so, we highly recommend you to. We will not cover this because we don't want to diverge and confuse our readers.
+
+And we will set up uWSGI in next section and finish deploying our app.
 
 
+## uWSGI
 
-## Setting up uWSGI
+We will be using uWSGI to run the app for us, in this way, we can run it in multiple threads within multiple processes. It also allow us to log more easily. More details on uWSGI can be found [here](https://uwsgi-docs.readthedocs.io/en/latest/).
+
+First, we define a uWSGI service in the system by:
+
+```
+sudo vi /etc/systemd/system/uwsgi_items_rest.service
+```
+
+And the content we are going to input is shown below:
+
+```
+[Unit]
+Description=uWSGI items rest
+
+[Service]
+Environment=DATABASE_URL=postgres://johndoe:<johndoe_postgres_password>@localhost:5432/johndoe
+ExecStart=/var/www/html/items-rest/venv/bin/uwsgi --master --emperor /var/www/html/items-rest/uwsgi.ini --die-on-term --uid johndoe --gid johndoe --logto /var/www/html/items-rest/log/emperor.log
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
+```
+
+We will explain the basic idea of these configs. Each pair of square brackets `[]` defines a `section` which can contain some properties.
+
+The `Unit` section simply provides some basic description and can be helpful when looking at the logs.
+
+The `Service` section contains several properties related to our app. The `Environment` properties defines all the environment variables we need in our code. In our sample code, we want to retrieve the DATABASE_URL from system environment. And this is the place where you should keep all your secrets, such as secret keys and credentials. Beware that the `DATABASE_URL` should follow the format:
+
+```
+<database_type>://<db_username>:<db_user_password>@localhost:<db_port>/<db_name>
+```
+
+The `ExecStart` proterty informs uWSGI on how to run our app as well as log it.
+
+At last, the `WantedBy` property in `Install` section allows the service to run as soon as the server boots up.
+
+***important:*** Remember to change the username, password, database name and service name/folder accordingly in your own code.
+
+```
+[uwsgi]
+base = /var/www/html/items-rest
+app = run
+module = %(app)
+
+home = %(base)/venv
+pythonpath = %(base)
+
+socket = %(base)/socket.sock
+
+chmod-socket = 777
+
+processes = 8
+
+threads = 8
+
+harakiri = 15
+
+callable = app
+
+logto = /var/www/html/items-rest/log/%n.log
+```
