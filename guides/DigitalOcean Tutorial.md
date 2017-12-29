@@ -532,7 +532,7 @@ sudo systemctl restart nginx
 
 ## Deployment wrap-up
 
-As the tutorial is very detailed, you may find it a bit hard to put the pieces together. Here's a quick wrap-up that may help you sort things up.
+As the tutorial is very detailed, you may find it a bit hard to put the pieces together. Here's a quick wrap-up that may help you sort things out.
 
 - We created a unix user and granted him some privilege.
 - We set up PostgreSQL and configured our user to interact with it.
