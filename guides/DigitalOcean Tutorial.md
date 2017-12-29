@@ -340,11 +340,19 @@ root /usr/share/nginx/html;
 
 Basically, the above config allows nginx to send the request, coming from our user, to our app. It also sets up some error pages for our service using nginx predefined pages.
 
-And at last, in order to enable our configuration, we need to do something like this:
+And then, in order to enable our configuration, we need to do something like this:
 
 ```
 sudo ln -s /etc/nginx/sites-available/items-rest.conf /etc/nginx/sites-enabled/
 ```
+
+At last, we need to do this:
+
+```
+sudo rm /etc/nginx/sites-available/default
+```
+
+Since nginx will look into the default configuration instead of ours unless we delete this file.
 
 ### Setting up our app folder
 
@@ -420,6 +428,8 @@ And we will set up uWSGI in next section and finish deploying our app.
 
 We will be using uWSGI to run the app for us, in this way, we can run it in multiple threads within multiple processes. It also allow us to log more easily. More details on uWSGI can be found [here](https://uwsgi-docs.readthedocs.io/en/latest/).
 
+### Defining a uWSGI service
+
 First, we define a uWSGI service in the system by:
 
 ```
@@ -458,7 +468,13 @@ The `ExecStart` property informs uWSGI on how to run our app as well as log it.
 
 At last, the `WantedBy` property in `Install` section allows the service to run as soon as the server boots up.
 
-***important:*** Remember to change the username, password, database name and service name/folder accordingly in your own code.
+***Important:*** remember to change the username, password, database name and service name/folder accordingly in your own code.
+
+*Hint:* after editting the above file, press `ESC` to quit insert mode and use `:wq` to write and quit.
+
+### Configuring uWSGI
+
+Our next step is to configure uWSGI to run our app. To do so, we need to create a file named `uwsgi.ini` with the following content:
 
 ```
 [uwsgi]
@@ -483,3 +499,44 @@ callable = app
 
 logto = /var/www/html/items-rest/log/%n.log
 ```
+
+Note that you should change the `base` folder accordingly in your own app. For the second entry, `run` is referred to the `run.py` in our sample app, which serves as the entry point of our app, so you may need to change it accordingly in your own project as well. We defined the socket.sock file here which is required in our previous [nginx section](DigitalOcean%20Tutorial.md#configure-nginx-for-our-app). Hopefully everything should link together and starting to make sense now. We asked for 8 processes with 8 threads each for no particular reason, you may adjust them according to your server capacity and data volume. The `harakiri` is a Japanese word for suicide, so in here it means for how long (in seconds) will the `emperor` kill the thread if it has failed. This is also an advantage we have with uWSGI, it allows our service to be resilient to minor failures. And it also specifies the log location.
+
+And at last, after saving the above file, we use the command below to run the uWSGI service we defined earlier:
+
+```
+sudo systemctl start uwsgi_items_rest
+```
+
+And we should be able to check the uWSGI logs immediately to make sure it's running by using the command:
+
+```
+vi /log/uwsgi.log
+```
+
+### Running our app
+
+Finally, we can launch our app! We can do so by starting the nginx and uWSGI services we defined.
+
+```
+sudo systemctl start nginx
+sudo systemctl start uwsgi_items_rest
+```
+
+If any of these services is already running, you may use the below commands (taking nginx for example) to reload and restart it so that it has the latest changes:
+
+```
+sudo systemctl reload nginx
+sudo systemctl restart nginx
+```
+
+## Deployment wrap-up
+
+As the tutorial is very detailed, you may find it a bit hard to put the pieces together. Here's a quick wrap-up that may help you sort things up.
+
+- We created a unix user and granted him some privilege.
+- We set up PostgreSQL and configured our user to interact with it.
+- We used uWSGI to run our app multi-processly and multi-threadly.
+- We used nginx to direct requests to our uWSGI service.
+
+Thanks for reading!
