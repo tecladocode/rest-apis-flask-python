@@ -38,7 +38,7 @@ In order to let Heroku understand our project, we need to add some files to tell
 
 #### runtime.txt
 
-The first file we need to add is called `runtime.txt`. And this is ***important*** that we have to name the file this way so that Heroku knows where to look at. All the filenames should remain unchanged for the following files we introduce unless specified otherwise. The `runtime.txt` file should contain what language and version you are using for the application. So for our sample project, our `runtime.txt` content should look like this:
+The first file we need to add is called `runtime.txt`. And it is **important** that we have to name the file this way so that Heroku knows where to look at. All the filenames should remain unchanged for the following files we introduce unless specified otherwise. The `runtime.txt` file should contain what language and version you are using for the application. So for our sample project, our `runtime.txt` content should look like this:
 
 ```
 python-3.5.2
