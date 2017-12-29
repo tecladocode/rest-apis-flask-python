@@ -8,7 +8,7 @@ Heroku is a cloud platform for deploying and running modern apps. A more detaile
 
 Some of the key advantages of Heroku include:
 - No server side knowledge is required, so it is easy to set up.
-- It can be free, but the free tier has some limitations, which we will discuss later when we introduce [`Dyno`]().
+- It can be free, but the free tier has some limitations, which we will discuss later when we introduce [`Dyno`](Heroku%20Tutorial.md#creating-a-heroku-dyno).
 - It enables SSL so the communication between your app and its users are encrypted.
 
 
