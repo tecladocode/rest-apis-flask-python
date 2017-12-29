@@ -1,6 +1,6 @@
 # Overview
 
-In this tutorial, we will introduce a popular cloud application platform called Heroku. We will briefly describe [what Heroku is](Heroku%20Tutorial.md#what-is-heroku) and [how to use it](Heroku%20Tutorial.md#deploying-our-app-to-heroku).
+In this tutorial, we will introduce a popular cloud application platform called Heroku. We will briefly describe [what Heroku is](Heroku%20Tutorial.md#what-is-heroku) and [how to use it](Heroku%20Tutorial.md#deploying-our-app-onto-heroku).
 
 # What is Heroku
 
