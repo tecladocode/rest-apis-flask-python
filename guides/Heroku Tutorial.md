@@ -6,7 +6,7 @@ In this tutorial, we will introduce a popular cloud application platform called 
 
 Heroku is a cloud platform for deploying and running modern apps. A more detailed Introduction can be found [here](https://www.heroku.com/platform).
 
-Some of the key advantages of Heorku include:
+Some of the key advantages of Heroku include:
 - No server side knowledge is required, so it is easy to set up.
 - It can be free, but the free tier has some limitations, which we will discuss later when we introduce [`Dyno`]().
 - It enables SSL so the communication between your app and its users are encrypted.
@@ -14,12 +14,12 @@ Some of the key advantages of Heorku include:
 
 # Deploying our app onto Heroku
 
-In this section, we will descrbe in length on how to deploy our app onto Heroku.
+In this section, we will describe in length on how to deploy our app onto Heroku.
 
 ## Preparing our code
 
 Before we start deploying our app into Heroku, we need to make some preparation:
-- We will be using GitHub to store our application source code and make it available for Heorku.
+- We will be using GitHub to store our application source code and make it available for Heroku.
 - We need to add a few files to allow Heroku to understand and run our application.
 
 We will explain exactly how to do it in this section.
@@ -46,7 +46,7 @@ python-3.5.2
 
 #### requirement.txt
 
-The next file we need to add is called `requirement.txt`, which specifies all the depencies of our project. So for our sample project, we will have something like this for the `requirement.txt` file:
+The next file we need to add is called `requirement.txt`, which specifies all the dependencies of our project. So for our sample project, we will have something like this for the `requirement.txt` file:
 
 ```
 Flask
@@ -61,7 +61,7 @@ Note that we are running a `Python` project, and `uWSGI` is used to run `Python`
 
 #### uwsgi.ini \*
 
-The `uwsgi.ini` file is only neccesary if you are running a `Python` app and choose to use `uWSGI`, which is highly recommended in this case. For our sample project, we have a `uwsgi.ini` file that looks like this:
+The `uwsgi.ini` file is only necessary if you are running a `Python` app and choose to use `uWSGI`, which is highly recommended in this case. For our sample project, we have a `uwsgi.ini` file that looks like this:
 
 ```
 [uwsgi]
@@ -94,7 +94,7 @@ The last file we need to add is called `Procfile`. It will tell Heroku how to ru
 web: uwsgi uwsgi.ini
 ```
 
-And this is all the preparation we need in our project for Heroku. Remeber to `push` these changes to your GitHub repository.
+And this is all the preparation we need in our project for Heroku. Remember to `push` these changes to your GitHub repository.
 
 ## Setting up Heroku for our app
 
@@ -134,7 +134,7 @@ Next, select the `Deploy` tab in the app page:
 
 <img src="assets/Heroku/select_tab.png" width =500>
 
-Then click the `GitHub` option in `Deployment method` section and enter your credentials to connect Heroku with your GitHub. Next, select the repository and branch (select `master` if you haven't created any other branches) where your project is. Once it is done, you can directly deploy your app from GitHub onto Heroku by clicking the button `Deploy Branch`. Heroku will take care of the rest for you from now on. After a few seconds, Heroku shoul finish deploying for you:
+Then click the `GitHub` option in `Deployment method` section and enter your credentials to connect Heroku with your GitHub. Next, select the repository and branch (select `master` if you haven't created any other branches) where your project is. Once it is done, you can directly deploy your app from GitHub onto Heroku by clicking the button `Deploy Branch`. Heroku will take care of the rest for you from now on. After a few seconds, Heroku will finish deploying for you:
 
 <img src="assets/Heroku/deploy.png">
 
