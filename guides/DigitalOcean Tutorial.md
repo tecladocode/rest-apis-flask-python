@@ -20,7 +20,7 @@ DigitalOcean is a cloud infrastructure provider focused on simplifying web infra
 
 ## Creating an account
 
-You can sign up to DigitalOcean using our affiliate link. Doing so gives you a starting credit of $10, which allows you to rent a server for 2 months. Click this link to create your account and get the $10: [https://m.do.co/c/d54c088544ed](https://m.do.co/c/d54c088544ed). If the link doesn't work, paste it into your browser. 
+You can sign up to DigitalOcean using our affiliate link. Doing so gives you a starting credit of $10, which allows you to rent a server for 2 months. Click this link to create your account and get the $10: [https://m.do.co/c/d54c088544ed](https://m.do.co/c/d54c088544ed). If the link doesn't work, paste it into your browser.
 
 ![Create an account](assets/DigitalOcean/create_account.png)
 
@@ -503,7 +503,7 @@ sudo systemctl start uwsgi_items_rest
 And we should be able to check the uWSGI logs immediately to make sure it's running by using the command:
 
 ```
-vi /log/uwsgi.log
+vi log/uwsgi.log
 ```
 
 ### Running our app
