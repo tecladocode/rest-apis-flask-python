@@ -503,7 +503,7 @@ sudo systemctl start uwsgi_items_rest
 And we should be able to check the uWSGI logs immediately to make sure it's running by using the command:
 
 ```
-vi /log/uwsgi.log
+vi log/uwsgi.log
 ```
 
 ### Running our app
