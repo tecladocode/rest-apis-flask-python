@@ -18,7 +18,7 @@ class UserRegister(Resource):
                         )
 
     def post(self):
-        data = UserRegister.parser.parse_args()
+        data = self.parser.parse_args()
 
         if UserModel.find_by_username(data['username']):
             return {"message": "A user with that username already exists"}, 400
@@ -43,7 +43,7 @@ class UserLogin(Resource):
                         )
 
     def post(self):
-        data = UserRegister.parser.parse_args()
+        data = self.parser.parse_args()
 
         user = UserModel.find_by_username(data['username'])
 
@@ -72,7 +72,7 @@ class UserFreshLogin(Resource):
                         )
 
     def post(self):
-        data = UserRegister.parser.parse_args()
+        data = self.parser.parse_args()
 
         user = UserModel.find_by_username(data['username'])
 
