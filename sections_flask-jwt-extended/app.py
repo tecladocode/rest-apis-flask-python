@@ -2,8 +2,8 @@ from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
-from resources.refresh_token import TokenRefresh
-from resources.user import UserRegister, UserLogin, UserFreshLogin
+from db import db
+from resources.user import UserRegister, UserLogin, TokenRefresh
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
@@ -11,18 +11,20 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
+db.init_app(app)
+
 """
 JWT related configurations began. The following functions includes:
 1) add claims to each jwt
 2) customize the token expired error message 
 """
-app.config['JWT_SECRET_KEY'] = 'super-secret'
+app.config['JWT_SECRET_KEY'] = 'jose'   # we can also use app.secret like before, Flask-JWT-Extended can recognize both
 app.config['JWT_BLACKLIST_ENABLED'] = True  # enable blacklist feature
 app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']  # allow blacklisting for access and refresh tokens
 jwt = JWTManager(app)
 
 """
-claims are data we choose to attached to each jwt payload
+`claims` are data we choose to attached to each jwt payload
 and for each jwt protected endpoint, we can retrieve these claims via `get_jwt_claims()`
 one possible use case for claims are access level control, which is shown below
 """
@@ -30,22 +32,22 @@ one possible use case for claims are access level control, which is shown below
 
 @jwt.user_claims_loader
 def add_claims_to_jwt(identity):
-    if identity == 1:
+    if identity == 1:   # instead of hard-coding, we can read from a config file to get a list of admins instead
         return {'isAdmin': True}
     return {'isAdmin': False}
 
 
+black_list = [4, 6]  # user.id that are black listed (can be read from a file or db too)
 
-black_list = [2, 4, 6]  # user.id that are black listed
 
-
-# this method will check if a token is blacklisted, and will be called automatically when blacklist is enabled
+# This method will check if a token is blacklisted, and will be called automatically when blacklist is enabled
 @jwt.token_in_blacklist_loader
 def check_if_token_in_blacklist(decrypted_token):
     return decrypted_token['identity'] in black_list
 
 
-# the following callbacks are used for customizing jwt response/error messages
+# The following callbacks are used for customizing jwt response/error messages.
+# The original ones may not be in a very pretty format (opinionated)
 @jwt.expired_token_loader
 def expired_token_callback():
     return jsonify({
@@ -55,7 +57,7 @@ def expired_token_callback():
 
 
 @jwt.invalid_token_loader
-def invalid_token_callback(error):
+def invalid_token_callback(error):  # we have to keep the argument here, since it's passed in by the caller internally
     return jsonify({
         'message': 'Signature verification failed.',
         'error': 'invalid_token'
@@ -85,24 +87,21 @@ def revoked_token_callback():
         'error': 'token_revoked'
     }), 401
 
-# JWT configuration ends ###################################
+# JWT configuration ends
 
 
 @app.before_first_request
 def create_tables():
     db.create_all()
 
-api.add_resource(TokenRefresh, '/refresh')
+
 api.add_resource(Store, '/store/<string:name>')
 api.add_resource(StoreList, '/stores')
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
 api.add_resource(UserRegister, '/register')
 api.add_resource(UserLogin, '/login')
-api.add_resource(UserFreshLogin, '/fresh_login')
+api.add_resource(TokenRefresh, '/refresh')
 
 if __name__ == '__main__':
-    from db import db
-
-    db.init_app(app)
     app.run(port=5000, debug=True)

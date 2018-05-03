@@ -13,33 +13,34 @@ This section presents the basic usage of an active flask JWT extension called `f
 ## Related Resources
 
 ### UserLogin
-- `POST: /login`
-    - Description: authenticate a user and ,if authenticated, respond with an access token and a refresh token.
 
-### UserFreshLogin
-- `POST: /fresh_login`
-    - Description: authenticate a user and ,if authenticated, respond with a fresh access token.    
+- `POST: /login`
+    - Description: authenticate a user and ,if authenticated, respond with a fresh access token and a refresh token.
+
+### TokenRefresh
+
+- `POST: /refresh`
+    - Description: This endpoint is used to refresh an expired access token. If the refresh token is valid, respond with a new valid access token (non-fresh). 
+    - Request header: `Authorization Bearer <refresh_token>`    
 
 ### Item
 
 - `GET: /item/<name>`
-    - Description: require a valid JWT to access this endpoint.
+    - Description: get an item by name, require a valid access token to access this endpoint.
     - Request header: `Authorization Bearer <access_token>`
 - `POST: /item/<name>`
-    - Description: require a valid and fresh JWT to access this endpoint.
-    - Request header: `Authorization Bearer <fresh_access_token>`
+    - Description: create a new item, require a valid and fresh access token to access this endpoint.
+    - Request header: `Authorization Bearer <access_token>`
+- `DELETE: /item/<name>`
+    - Description: delete an item by name, require a valid access token and admin privilege.
+    - Request header: `Authorization Bearer <access_token>`
     
 ### ItemList
 
 - `GET: /items`
-    - Description: require a valid JWT and appropriate user privilege to access this endpoint. The user privilege is provided as claims within the JWT payload. 
+    - Description: get all items, half protected. User can get more detailed info when providing an access token.  
     - Request header: `Authorization Bearer <access_token>`
-    
-### TokenRefresh
 
-- `POST: /refresh`
-    - Description: This endpoint is used to refresh an expired access token. If the refresh token is valid, respond with a new valid access token. 
-    - Request header: `Authorization Bearer <refresh_token>`
         
 
 
