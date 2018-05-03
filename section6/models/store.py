@@ -1,5 +1,6 @@
 from db import db
 
+
 class StoreModel(db.Model):
     __tablename__ = 'stores'
 
