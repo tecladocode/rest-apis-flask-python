@@ -14,11 +14,11 @@ api = Api(app)
 db.init_app(app)
 
 """
-JWT related configurations began. The following functions includes:
+JWT related configuration. The following functions includes:
 1) add claims to each jwt
 2) customize the token expired error message 
 """
-app.config['JWT_SECRET_KEY'] = 'jose'   # we can also use app.secret like before, Flask-JWT-Extended can recognize both
+app.config['JWT_SECRET_KEY'] = 'jose'  # we can also use app.secret like before, Flask-JWT-Extended can recognize both
 app.config['JWT_BLACKLIST_ENABLED'] = True  # enable blacklist feature
 app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']  # allow blacklisting for access and refresh tokens
 jwt = JWTManager(app)
@@ -28,8 +28,6 @@ jwt = JWTManager(app)
 and for each jwt protected endpoint, we can retrieve these claims via `get_jwt_claims()`
 one possible use case for claims are access level control, which is shown below
 """
-
-
 @jwt.user_claims_loader
 def add_claims_to_jwt(identity):
     if identity == 1:   # instead of hard-coding, we can read from a config file to get a list of admins instead
