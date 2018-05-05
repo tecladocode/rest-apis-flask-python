@@ -24,13 +24,13 @@ app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']  # allow blackl
 jwt = JWTManager(app)
 
 """
-`claims` are data we choose to attached to each jwt payload
+`claims` are data we choose to attach to each jwt payload
 and for each jwt protected endpoint, we can retrieve these claims via `get_jwt_claims()`
 one possible use case for claims are access level control, which is shown below
 """
 @jwt.user_claims_loader
 def add_claims_to_jwt(identity):
-    if identity == 1:   # instead of hard-coding, we can read from a config file to get a list of admins instead
+    if identity == 1:   # instead of hard-coding, we should read from a config file to get a list of admins instead
         return {'is_admin': True}
     return {'is_admin': False}
 
