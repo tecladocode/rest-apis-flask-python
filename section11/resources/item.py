@@ -80,4 +80,7 @@ class ItemList(Resource):
         items = [item.json() for item in ItemModel.find_all()]
         if user_id:
             return {'items': items}, 200
-        return {'items': [item['name'] for item in items]}, 401
+        return {
+            'items': [item['name'] for item in items],
+            'message': 'More data available if you log in.'
+        }, 200

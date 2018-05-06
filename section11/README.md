@@ -83,7 +83,7 @@ tips:
 Introduce the concept of `claims`, it's just the data we choose to attach to the JWT payload. Use the `Item.delete()` endpoint as example, we make it only accessible by authenticated admins. So we need to configure the claims in `app.py` and decide whether a user is an admin, then we add a boolean claim `is_admin` to the JWT payload.
 
 tips:
-- `get_jwt_oidentity()` now as opposed to `current_identity`
+- `get_jwt_identity()` now as opposed to `current_identity`
 - The identity is just the user id now as opposed to a UserModel object.
 
 ### Half protected endpoints
