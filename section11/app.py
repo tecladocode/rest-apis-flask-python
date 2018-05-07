@@ -3,7 +3,8 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
 from db import db
-from resources.user import UserRegister, UserLogin, User, TokenRefresh
+from blacklist import BLACKLIST
+from resources.user import UserRegister, UserLogin, User, TokenRefresh, UserLogout
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
@@ -35,13 +36,10 @@ def add_claims_to_jwt(identity):
     return {'is_admin': False}
 
 
-black_list = [4, 6]  # user.id that are black listed (can be read from a file or db too)
-
-
 # This method will check if a token is blacklisted, and will be called automatically when blacklist is enabled
 @jwt.token_in_blacklist_loader
 def check_if_token_in_blacklist(decrypted_token):
-    return decrypted_token['identity'] in black_list
+    return decrypted_token['jti'] in BLACKLIST
 
 
 # The following callbacks are used for customizing jwt response/error messages.
@@ -101,6 +99,7 @@ api.add_resource(UserRegister, '/register')
 api.add_resource(UserLogin, '/login')
 api.add_resource(User, '/user/<int:user_id>')
 api.add_resource(TokenRefresh, '/refresh')
+api.add_resource(UserLogout, '/logout')
 
 if __name__ == '__main__':
     db.init_app(app)
