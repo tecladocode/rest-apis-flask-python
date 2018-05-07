@@ -37,27 +37,73 @@
 					"response": []
 				},
 				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"jose\",\n\t\"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{server_address}}/user/1",
+							"host": [
+								"{{server_address}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"jose\",\n\t\"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{server_address}}/user/2",
+							"host": [
+								"{{server_address}}"
+							],
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "login",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "d73931b5-5e53-4efd-b3f1-06219fd5c88d",
+								"id": "8c0c0ed6-c206-4c88-9349-429e024e312b",
 								"type": "text/javascript",
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"jwt_token not empty\"] = jsonData.access_token !== undefined;",
-									"if (jsonData.access_token !== undefined) {",
-									"    postman.setEnvironmentVariable(\"jwt_token\", jsonData.access_token);",
-									"} else {",
-									"    postman.setEnvironmentVariable(\"jwt_token\", null);",
-									"}",
-									"",
-									"pm.test(\"jwt_token not empty 2\", function () {",
-									"    var jsonData = pm.response.json();",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"access_token not empty\", function () {",
 									"    pm.expect(jsonData.access_token).not.eql(undefined);",
 									"});",
 									"",
+									"pm.test(\"refresh token not empty\", function () {",
+									"    pm.expect(jsonData.refresh_token).not.eql(undefined);",
+									"});",
+									"// set access token as environement variable",
+									"if (jsonData.access_token !== undefined) {",
+									"    postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+									"} else {",
+									"    postman.setEnvironmentVariable(\"access_token\", null);",
+									"}",
+									"// set refresh token as environement variable",
 									"if (jsonData.refresh_token !== undefined) {",
 									"    postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
 									"} else {",
@@ -92,20 +138,61 @@
 					"response": []
 				},
 				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dc763e9b-e6c7-4ff3-9766-637976a5c64b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server_address}}/logout",
+							"host": [
+								"{{server_address}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "refresh token",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "a4c2fd32-e292-4490-b4b6-d01f15be0925",
+								"id": "ad818ea6-8f79-436e-b756-ad878666ae9e",
 								"type": "text/javascript",
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"jwt_token not empty\"] = jsonData.access_token !== undefined;",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"access_token not empty\", function () {",
+									"    pm.expect(jsonData.access_token).not.eql(undefined);",
+									"});",
+									"// set access token as environement variable",
 									"if (jsonData.access_token !== undefined) {",
-									"    postman.setEnvironmentVariable(\"jwt_token\", jsonData.access_token);",
+									"    postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
 									"} else {",
-									"    postman.setEnvironmentVariable(\"jwt_token\", null);",
+									"    postman.setEnvironmentVariable(\"access_token\", null);",
 									"}"
 								]
 							}
@@ -152,7 +239,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{jwt_token}}"
+								"value": "Bearer {{access_token}}"
 							}
 						],
 						"body": {},
@@ -176,7 +263,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{jwt_token}}"
+								"value": "Bearer {{access_token}}"
 							},
 							{
 								"key": "Content-Type",
@@ -207,7 +294,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{jwt_token}}"
+								"value": "Bearer {{access_token}}"
 							},
 							{
 								"key": "Content-Type",
@@ -238,7 +325,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{jwt_token}}"
+								"value": "Bearer {{access_token}}"
 							},
 							{
 								"key": "Content-Type",
@@ -269,7 +356,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{jwt_token}}"
+								"value": "Bearer {{access_token}}"
 							}
 						],
 						"body": {
