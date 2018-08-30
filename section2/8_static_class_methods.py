@@ -6,7 +6,7 @@ class Student:
         self.marks = []
 
     def average(self):
-        return sum(marks) / len(marks)
+        return sum(self.marks) / len(self.marks)
 
     def go_to_school(self):
         return "I'm going to {}".format(self.school)
@@ -26,7 +26,7 @@ class Student:
         self.marks = []
 
     def average(self):
-        return sum(marks) / len(marks)
+        return sum(self.marks) / len(self.marks)
 
     def go_to_school(self):
         return "I'm going to school"
@@ -46,7 +46,7 @@ class Student:
         self.marks = []
 
     def average(self):
-        return sum(marks) / len(marks)
+        return sum(self.marks) / len(self.marks)
 
     @staticmethod
     def go_to_school():
@@ -67,7 +67,7 @@ class Student:
         self.marks = []
 
     def average(self):
-        return sum(marks) / len(marks)
+        return sum(self.marks) / len(self.marks)
 
     def friend(self, friend_name):
         return Student(friend_name, self.school)
@@ -77,3 +77,4 @@ anna = Student("Anna", "Oxford")
 friend = anna.friend("Greg")
 print(friend.name)
 print(friend.school)
+
