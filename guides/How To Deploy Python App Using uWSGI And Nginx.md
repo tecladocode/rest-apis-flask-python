@@ -285,7 +285,7 @@ pip install virtualenv
 After it is installed, we can create a `virtualenv`:
 
 ```
-virtualenv venv --python==python3.5
+virtualenv venv --python=python3.5
 ```
 
 Note that `Ubuntu` usually comes with `Python3.5` and it is what we used in the sample code, if you choose to use different versions of `Python`, feel free to change it accordingly and it will be the Python version inside your `virtualenv`.
@@ -509,7 +509,7 @@ The above config allows `nginx` to send the request coming from our user's brows
 And at last, in order to enable our configuration, we need to do something like this:
 
 ```
-sudo rm /etc/nginx/site-enabled/default
+sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/items-rest.conf /etc/nginx/sites-enabled/
 ```
 
