@@ -6,7 +6,7 @@ To create a new user, run the following command and enter the user details as pr
 adduser jose
 ```
 
-# Add the new user to sudo users
+### Add the new user to sudo users
 
 Running the visudo command will open a file (normally located at /etc/sudoers). 
 ```bash
@@ -21,7 +21,7 @@ jose ALL=(ALL:ALL) ALL
 
 Save the file with CNTR+O and press enter to save it. Then CNTR+X to exit the file.
 
-# To enable logging in to the server as the newly created user, enable password login to the server by running
+### To enable logging in to the server as the newly created user, enable password login to the server by running
 
 ```bash
 vi /etc/ssh/sshd_config
