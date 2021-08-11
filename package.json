@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "cur:dev": "vuepress dev curriculum",
+    "cur:build": "vuepress build curriculum",
+    "deploy": "npm run cur:build && surge --project ./curriculum/.vuepress/dist/ --domain https://python-web.teclado.com"
+  },
+  "devDependencies": {
+    "surge": "^0.21.3",
+    "vuepress": "^1.8.2"
+  },
+  "dependencies": {
+    "markdown-it-footnote": "^3.0.3",
+    "vuepress-plugin-plausible": "0.0.2"
+  }
+}
