@@ -26,12 +26,12 @@ jwt = JWT(app, authenticate, identity)  # /auth
 And in our security.py file, we should have something like this:
 
 ```python
-from werkzeug.security import safe_str_cmp
+from hmac import compare_digest
 from models.user import UserModel
 
 def authenticate(username, password):
     user = UserModel.find_by_username(username)
-    if user and safe_str_cmp(user.password, password):
+    if user and compare_digest(user.password, password):
         return user
 
 def identity(payload):
