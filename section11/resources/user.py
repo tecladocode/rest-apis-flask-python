@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from werkzeug.security import safe_str_cmp
+from hmac import compare_digest
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
@@ -43,7 +43,7 @@ class UserLogin(Resource):
 
         user = UserModel.find_by_username(data['username'])
 
-        if user and safe_str_cmp(user.password, data['password']):
+        if user and compare_digest(user.password, data['password']):
             access_token = create_access_token(identity=user.id, fresh=True)
             refresh_token = create_refresh_token(user.id)
             return {
