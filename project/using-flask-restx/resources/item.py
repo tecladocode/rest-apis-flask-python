@@ -23,7 +23,7 @@ class Item(Resource):
                 "message": "An item with name '{}' already exists.".format(name)
             }, 400
 
-        data = item_schema.load(request.json)
+        data = item_schema.load(request.get_json())
 
         item = ItemModel(name=name, **data)
 
@@ -47,7 +47,7 @@ class Item(Resource):
         return {"message": "Item not found."}, 404
 
     def put(self, name):
-        data = item_schema.load(request.json)
+        data = item_schema.load(request.get_json())
 
         item = ItemModel.find_by_name(name)
 
