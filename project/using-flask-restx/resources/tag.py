@@ -1,4 +1,4 @@
-from flask_restful import Resource, reqparse
+from flask_restx import Resource, reqparse
 from models import TagModel
 from models import ItemModel
 from werkzeug.exceptions import BadRequest
