@@ -1,3 +1,4 @@
+from flask import request
 from flask_restx import Resource, reqparse
 from flask_jwt_extended import (
     create_access_token,
@@ -9,26 +10,23 @@ from flask_jwt_extended import (
 from passlib.hash import pbkdf2_sha256
 
 from models import UserModel
+from schemas import UserSchema
 from blocklist import BLOCKLIST
 
-_user_parser = reqparse.RequestParser()
-_user_parser.add_argument(
-    "username", type=str, required=True, help="This field cannot be blank."
-)
-_user_parser.add_argument(
-    "password", type=str, required=True, help="This field cannot be blank."
-)
+
+user_schema = UserSchema()
 
 
 class UserRegister(Resource):
     def post(self):
-        data = _user_parser.parse_args()
+        user_data = user_schema.load(request.get_json())
 
-        if UserModel.find_by_username(data["username"]):
+        if UserModel.find_by_username(user_data["username"]):
             return {"message": "A user with that username already exists"}, 400
 
         user = UserModel(
-            username=data["username"], password=pbkdf2_sha256.hash(data["password"])
+            username=user_data["username"],
+            password=pbkdf2_sha256.hash(user_data["password"]),
         )
         user.save_to_db()
 
@@ -37,11 +35,11 @@ class UserRegister(Resource):
 
 class UserLogin(Resource):
     def post(self):
-        data = _user_parser.parse_args()
+        user_data = user_schema.load(request.get_json())
 
-        user = UserModel.find_by_username(data["username"])
+        user = UserModel.find_by_username(user_data["username"])
 
-        if user and pbkdf2_sha256.verify(data["password"], user.password):
+        if user and pbkdf2_sha256.verify(user_data["password"], user.password):
             access_token = create_access_token(identity=user.id, fresh=True)
             refresh_token = create_refresh_token(user.id)
             return {"access_token": access_token, "refresh_token": refresh_token}, 200
@@ -70,7 +68,7 @@ class User(Resource):
         user = UserModel.find_by_id(user_id)
         if not user:
             return {"message": "User Not Found"}, 404
-        return user.json(), 200
+        return user_schema.dump(user), 200
 
     @classmethod
     def delete(cls, user_id: int):
