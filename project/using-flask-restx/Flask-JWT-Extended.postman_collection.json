@@ -1,0 +1,483 @@
+{
+	"info": {
+		"_postman_id": "74a1833f-bc4e-4e85-a525-72d268ab9999",
+		"name": "Flask-JWT-Extended",
+		"description": "This collection contains requests associated witht the Flask-JWT-Extended section of the REST API course.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"description": "",
+			"item": [
+				{
+					"name": "register a new user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"jose\",\n\t\"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{server_address}}/register",
+							"host": [
+								"{{server_address}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"jose\",\n\t\"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{server_address}}/user/1",
+							"host": [
+								"{{server_address}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"jose\",\n\t\"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{server_address}}/user/2",
+							"host": [
+								"{{server_address}}"
+							],
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8c0c0ed6-c206-4c88-9349-429e024e312b",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"access_token not empty\", function () {",
+									"    pm.expect(jsonData.access_token).not.eql(undefined);",
+									"});",
+									"",
+									"pm.test(\"refresh token not empty\", function () {",
+									"    pm.expect(jsonData.refresh_token).not.eql(undefined);",
+									"});",
+									"// set access token as environement variable",
+									"if (jsonData.access_token !== undefined) {",
+									"    postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+									"} else {",
+									"    postman.setEnvironmentVariable(\"access_token\", null);",
+									"}",
+									"// set refresh token as environement variable",
+									"if (jsonData.refresh_token !== undefined) {",
+									"    postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
+									"} else {",
+									"    postman.setEnvironmentVariable(\"refresh_token\", null);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\" : \"jose\",\n  \"password\" : \"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{server_address}}/login",
+							"host": [
+								"{{server_address}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dc763e9b-e6c7-4ff3-9766-637976a5c64b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server_address}}/logout",
+							"host": [
+								"{{server_address}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ad818ea6-8f79-436e-b756-ad878666ae9e",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"access_token not empty\", function () {",
+									"    pm.expect(jsonData.access_token).not.eql(undefined);",
+									"});",
+									"// set access token as environement variable",
+									"if (jsonData.access_token !== undefined) {",
+									"    postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+									"} else {",
+									"    postman.setEnvironmentVariable(\"access_token\", null);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{refresh_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{local_flask}}/refresh",
+							"host": [
+								"{{local_flask}}"
+							],
+							"path": [
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "items",
+			"description": "",
+			"item": [
+				{
+					"name": "get item/name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{local_flask}}/item/chair",
+							"host": [
+								"{{local_flask}}"
+							],
+							"path": [
+								"item",
+								"chair"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post item/name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"price\": 12.99,\n  \"store_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{local_flask}}/item/chair",
+							"host": [
+								"{{local_flask}}"
+							],
+							"path": [
+								"item",
+								"chair"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put item/name",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"price\": 12.99,\n  \"store_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{local_flask}}/item/chair",
+							"host": [
+								"{{local_flask}}"
+							],
+							"path": [
+								"item",
+								"chair"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete item by name",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{local_flask}}/item/chair",
+							"host": [
+								"{{local_flask}}"
+							],
+							"path": [
+								"item",
+								"chair"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all items",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\" : \"cristiano\",\n  \"password\" : \"12345678\"\n}"
+						},
+						"url": {
+							"raw": "{{local_flask}}/items",
+							"host": [
+								"{{local_flask}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all items without JWT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\" : \"cristiano\",\n  \"password\" : \"12345678\"\n}"
+						},
+						"url": {
+							"raw": "{{local_flask}}/items",
+							"host": [
+								"{{local_flask}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "stores",
+			"description": "",
+			"item": [
+				{
+					"name": "create a new store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_address}}/store/My Wonderful Store",
+							"host": [
+								"{{server_address}}"
+							],
+							"path": [
+								"store",
+								"My Wonderful Store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get store by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_address}}/store/My Wonderful Store",
+							"host": [
+								"{{server_address}}"
+							],
+							"path": [
+								"store",
+								"My Wonderful Store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a new store by name",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_address}}/store/My Wonderful Store",
+							"host": [
+								"{{server_address}}"
+							],
+							"path": [
+								"store",
+								"My Wonderful Store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all stores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_address}}/stores",
+							"host": [
+								"{{server_address}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
