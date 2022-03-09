@@ -1,5 +1,10 @@
 from flask_restx import Resource
 from models import StoreModel
+from schemas import StoreSchema
+
+
+store_schema = StoreSchema()
+stores_schema = StoreSchema(many=True)
 
 
 class Store(Resource):
@@ -7,7 +12,7 @@ class Store(Resource):
     def get(cls, name):
         store = StoreModel.find_by_name(name)
         if store:
-            return store.json()
+            return store_schema.dump(store)
         return {"message": "Store not found"}, 404
 
     @classmethod
@@ -23,7 +28,7 @@ class Store(Resource):
         except:
             return {"message": "An error occurred creating the store."}, 500
 
-        return store.json(), 201
+        return store_schema.dump(store), 201
 
     @classmethod
     def delete(cls, name):
@@ -37,4 +42,4 @@ class Store(Resource):
 class StoreList(Resource):
     @classmethod
     def get(cls):
-        return {"stores": [store.json() for store in StoreModel.find_all()]}
+        return stores_schema.dump(StoreModel.find_all())
