@@ -5,6 +5,7 @@ from models import ItemModel
 from schemas import ItemSchema
 
 item_schema = ItemSchema()
+items_schema = ItemSchema(many=True)
 
 
 class Item(Resource):
@@ -31,7 +32,7 @@ class Item(Resource):
         except:
             return {"message": "An error occurred while inserting the item."}, 500
 
-        return item.json(), 201
+        return item_schema.dump(item), 201
 
     @jwt_required()
     def delete(self, name):
@@ -57,7 +58,7 @@ class Item(Resource):
 
         item.save_to_db()
 
-        return item.json()
+        return item_schema.dump(item)
 
 
 class ItemList(Resource):
@@ -66,7 +67,7 @@ class ItemList(Resource):
         user_id = get_jwt_identity()
         items = [item.json() for item in ItemModel.find_all()]
         if user_id:
-            return {"items": items}, 200
+            return items_schema.dump(items), 200
         return {
             "items": [item["name"] for item in items],
             "message": "More data available if you log in.",
