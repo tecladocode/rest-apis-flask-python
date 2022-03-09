@@ -1,4 +1,4 @@
-from flask_restful import Resource, reqparse
+from flask_restx import Resource, reqparse
 from flask_jwt_extended import get_jwt_identity, jwt_required, get_jwt
 from models import ItemModel
 
