@@ -5,4 +5,5 @@ __pycache__/
 *.db
 .DS_Store
 venv/
+.venv
 curriculum/.vuepress/dist/
