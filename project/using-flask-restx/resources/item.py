@@ -1,4 +1,4 @@
-from flask import request
+from flask import abort, request
 from flask_restx import Resource
 from flask_jwt_extended import get_jwt_identity, jwt_required, get_jwt
 from sqlalchemy.exc import SQLAlchemyError
@@ -15,14 +15,12 @@ class Item(Resource):
         item = ItemModel.find_by_name(name)
         if item:
             return item_schema.dump(item)
-        return {"message": "Item not found"}, 404
+        abort(404, "Item not found")
 
     @jwt_required(fresh=True)
     def post(self, name):
         if ItemModel.find_by_name(name):
-            return {
-                "message": "An item with name '{}' already exists.".format(name)
-            }, 400
+            abort(400, f"An item with name {name} already exists.")
 
         data = item_schema.load(request.get_json())
 
@@ -31,7 +29,7 @@ class Item(Resource):
         try:
             item.save_to_db()
         except SQLAlchemyError:
-            return {"message": "An error occurred while inserting the item."}, 500
+            abort(500, "An error occurred while inserting the item.")
 
         return item_schema.dump(item), 201
 
@@ -39,13 +37,13 @@ class Item(Resource):
     def delete(self, name):
         jwt = get_jwt()
         if not jwt["is_admin"]:
-            return {"message": "Admin privilege required."}, 401
+            abort(401, "Admin privilege required.")
 
         item = ItemModel.find_by_name(name)
         if item:
             item.delete_from_db()
             return {"message": "Item deleted."}
-        return {"message": "Item not found."}, 404
+        abort(404, "Item not found.")
 
     def put(self, name):
         data = item_schema.load(request.get_json())

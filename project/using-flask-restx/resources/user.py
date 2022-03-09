@@ -1,4 +1,4 @@
-from flask import request
+from flask import abort, request
 from flask_restx import Resource
 from flask_jwt_extended import (
     create_access_token,
@@ -22,7 +22,7 @@ class UserRegister(Resource):
         user_data = user_schema.load(request.get_json())
 
         if UserModel.find_by_username(user_data["username"]):
-            return {"message": "A user with that username already exists"}, 400
+            abort(400, "A user with that username already exists.")
 
         user = UserModel(
             username=user_data["username"],
@@ -44,7 +44,7 @@ class UserLogin(Resource):
             refresh_token = create_refresh_token(user.id)
             return {"access_token": access_token, "refresh_token": refresh_token}, 200
 
-        return {"message": "Invalid Credentials!"}, 401
+        abort(401, "Invalid credentials.")
 
 
 class UserLogout(Resource):
@@ -67,14 +67,14 @@ class User(Resource):
     def get(cls, user_id: int):
         user = UserModel.find_by_id(user_id)
         if not user:
-            return {"message": "User Not Found"}, 404
+            abort(404, "User not found.")
         return user_schema.dump(user), 200
 
     @classmethod
     def delete(cls, user_id: int):
         user = UserModel.find_by_id(user_id)
         if not user:
-            return {"message": "User Not Found"}, 404
+            abort(404, "User not found.")
         user.delete_from_db()
         return {"message": "User deleted."}, 200
 
