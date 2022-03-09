@@ -1,4 +1,4 @@
-from flask import request
+from flask import abort, request
 from flask_restx import Resource
 from werkzeug.exceptions import BadRequest
 from sqlalchemy.exc import SQLAlchemyError
@@ -16,7 +16,7 @@ class Tag(Resource):
         tag = TagModel.find_by_name(name)
         if tag:
             return tag_schema.dump(tag)
-        return {"message": "Tag not found"}, 404
+        abort(404, "Tag not found.")
 
     def post(self, name):
         json_input = request.get_json()
@@ -29,16 +29,16 @@ class Tag(Resource):
             item = ItemModel.query.get(json_input["item_id"])
 
             if not item:
-                return {"message": "An item with this item_id doesn't exist."}, 400
+                abort(400, "An item with this item_id doesn't exist.")
 
             tag.items.append(item)
         except (TypeError, KeyError):
-            return {"message": "Missing required field 'item_id' in JSON body."}
+            abort(400, "Missing required field 'item_id' in JSON body.")
 
         try:
             tag.save_to_db()
         except SQLAlchemyError:
-            return {"message": "An error occurred while inserting the tag."}, 500
+            abort(500, "An error occurred while inserting the tag.")
 
         return tag_schema.dump(tag), 201
 
@@ -60,7 +60,8 @@ class Tag(Resource):
             if not tag.items:
                 tag.delete_from_db()
                 return {"message": "Tag deleted."}
-            return {
-                "message": "Could not delete tag. Make sure tag is not associated with any items, then try again."  # noqa: E501
-            }
-        return {"message": "Tag not found."}, 404
+            abort(
+                400,
+                "Could not delete tag. Make sure tag is not associated with any items, then try again.",  # noqa: E501
+            )
+        abort(404, "Tag not found.")

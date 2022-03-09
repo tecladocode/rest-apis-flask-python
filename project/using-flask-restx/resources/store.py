@@ -1,3 +1,4 @@
+from flask import abort
 from flask_restx import Resource
 from sqlalchemy.exc import SQLAlchemyError
 from models import StoreModel
@@ -14,20 +15,18 @@ class Store(Resource):
         store = StoreModel.find_by_name(name)
         if store:
             return store_schema.dump(store)
-        return {"message": "Store not found"}, 404
+        abort(404, "Store not found.")
 
     @classmethod
     def post(cls, name):
         if StoreModel.find_by_name(name):
-            return {
-                "message": "A store with name '{}' already exists.".format(name)
-            }, 400
+            abort(400, f"A store with name '{name}' already exists.")
 
         store = StoreModel(name=name)
         try:
             store.save_to_db()
         except SQLAlchemyError:
-            return {"message": "An error occurred creating the store."}, 500
+            abort(500, "An error occurred creating the store.")
 
         return store_schema.dump(store), 201
 
@@ -37,7 +36,7 @@ class Store(Resource):
         if store:
             store.delete_from_db()
             return {"message": "Store deleted"}, 200
-        return {"message": "Store not found"}, 404
+        abort(404, "Store not found.")
 
 
 class StoreList(Resource):
