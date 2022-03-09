@@ -1,6 +1,7 @@
 from flask import request
 from flask_restx import Resource
 from werkzeug.exceptions import BadRequest
+from sqlalchemy.exc import SQLAlchemyError
 from models import TagModel
 from models import ItemModel
 from schemas import TagSchema, ItemSchema
@@ -36,7 +37,7 @@ class Tag(Resource):
 
         try:
             tag.save_to_db()
-        except:
+        except SQLAlchemyError:
             return {"message": "An error occurred while inserting the tag."}, 500
 
         return tag_schema.dump(tag), 201
