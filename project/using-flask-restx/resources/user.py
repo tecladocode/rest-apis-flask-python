@@ -1,5 +1,5 @@
 from flask import request
-from flask_restx import Resource, reqparse
+from flask_restx import Resource
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
