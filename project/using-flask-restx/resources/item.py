@@ -1,30 +1,18 @@
-from flask_restx import Resource, reqparse
+from flask import request
+from flask_restx import Resource
 from flask_jwt_extended import get_jwt_identity, jwt_required, get_jwt
 from models import ItemModel
+from schemas import ItemSchema
 
-
-"""
-The following resources contain endpoints that are protected by jwt,
-one may need a valid access token, a valid fresh token or
-a valid token with authorized privilege to access each endpoint,
-details can be found in the README.md doc.
-"""
+item_schema = ItemSchema()
 
 
 class Item(Resource):
-    parser = reqparse.RequestParser()
-    parser.add_argument(
-        "price", type=float, required=True, help="This field cannot be left blank!"
-    )
-    parser.add_argument(
-        "store_id", type=int, required=True, help="Every item needs a store_id."
-    )
-
     @jwt_required()
     def get(self, name):
         item = ItemModel.find_by_name(name)
         if item:
-            return item.json()
+            return item_schema.dump(item)
         return {"message": "Item not found"}, 404
 
     @jwt_required(fresh=True)
@@ -34,7 +22,7 @@ class Item(Resource):
                 "message": "An item with name '{}' already exists.".format(name)
             }, 400
 
-        data = self.parser.parse_args()
+        data = item_schema.load(request.json)
 
         item = ItemModel(name=name, **data)
 
@@ -58,7 +46,7 @@ class Item(Resource):
         return {"message": "Item not found."}, 404
 
     def put(self, name):
-        data = self.parser.parse_args()
+        data = item_schema.load(request.json)
 
         item = ItemModel.find_by_name(name)
 
