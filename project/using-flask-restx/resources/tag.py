@@ -60,6 +60,6 @@ class Tag(Resource):
                 tag.delete_from_db()
                 return {"message": "Tag deleted."}
             return {
-                "message": "Could not delete tag. Make sure tag is not associated with any items, then try again."
+                "message": "Could not delete tag. Make sure tag is not associated with any items, then try again."  # noqa: E501
             }
         return {"message": "Tag not found."}, 404

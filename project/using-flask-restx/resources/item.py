@@ -5,8 +5,9 @@ from models import ItemModel
 
 """
 The following resources contain endpoints that are protected by jwt,
-one may need a valid access token, a valid fresh token or a valid token with authorized privilege 
-to access each endpoint, details can be found in the README.md doc.  
+one may need a valid access token, a valid fresh token or
+a valid token with authorized privilege to access each endpoint,
+details can be found in the README.md doc.
 """
 
 
