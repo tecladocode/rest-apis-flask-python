@@ -31,8 +31,8 @@ class Tag(Resource):
                 return {"message": "An item with this item_id doesn't exist."}, 400
 
             tag.items.append(item)
-        except KeyError:
-            return {"message": "Missing required field 'item_id'."}
+        except (TypeError, KeyError):
+            return {"message": "Missing required field 'item_id' in JSON body."}
 
         try:
             tag.save_to_db()
@@ -44,7 +44,7 @@ class Tag(Resource):
     def delete(self, name):
         tag = TagModel.find_by_name(name)
         try:
-            json_input = request.get_json()
+            json_input = request.get_json(force=True)
             if "item_id" in json_input:
                 item = ItemModel.query.get(json_input["item_id"])
                 tag.items.remove(item)
