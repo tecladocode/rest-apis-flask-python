@@ -8,12 +8,14 @@ class Store(Resource):
         store = StoreModel.find_by_name(name)
         if store:
             return store.json()
-        return {'message': 'Store not found'}, 404
+        return {"message": "Store not found"}, 404
 
     @classmethod
     def post(cls, name):
         if StoreModel.find_by_name(name):
-            return {'message': "A store with name '{}' already exists.".format(name)}, 400
+            return {
+                "message": "A store with name '{}' already exists.".format(name)
+            }, 400
 
         store = StoreModel(name=name)
         try:
@@ -28,11 +30,11 @@ class Store(Resource):
         store = StoreModel.find_by_name(name)
         if store:
             store.delete_from_db()
-            return {'message': 'Store deleted'}, 200
-        return {'message': 'Store not found'}, 404
+            return {"message": "Store deleted"}, 200
+        return {"message": "Store not found"}, 404
 
 
 class StoreList(Resource):
     @classmethod
     def get(cls):
-        return {'stores': [store.json() for store in StoreModel.find_all()]}
+        return {"stores": [store.json() for store in StoreModel.find_all()]}
