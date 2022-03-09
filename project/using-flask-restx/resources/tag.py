@@ -1,57 +1,57 @@
+from flask import request
 from flask_restx import Resource, reqparse
+from werkzeug.exceptions import BadRequest
 from models import TagModel
 from models import ItemModel
-from werkzeug.exceptions import BadRequest
+from schemas import TagSchema, ItemSchema
+
+
+tag_schema = TagSchema()
+item_schema = ItemSchema()
 
 
 class Tag(Resource):
-    parser = reqparse.RequestParser()
-    parser.add_argument(
-        "item_id",
-        type=int,
-        required=True,
-        help="To create or add a tag to an item, please provide the item_id.",
-    )
-
     def get(self, name):
         tag = TagModel.find_by_name(name)
         if tag:
-            return tag.json()
+            return tag_schema.dump(tag)
         return {"message": "Tag not found"}, 404
 
     def post(self, name):
+        json_input = request.get_json()
         tag = TagModel.find_by_name(name)
         if not tag:
             tag = TagModel(name=name)
 
         # Add the item to the tag
-        data = self.parser.parse_args()
-        item = ItemModel.query.get(data["item_id"])
+        try:
+            item = ItemModel.query.get(json_input["item_id"])
 
-        if not item:
-            return {"message": "An item with this item_id doesn't exist."}, 400
+            if not item:
+                return {"message": "An item with this item_id doesn't exist."}, 400
 
-        tag.items.append(item)
+            tag.items.append(item)
+        except KeyError:
+            return {"message": "Missing required field 'item_id'."}
 
         try:
             tag.save_to_db()
         except:
-            raise
             return {"message": "An error occurred while inserting the tag."}, 500
 
-        return tag.json(), 201
+        return tag_schema.dump(tag), 201
 
     def delete(self, name):
         tag = TagModel.find_by_name(name)
         try:
-            data = self.parser.parse_args()
-            if "item_id" in data:
-                item = ItemModel.query.get(data["item_id"])
+            json_input = request.get_json()
+            if "item_id" in json_input:
+                item = ItemModel.query.get(json_input["item_id"])
                 tag.items.remove(item)
                 return {
                     "message": "Item removed from tag",
-                    "item": item.json(),
-                    "tag": tag.json(),
+                    "item": item_schema.dump(item),
+                    "tag": tag_schema.dump(tag),
                 }
         except BadRequest:
             # Assume no item_id was passed. Instead delete entire tag.
