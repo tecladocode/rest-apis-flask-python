@@ -1,6 +1,7 @@
 from flask import request
 from flask_restx import Resource
 from flask_jwt_extended import get_jwt_identity, jwt_required, get_jwt
+from sqlalchemy.exc import SQLAlchemyError
 from models import ItemModel
 from schemas import ItemSchema
 
@@ -29,7 +30,7 @@ class Item(Resource):
 
         try:
             item.save_to_db()
-        except:
+        except SQLAlchemyError:
             return {"message": "An error occurred while inserting the item."}, 500
 
         return item_schema.dump(item), 201

@@ -1,4 +1,5 @@
 from flask_restx import Resource
+from sqlalchemy.exc import SQLAlchemyError
 from models import StoreModel
 from schemas import StoreSchema
 
@@ -25,7 +26,7 @@ class Store(Resource):
         store = StoreModel(name=name)
         try:
             store.save_to_db()
-        except:
+        except SQLAlchemyError:
             return {"message": "An error occurred creating the store."}, 500
 
         return store_schema.dump(store), 201

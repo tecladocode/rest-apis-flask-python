@@ -1,13 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import get_jwt_identity, jwt_required, get_jwt
+from sqlalchemy.exc import SQLAlchemyError
 from models import ItemModel
-
-
-"""
-The following resources contain endpoints that are protected by jwt,
-one may need a valid access token, a valid fresh token or a valid token with authorized privilege 
-to access each endpoint, details can be found in the README.md doc.  
-"""
 
 
 class Item(Resource):
@@ -39,7 +33,7 @@ class Item(Resource):
 
         try:
             item.save_to_db()
-        except:
+        except SQLAlchemyError:
             return {"message": "An error occurred while inserting the item."}, 500
 
         return item.json(), 201
