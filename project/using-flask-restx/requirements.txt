@@ -4,4 +4,3 @@ Flask-SQLAlchemy
 passlib
 marshmallow
 python-dotenv
-webargs
