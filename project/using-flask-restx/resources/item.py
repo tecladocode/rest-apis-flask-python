@@ -1,6 +1,6 @@
 from flask import request
 from flask_restx import Namespace, Resource, fields, abort
-from flask_jwt_extended import get_jwt_identity, jwt_required, get_jwt
+from flask_jwt_extended import jwt_required, get_jwt
 from sqlalchemy.exc import SQLAlchemyError
 from models import ItemModel
 
