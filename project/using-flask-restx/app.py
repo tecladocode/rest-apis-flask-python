@@ -4,10 +4,10 @@ from flask_jwt_extended import JWTManager
 
 from db import db
 from blocklist import BLOCKLIST
-from resources.user import UserRegister, UserLogin, User, TokenRefresh, UserLogout
-from resources.item import Item, ItemList
-from resources.store import Store, StoreList
-from resources.tag import Tag
+from resources.user import api as user_namespace
+from resources.item import api as item_namespace
+from resources.store import api as store_namespace
+from resources.tag import api as tag_namespace
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
@@ -102,13 +102,7 @@ def create_tables():
     db.create_all()
 
 
-api.add_resource(UserRegister, "/register")
-api.add_resource(UserLogin, "/login")
-api.add_resource(UserLogout, "/logout")
-api.add_resource(User, "/user/<int:user_id>")
-api.add_resource(TokenRefresh, "/refresh")
-api.add_resource(Store, "/store/<string:name>")
-api.add_resource(StoreList, "/stores")
-api.add_resource(Item, "/item/<string:name>")
-api.add_resource(ItemList, "/items")
-api.add_resource(Tag, "/tag/<string:name>")
+api.add_namespace(user_namespace, path="/")
+api.add_namespace(item_namespace, path="/item")
+api.add_namespace(store_namespace, path="/store")
+api.add_namespace(tag_namespace, path="/tag")
