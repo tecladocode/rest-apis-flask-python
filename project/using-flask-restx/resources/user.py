@@ -1,4 +1,5 @@
-from flask_restful import Resource, reqparse
+from flask import abort, request
+from flask_restx import Namespace, Resource, fields
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
@@ -11,44 +12,54 @@ from passlib.hash import pbkdf2_sha256
 from models import UserModel
 from blocklist import BLOCKLIST
 
-_user_parser = reqparse.RequestParser()
-_user_parser.add_argument(
-    "username", type=str, required=True, help="This field cannot be blank."
-)
-_user_parser.add_argument(
-    "password", type=str, required=True, help="This field cannot be blank."
+api = Namespace("users", description="Operations related to users and authentication.")
+
+user_inputs = api.model(
+    "UserFields",
+    {
+        "username": fields.String(required=True),
+        "password": fields.String(required=True),
+    },
 )
 
+user_outputs = api.model("User", {"id": fields.String(), "username": fields.String()})
 
+
+@api.route("/register")
 class UserRegister(Resource):
+    @api.expect(user_inputs, validate=True)
     def post(self):
-        data = _user_parser.parse_args()
+        user_data = request.get_json()
 
-        if UserModel.find_by_username(data["username"]):
-            return {"message": "A user with that username already exists"}, 400
+        if UserModel.find_by_username(user_data["username"]):
+            abort(400, "A user with that username already exists.")
 
         user = UserModel(
-            username=data["username"], password=pbkdf2_sha256.hash(data["password"])
+            username=user_data["username"],
+            password=pbkdf2_sha256.hash(user_data["password"]),
         )
         user.save_to_db()
 
         return {"message": "User created successfully."}, 201
 
 
+@api.route("/login")
 class UserLogin(Resource):
+    @api.expect(user_inputs, validate=True)
     def post(self):
-        data = _user_parser.parse_args()
+        user_data = request.get_json()
 
-        user = UserModel.find_by_username(data["username"])
+        user = UserModel.find_by_username(user_data["username"])
 
-        if user and pbkdf2_sha256.verify(data["password"], user.password):
+        if user and pbkdf2_sha256.verify(user_data["password"], user.password):
             access_token = create_access_token(identity=user.id, fresh=True)
             refresh_token = create_refresh_token(user.id)
             return {"access_token": access_token, "refresh_token": refresh_token}, 200
 
-        return {"message": "Invalid Credentials!"}, 401
+        abort(401, "Invalid credentials.")
 
 
+@api.route("/logout")
 class UserLogout(Resource):
     @jwt_required()
     def post(self):
@@ -57,28 +68,32 @@ class UserLogout(Resource):
         return {"message": "Successfully logged out"}, 200
 
 
+@api.route("/user/<user_id>")
 class User(Resource):
     """
-    This resource can be useful when testing our Flask app. We may not want to expose it to public users, but for the
-    sake of demonstration in this course, it can be useful when we are manipulating data regarding the users.
+    This resource can be useful when testing our Flask app.
+    We may not want to expose it to public users, but for the
+    sake of demonstration in this course, it can be useful
+    when we are manipulating data regarding the users.
     """
 
-    @classmethod
+    @api.marshal_with(user_outputs)
     def get(cls, user_id: int):
         user = UserModel.find_by_id(user_id)
         if not user:
-            return {"message": "User Not Found"}, 404
-        return user.json(), 200
+            abort(404, "User not found.")
+        return user, 200
 
     @classmethod
     def delete(cls, user_id: int):
         user = UserModel.find_by_id(user_id)
         if not user:
-            return {"message": "User Not Found"}, 404
+            abort(404, "User not found.")
         user.delete_from_db()
         return {"message": "User deleted."}, 200
 
 
+@api.route("/refresh")
 class TokenRefresh(Resource):
     @jwt_required(refresh=True)
     def post(self):

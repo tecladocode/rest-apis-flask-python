@@ -1,7 +1,8 @@
 from flask_restful import Resource, reqparse
+from werkzeug.exceptions import BadRequest
+from sqlalchemy.exc import SQLAlchemyError
 from models import TagModel
 from models import ItemModel
-from werkzeug.exceptions import BadRequest
 
 
 class Tag(Resource):
@@ -35,8 +36,7 @@ class Tag(Resource):
 
         try:
             tag.save_to_db()
-        except:
-            raise
+        except SQLAlchemyError:
             return {"message": "An error occurred while inserting the tag."}, 500
 
         return tag.json(), 201

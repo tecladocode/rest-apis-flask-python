@@ -19,11 +19,9 @@ api = Api(app)
 """
 JWT related configuration. The following functions includes:
 1) add claims to each jwt
-2) customize the token expired error message 
+2) customize the token expired error message
 """
-app.config[
-    "JWT_SECRET_KEY"
-] = "jose"  # we can also use app.secret like before, Flask-JWT-Extended can recognize both
+app.config["JWT_SECRET_KEY"] = "jose"
 jwt = JWTManager(app)
 
 """
@@ -35,30 +33,24 @@ one possible use case for claims are access level control, which is shown below
 
 @jwt.additional_claims_loader
 def add_claims_to_jwt(identity):
-    if (
-        identity == 1
-    ):  # instead of hard-coding, we should read from a config file to get a list of admins instead
+    # TODO: Read from a config file instead of hard-coding
+    if identity == 1:
         return {"is_admin": True}
     return {"is_admin": False}
 
 
-# This method will check if a token is blocklisted, and will be called automatically when blocklist is enabled
 @jwt.token_in_blocklist_loader
 def check_if_token_in_blocklist(jwt_header, jwt_payload):
     return jwt_payload["jti"] in BLOCKLIST
 
 
-# The following callbacks are used for customizing jwt response/error messages.
-# The original ones may not be in a very pretty format (opinionated)
 @jwt.expired_token_loader
 def expired_token_callback(jwt_header, jwt_payload):
     return jsonify({"message": "The token has expired.", "error": "token_expired"}), 401
 
 
 @jwt.invalid_token_loader
-def invalid_token_callback(
-    error,
-):  # we have to keep the argument here, since it's passed in by the caller internally
+def invalid_token_callback(error):
     return (
         jsonify(
             {"message": "Signature verification failed.", "error": "invalid_token"}
@@ -105,7 +97,7 @@ def revoked_token_callback():
 
 @app.before_first_request
 def create_tables():
-    import models
+    import models  # noqa: F401
 
     db.create_all()
 

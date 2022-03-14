@@ -1,38 +1,62 @@
-from flask_restful import Resource
+from flask import abort
+from flask_restx import Namespace, Resource, fields
+from sqlalchemy.exc import SQLAlchemyError
 from models import StoreModel
 
 
+api = Namespace("stores", description="Operations related to stores.")
+
+nested_item = api.model(
+    "NestedItem",
+    {
+        "id": fields.Integer(),
+        "name": fields.String(),
+        "price": fields.Float(),
+    },
+)
+
+store_outputs = api.model(
+    "Store",
+    {
+        "id": fields.Integer(),
+        "name": fields.String(),
+        "items": fields.List(fields.Nested(nested_item)),
+    },
+)
+
+
+@api.route("/<name>")
 class Store(Resource):
-    @classmethod
-    def get(cls, name):
+    @api.marshal_with(store_outputs)
+    def get(self, name):
         store = StoreModel.find_by_name(name)
         if store:
-            return store.json()
-        return {'message': 'Store not found'}, 404
+            return store
+        abort(404, "Store not found.")
 
-    @classmethod
-    def post(cls, name):
+    @api.marshal_with(store_outputs)
+    def post(self, name):
         if StoreModel.find_by_name(name):
-            return {'message': "A store with name '{}' already exists.".format(name)}, 400
+            abort(400, f"A store with name '{name}' already exists.")
 
         store = StoreModel(name=name)
         try:
             store.save_to_db()
-        except:
-            return {"message": "An error occurred creating the store."}, 500
+        except SQLAlchemyError:
+            abort(500, "An error occurred creating the store.")
 
-        return store.json(), 201
+        return store, 201
 
-    @classmethod
-    def delete(cls, name):
+    def delete(self, name):
         store = StoreModel.find_by_name(name)
         if store:
             store.delete_from_db()
-            return {'message': 'Store deleted'}, 200
-        return {'message': 'Store not found'}, 404
+            return {"message": "Store deleted"}, 200
+        abort(404, "Store not found.")
 
 
+@api.route("/")
 class StoreList(Resource):
-    @classmethod
-    def get(cls):
-        return {'stores': [store.json() for store in StoreModel.find_all()]}
+    @api.marshal_list_with(store_outputs)
+    def get(self):
+        return StoreModel.find_all()
