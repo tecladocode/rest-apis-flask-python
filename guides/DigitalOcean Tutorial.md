@@ -30,17 +30,22 @@ Generally, choosing a region that's _closest to your users_ will make your servi
 
 ### Other configurations
 
-In our example, we do not need to add any other services such as block storage or private network. So we will ignore these settings to keep our setup simple and cheap. You may choose to use `SSH` key or you can just leave it unchecked and a password will be generated for you. If you choose to use SSH key, then each time you want to login to the server, you will need to provide the key. Since you have to have access to the SSH key whenever you log in, it can be more secure or more troublesome depends on scenarios. At last, you may change the name of your `Droplet` to something you like and then click `Create` to create and launch your `Droplet`.
+In our example, we do not need to add any other services such as block storage or private network. So we will ignore these settings to keep our setup simple and cheap. You may choose to use `SSH` key and follow the steps recommended by DigitalOcean or create a password. If you choose to use SSH key, then each time you want to login to the server from outside DigitalOcean's site, you will need to provide the key. For example in windows using [GitBash terminal](https://git-scm.com/downloads) you need to add the `-i` option and pass the full path for the ssh-key file:
+
+```bash
+ssh root@insert-droplet-ip -i /c/Users/insert-username/.ssh/insert-ssh-key-filename
+```
+
+Be aware that this command will only work for the root user, if you want to add an ssh key for another user you can see the details in [DigitalOcean's docs](https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/).
+
+Since you have to have access to the SSH key whenever you log in, it can be more secure or more troublesome depending on the scenario.  
+At last, you may change the name of your `Droplet` to something you like and then click `Create` to create and launch your `Droplet`.
 
 ## Connecting to our droplet
 
 ![DigitalOcean Access Console](assets/DigitalOcean/access_console.png)
 
-Once you've created your `Droplet`, you will receive an e-mail containing your login (`root`) and initial password for it. Now click the "Access Console" option in the dropdown menu associated with your `Droplet` as shown in above image.
-
-## Change your password
-
-Now you will be shown a console connected to your `Droplet`. Use the login `root` and the password received in your email to login. Then you will be ask to provide your password again and change it to a new password. Notice that all password field will not show any modification when you are typing. There is nothing wrong with your console, it's just a `UNIX` security feature. After changing your password, you are now logged in as the root user on your server.
+Once you've created your `Droplet` click the "Access Console" option in the dropdown menu associated with your `Droplet`, as shown in above image, and click the `Launch Droplet Console` button.
 
 If you have successfully followed the tutorial so far, then you have finished all the setting-ups that are specific to DigitalOcean. The following sections can serve as a standalone tutorial and can be applied to deployment onto any other platforms as well.
 
