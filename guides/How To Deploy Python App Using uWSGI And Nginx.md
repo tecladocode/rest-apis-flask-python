@@ -177,7 +177,7 @@ In this section, we will pull our code from `GitHub`, which integrates a popular
 First, we create a folder called `items-rest` for our app, since our sample project is a REST API which manages items of stores. We create this folder using the following command:
 
 ```
-sudo mkdir /var/www/html/items-rest
+sudo mkdir -p /var/www/html/items-rest
 ```
 
 The folder is owned by the `root` user since we used `sudo` to create it. We need to transfer ownership to our current user:
