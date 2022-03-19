@@ -62,30 +62,11 @@ passwd johndoe
 
 ## Providing user with additional privilege
 
-Since we will be logging in as `johndoe` for most of the time in the future, we will want it to have some "extra power", that is, temporarily acting as a super user. To do this, we need to run the command:
+Since we will be logging in as `johndoe` for most of the time in the future, we will want it to have some "extra power", that is, temporarily acting as a super user. To do this, we have to add the user to the sudoers group running the command:
 
 ```
-visudo
+usermod -aG sudo johndoe
 ```
-
-first, and we will see a text file popping up. Then we navigate to the lines containing:
-
-```
-# User privilege specification
-root ALL=(ALL:ALL) ALL
-```
-
-You can do this with the arrow keys. We need to add a new line for our user in this section:
-
-```
-# User privilege specification
-root ALL=(ALL:ALL) ALL
-johndoe ALL=(ALL:ALL) ALL
-```
-
-Remember that the `ALL` has to be **all uppercase**, otherwise it will raise syntax error.
-
-After adding this line, use `ctrl + o` to save and press `ENTER` to overwrite, then press `ctrl + x` to quit.
 
 ## Enable SSH for our new user
 
