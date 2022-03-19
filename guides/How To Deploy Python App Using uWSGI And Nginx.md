@@ -7,12 +7,12 @@ In this tutorial, we will not cover how to set up a server on any hosting platfo
 # Quick links
 In this tutorial, we will assume you have a server set up already, and we will introduce the deployment process in the following order:
 
-- [Connecting to the server using `SSH`](How%20To%20Deploy%20Python%20App%20Using%20uWSGI%20And%20Nginx.md#connecting-to-our-server).
-- [Creating and configuring a `UNIX` user](How%20To%20Deploy%20Python%20App%20Using%20uWSGI%20And%20Nginx.md#creating-another-user).
-- [Setting up `PostgreSQL` database](How%20To%20Deploy%20Python%20App%20Using%20uWSGI%20And%20Nginx.md#configuring-postgres).
-- [Getting project code from `GitHub`](How%20To%20Deploy%20Python%20App%20Using%20uWSGI%20And%20Nginx.md#getting-code-from-github).
-- [Configuring `uWSGI` for our project](How%20To%20Deploy%20Python%20App%20Using%20uWSGI%20And%20Nginx.md#uwsgi).
-- [Configuring `nginx` for our project](How%20To%20Deploy%20Python%20App%20Using%20uWSGI%20And%20Nginx.md#nginx).
+- [Connecting to the server using `SSH`](#connecting-to-our-server).
+- [Creating and configuring a `UNIX` user](#creating-another-user).
+- [Setting up `PostgreSQL` database](#configuring-postgres).
+- [Getting project code from `GitHub`](#getting-code-from-github).
+- [Configuring `uWSGI` for our project](#uwsgi).
+- [Configuring `nginx` for our project](#nginx).
 
 If you are a first time learner, we highly recommend you to follow through the whole tutorial so that you can get familiar with it and may be less likely to run into error. However, if you are only looking for information on a specific subject, please feel free to use the above links to navigate to according sections.
 
@@ -331,7 +331,7 @@ And the content we are going to input is shown below:
 Description=uWSGI items rest
 
 [Service]
-Environment=DATABASE_URL=postgres://johndoe:<johndoe_postgres_password>@localhost:5432/johndoe
+Environment=DATABASE_URL=postgresql://johndoe:<johndoe_postgres_password>@localhost:5432/johndoe
 ExecStart=/var/www/html/items-rest/venv/bin/uwsgi --master --emperor /var/www/html/items-rest/uwsgi.ini --die-on-term --uid johndoe --gid johndoe --logto /var/www/html/items-rest/log/emperor.log
 Restart=always
 KillSignal=SIGQUIT

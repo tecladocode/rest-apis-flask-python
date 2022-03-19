@@ -1,6 +1,6 @@
 # Overview
 
-In this tutorial, we will introduce a popular cloud application platform called Heroku. We will briefly describe [what Heroku is](Heroku%20Tutorial.md#what-is-heroku) and [how to use it](Heroku%20Tutorial.md#deploying-our-app-onto-heroku).
+In this tutorial, we will introduce a popular cloud application platform called Heroku. We will briefly describe [what Heroku is](#what-is-heroku) and [how to use it](#deploying-our-app-onto-heroku).
 
 # What is Heroku
 
@@ -8,7 +8,7 @@ Heroku is a cloud platform for deploying and running modern apps. A more detaile
 
 Some of the key advantages of Heroku include:
 - No server side knowledge is required, so it is easy to set up.
-- It can be free, but the free tier has some limitations, which we will discuss later when we introduce [`Dyno`](Heroku%20Tutorial.md#creating-a-heroku-dyno).
+- It can be free, but the free tier has some limitations, which we will discuss later when we introduce [`Dyno`](#creating-a-heroku-dyno).
 - It enables SSL so the communication between your app and its users are encrypted.
 
 
@@ -44,9 +44,9 @@ The first file we need to add is called `runtime.txt`. And it is **important** t
 python-3.5.2
 ```
 
-#### requirement.txt
+#### requirements.txt
 
-The next file we need to add is called `requirement.txt`, which specifies all the dependencies of our project. So for our sample project, we will have something like this for the `requirement.txt` file:
+The next file we need to add is called `requirements.txt`, which specifies all the dependencies of our project. So for our sample project, we will have something like this for the `requirements.txt` file:
 
 ```
 Flask
@@ -57,7 +57,7 @@ uwsgi
 psycopg2
 ```
 
-Note that we are running a `Python` project, and `uWSGI` is used to run `Python` applications more efficiently and more reliably, providing features such as multi-threading and auto restarting after failure. If you are not running a `Python` app or you choose not to use `uWSGI`, it is totally fine and you can skip the next sub-section and go to the `Procfile` sub-section [here](Heroku%20Tutorial.md#procfile).
+Note that we are running a `Python` project, and `uWSGI` is used to run `Python` applications more efficiently and more reliably, providing features such as multi-threading and auto restarting after failure. If you are not running a `Python` app or you choose not to use `uWSGI`, it is totally fine and you can skip the next sub-section and go to the `Procfile` sub-section [here](#procfile).
 
 #### uwsgi.ini \*
 

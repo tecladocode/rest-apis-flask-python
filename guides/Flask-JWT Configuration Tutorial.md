@@ -1,4 +1,4 @@
-## Overview
+# Flask-JWT Configuration Tutorial
 
 Flask-JWT adds JWT functionality to Flask in an easy to use manner. It gives you a lot of functionality out of the box, but sometimes we want to modify some of the configuration. This document walks through how to:
 
@@ -9,7 +9,7 @@ Flask-JWT adds JWT functionality to Flask in an easy to use manner. It gives you
 
 In addition, it covers how to retrieve the **currently logged in user** from any of our Flask app endpoints.
 
-This tutorial assumes that you’ve followed the lectures and have set up Flask-JWT already! If you haven't done so yet, check out Section 5 of the [Udemy course](https://www.udemy.com/rest-api-flask-and-python/?couponCode=GITHUB).
+This tutorial assumes that you’ve followed the lectures and have set up Flask-JWT already! If you haven't done so yet, check out Section 5 of the [Udemy course](https://go.tecla.do/rest-apis-sale).
 
 ## Before We Start
 
@@ -112,9 +112,9 @@ def customized_error_handler(error):
 
 ### Other Configurations
 
-You may find out more configuration options here: https://pythonhosted.org/Flask-JWT/
+You may find out more configuration options here: [https://pythonhosted.org/Flask-JWT/](https://pythonhosted.org/Flask-JWT/)
 
-Please refer to the \<Configuration Options> section.
+Please refer to the [Configuration Options](https://pythonhosted.org/Flask-JWT/#configuration-options) section.
 
 ## More
 
