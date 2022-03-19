@@ -218,10 +218,10 @@ pip install virtualenv
 After it is installed, we can create a `virtualenv`:
 
 ```
-virtualenv venv --python=python3.8.5
+virtualenv venv --python=python3.8
 ```
 
-Note that `Ubuntu` usually comes with `Python3.8.5` and it is what we used in the sample code, if you choose to use different versions of `Python`, feel free to change it accordingly and it will be the Python version inside your `virtualenv`.
+Note that `Ubuntu 20.04` usually comes with `Python3.8` and it is what we used in the sample code, if you choose to use different versions of `Python`, feel free to change it accordingly and it will be the Python version inside your `virtualenv`.
 
 To activate `virtualenv`:
 
