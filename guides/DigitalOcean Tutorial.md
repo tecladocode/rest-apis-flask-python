@@ -6,11 +6,11 @@ DigitalOcean is a cloud infrastructure provider focused on simplifying web infra
 
 ## Creating an account
 
-You can sign up to DigitalOcean using our affiliate link. Doing so gives you a starting credit of $10, which allows you to rent a server for 2 months. Click this link to create your account and get the $10: [https://m.do.co/c/d54c088544ed](https://m.do.co/c/d54c088544ed). If the link doesn't work, paste it into your browser.
+You can sign up to DigitalOcean using our affiliate link. Doing so gives you a starting credit of $100 to spend in 60 days. Click this link to create your account and get the $100: [https://m.do.co/c/d54c088544ed](https://m.do.co/c/d54c088544ed). If the link doesn't work, paste it into your browser.
 
 ![Create an account](assets/DigitalOcean/create_account.png)
 
-After clicking the link, you should see a page like the above. Create your account at the left-bottom corner and you'll receive the $10 automatically. Beware that you'll be asked to provide payment info when creating the account, since all services (which you'll choose below) in DigitalOcean will be charged after your credit runs out.
+After clicking the link, you should see a page like the above. Create your account at the left-bottom corner and you'll receive the $100 automatically. Beware that you'll be asked to provide payment info when creating the account, since all services (which you'll choose below) in DigitalOcean will be charged after your credit runs out.
 
 ## Creating a Droplet
 
