@@ -68,60 +68,6 @@ Since we will be logging in as `johndoe` for most of the time in the future, we 
 usermod -aG sudo johndoe
 ```
 
-## Enable SSH for our new user
-
-Next, we want to allow us to login as `johndoe` using SSH, and we may also want to disable login as `root` from SSH to make our server more secure. To do this, use the command:
-
-```
-vi /etc/ssh/sshd_config
-```
-
-And we will be prompted with another text file. Navigate to the section which contains:
-
-```
-# Authentication
-PermitRootLogin yes
-```
-
-Press `i` on your keyboard to enter insert mode and change the `yes` to `no` to disallow login as root.
-
-Next, look for a configuration called `PasswordAuthentication`:
-
-```
-# Change to no to disable tunnelled clear text passwords
-PasswordAuthentication yes
-```
-
- **Important:** make sure to set it as `yes` so that you can use your password to login in the future. It should be set to `yes` already, however, there are some platforms that enforces SSH key authentication and set it to `no` instead.
-
-Then go to the bottom of the file and add the following lines:
-
-```
-AllowUsers johndoe
-```
-
-For this section, if you already have other users on the server, make sure to include them as well. On AWS, for instance, a user named `ubuntu` is initialized and used to login for the first time. If you choose to create a new user, say `johndoe`, then you will need to add them together into `AllowUsers`:
-
-```
-AllowUsers johndoe ubuntu
-```
-
-Otherwise, you will no longer be able to login as `ubuntu` in the future.
-
-Next, press `Esc` to quit insert mode, press `:` (colon) to enable the command function and enter `wq` to write and quit (after hitting `ENTER` to confirm).
-
-Some other useful vi commands are: `:q` to quit without modification and `:q!` to force quit and discard changes.
-
-Finally, we use the command:
-
-```
-service sshd reload
-```
-
-to enable our modifications.
-
-Now we've created a new user `johndoe` and enabled both its super user privilege and SSH access. Next, we'll be learning to link this user to our PostgreSQL database.
-
 # Configuring Postgres
 
 Postgres allows from the start a user to access a database with its own name. Thus we must:
