@@ -133,7 +133,7 @@ su johndoe
 However, notice that we've created a password for the Postgres user but never have to use it just because we used the same username in UNIX and Postgres. It is safer to require a password when connecting to the database. Use the below command to configure Postgres security options.
 
 ```
-sudo vi /etc/postgresql/9.5/main/pg_hba.conf
+sudo vi /etc/postgresql/12/main/pg_hba.conf
 ```
 
 Navigate to the bottom of the file, and we may see something like this:
