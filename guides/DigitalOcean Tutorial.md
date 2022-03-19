@@ -18,7 +18,7 @@ A server instance in DigitalOcean is called a `Droplet`. It's just a name that m
 
 ### Choosing an image
 
-To create a `Droplet`, we must first specify an image, that is, choosing what Operating System you want for the server. We recommend to use a Ubuntu LTS (Long Term Support) distribution. For more info on Ubuntu life time, please refer to the [official Ubuntu end of life page here](https://www.ubuntu.com/info/release-end-of-life). In our example, we'll use `Ubuntu 16.04.* x64`, which is an LTS distribution.
+To create a `Droplet`, we must first specify an image, that is, choosing what Operating System you want for the server. We recommend to use a Ubuntu LTS (Long Term Support) distribution. For more info on Ubuntu life time, please refer to the [official Ubuntu end of life page here](https://www.ubuntu.com/info/release-end-of-life). In our example, we'll use `Ubuntu 20.04 (LTS) x64`, which is an LTS distribution.
 
 ### Choosing a size
 
