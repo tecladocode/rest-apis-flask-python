@@ -212,7 +212,7 @@ sudo apt-get install python3-pip python3-dev libpq-dev
 Next, we will install `virtualenv`, which is a python library used to create virtual environment. Since we may want to deploy several services on one server in the future, using virtual environment allows us to create independent environment for each project so that their dependencies won't affect each other. We may install `virtualenv` using the following command:
 
 ```
-pip install virtualenv
+sudo pip install virtualenv
 ```
 
 After it is installed, we can create a `virtualenv`:
