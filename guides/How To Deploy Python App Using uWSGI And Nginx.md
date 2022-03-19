@@ -122,6 +122,12 @@ To quit Postgres:
 \q
 ```
 
+Change back to user johndoe
+
+```
+su johndoe
+```
+
 ## Improve security on our PostgreSQL database
 
 However, notice that we've created a password for the Postgres user but never have to use it just because we used the same username in UNIX and Postgres. It is safer to require a password when connecting to the database. Use the below command to configure Postgres security options.
