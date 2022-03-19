@@ -22,7 +22,7 @@ To create a `Droplet`, we must first specify an image, that is, choosing what Op
 
 ### Choosing a size
 
-Next, we need to choose the specs for our server. In this tutorial, we'll be using the most basic tier of a Standard `Droplet`, which offers a single CPU with 512MB RAM, 20GB SSD and 1000 GB transfer at $5 per month. Generally, it's more than enough for running personal applications. You may also run several services in a single Droplet.
+Next, we need to choose the specs for our server. In this tutorial, we'll be using the most basic tier of a Standard `Droplet`, which offers a single Regular Intel CPU with 1GB RAM, 25GB SSD and 1000 GB transfer at $5 per month. Generally, it's more than enough for running personal applications. You may also run several services in a single Droplet.
 
 ### Choosing a datacenter region
 
