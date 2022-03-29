@@ -30,7 +30,16 @@ Generally, choosing a region that's _closest to your users_ will make your servi
 
 ### Other configurations
 
-In our example, we do not need to add any other services such as block storage or private network. So we will ignore these settings to keep our setup simple and cheap. You may choose to use `SSH` key and follow the steps recommended by DigitalOcean or create a password. If you choose to use SSH key, then each time you want to login to the server from outside DigitalOcean's site, you will need to provide the key. For example in windows using [GitBash terminal](https://git-scm.com/downloads) you need to add the `-i` option and pass the full path for the ssh-key file:
+In our example, we do not need to add any other services such as block storage or private network. So we will ignore these settings to keep our setup simple and cheap.  
+You may choose to use `SSH` key and follow the steps recommended by DigitalOcean or create a password.
+
+#### Setting up a password
+
+If you want to use a password you just have to select the __"Create a root password to access Droplet"__ and then insert a strong password which you can use to login remotely or through DigitalOcean's Droplet Console.
+
+#### Setting up an SSH key
+
+ If you choose to use SSH key, then each time you want to login to the server from outside DigitalOcean's site, you will need to provide the key. For example in windows using [GitBash terminal](https://git-scm.com/downloads) you need to add the `-i` option and pass the full path for the ssh-key file:
 
 ```bash
 ssh root@insert-droplet-ip -i /c/Users/insert-username/.ssh/insert-ssh-key-filename
