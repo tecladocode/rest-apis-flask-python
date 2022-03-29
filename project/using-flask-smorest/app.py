@@ -1,15 +1,23 @@
 from flask import Flask, jsonify
-from flask_restx import Api
+from flask_smorest import Api
 from flask_jwt_extended import JWTManager
 
 from db import db
 from blocklist import BLOCKLIST
-from resources.user import UserRegister, UserLogin, User, TokenRefresh, UserLogout
-from resources.item import Item, ItemList
-from resources.store import Store, StoreList
-from resources.tag import Tag
+
+from resources.user import blp as UserBlueprint
+from resources.item import blp as ItemBlueprint
+from resources.store import blp as StoreBlueprint
+from resources.tag import blp as TagBlueprint
+
 
 app = Flask(__name__)
+app.config["API_TITLE"] = "Stores REST API"
+app.config["API_VERSION"] = "v1"
+app.config["OPENAPI_VERSION"] = "3.0.2"
+app.config["OPENAPI_URL_PREFIX"] = "/"
+app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
+app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["PROPAGATE_EXCEPTIONS"] = True
@@ -102,13 +110,7 @@ def create_tables():
     db.create_all()
 
 
-api.add_resource(UserRegister, "/register")
-api.add_resource(UserLogin, "/login")
-api.add_resource(UserLogout, "/logout")
-api.add_resource(User, "/user/<int:user_id>")
-api.add_resource(TokenRefresh, "/refresh")
-api.add_resource(Store, "/store/<string:name>")
-api.add_resource(StoreList, "/stores")
-api.add_resource(Item, "/item/<string:name>")
-api.add_resource(ItemList, "/items")
-api.add_resource(Tag, "/tag/<string:name>")
+api.register_blueprint(UserBlueprint)
+api.register_blueprint(ItemBlueprint)
+api.register_blueprint(StoreBlueprint)
+api.register_blueprint(TagBlueprint)
