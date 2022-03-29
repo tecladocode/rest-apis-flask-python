@@ -1,5 +1,5 @@
-from flask import abort, request
-from flask_restx import Resource
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
@@ -8,23 +8,19 @@ from flask_jwt_extended import (
     jwt_required,
 )
 from passlib.hash import pbkdf2_sha256
-from marshmallow import ValidationError
 
 from models import UserModel
 from schemas import UserSchema
 from blocklist import BLOCKLIST
 
 
-user_schema = UserSchema()
+blp = Blueprint("Users", "users", description="Operations on users")
 
 
-class UserRegister(Resource):
-    def post(self):
-        try:
-            user_data = user_schema.load(request.get_json())
-        except ValidationError as err:
-            abort(422, "A validation error occurred", errors=err.messages)
-
+@blp.route("/register")
+class UserRegister(MethodView):
+    @blp.arguments(UserSchema)
+    def post(self, user_data):
         if UserModel.find_by_username(user_data["username"]):
             abort(400, "A user with that username already exists.")
 
@@ -37,13 +33,10 @@ class UserRegister(Resource):
         return {"message": "User created successfully."}, 201
 
 
-class UserLogin(Resource):
-    def post(self):
-        try:
-            user_data = user_schema.load(request.get_json())
-        except ValidationError as err:
-            abort(422, "A validation error occurred", errors=err.messages)
-
+@blp.route("/login")
+class UserLogin(MethodView):
+    @blp.arguments(UserSchema)
+    def post(self, user_data):
         user = UserModel.find_by_username(user_data["username"])
 
         if user and pbkdf2_sha256.verify(user_data["password"], user.password):
@@ -54,7 +47,8 @@ class UserLogin(Resource):
         abort(401, "Invalid credentials.")
 
 
-class UserLogout(Resource):
+@blp.route("/logout")
+class UserLogout(MethodView):
     @jwt_required()
     def post(self):
         jti = get_jwt()["jti"]
@@ -62,7 +56,8 @@ class UserLogout(Resource):
         return {"message": "Successfully logged out"}, 200
 
 
-class User(Resource):
+@blp.route("/user/<int:user_id>")
+class User(MethodView):
     """
     This resource can be useful when testing our Flask app.
     We may not want to expose it to public users, but for the
@@ -71,11 +66,12 @@ class User(Resource):
     """
 
     @classmethod
+    @blp.response(200, UserSchema)
     def get(cls, user_id: int):
         user = UserModel.find_by_id(user_id)
         if not user:
             abort(404, "User not found.")
-        return user_schema.dump(user), 200
+        return user
 
     @classmethod
     def delete(cls, user_id: int):
@@ -86,7 +82,8 @@ class User(Resource):
         return {"message": "User deleted."}, 200
 
 
-class TokenRefresh(Resource):
+@blp.route("/refresh")
+class TokenRefresh(MethodView):
     @jwt_required(refresh=True)
     def post(self):
         current_user = get_jwt_identity()
