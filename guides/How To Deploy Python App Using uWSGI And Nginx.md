@@ -122,7 +122,7 @@ To quit Postgres:
 \q
 ```
 
-Change back to user johndoe
+Change to user johndoe
 
 ```
 su johndoe
