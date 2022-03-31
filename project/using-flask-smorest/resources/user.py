@@ -22,7 +22,7 @@ class UserRegister(MethodView):
     @blp.arguments(UserSchema)
     def post(self, user_data):
         if UserModel.find_by_username(user_data["username"]):
-            abort(400, "A user with that username already exists.")
+            abort(400, message="A user with that username already exists.")
 
         user = UserModel(
             username=user_data["username"],
@@ -44,7 +44,7 @@ class UserLogin(MethodView):
             refresh_token = create_refresh_token(user.id)
             return {"access_token": access_token, "refresh_token": refresh_token}, 200
 
-        abort(401, "Invalid credentials.")
+        abort(401, message="Invalid credentials.")
 
 
 @blp.route("/logout")
@@ -70,14 +70,14 @@ class User(MethodView):
     def get(cls, user_id: int):
         user = UserModel.find_by_id(user_id)
         if not user:
-            abort(404, "User not found.")
+            abort(404, message="User not found.")
         return user
 
     @classmethod
     def delete(cls, user_id: int):
         user = UserModel.find_by_id(user_id)
         if not user:
-            abort(404, "User not found.")
+            abort(404, message="User not found.")
         user.delete_from_db()
         return {"message": "User deleted."}, 200
 

@@ -15,18 +15,18 @@ class Store(MethodView):
         store = StoreModel.find_by_name(name)
         if store:
             return store
-        abort(404, "Store not found.")
+        abort(404, message="Store not found.")
 
     @blp.response(201, StoreSchema)
     def post(cls, name):
         if StoreModel.find_by_name(name):
-            abort(400, f"A store with name '{name}' already exists.")
+            abort(400, message=f"A store with name '{name}' already exists.")
 
         store = StoreModel(name=name)
         try:
             store.save_to_db()
         except SQLAlchemyError:
-            abort(500, "An error occurred creating the store.")
+            abort(500, message="An error occurred creating the store.")
 
         return store
 
@@ -35,7 +35,7 @@ class Store(MethodView):
         if store:
             store.delete_from_db()
             return {"message": "Store deleted"}, 200
-        abort(404, "Store not found.")
+        abort(404, message="Store not found.")
 
 
 @blp.route("/stores")
