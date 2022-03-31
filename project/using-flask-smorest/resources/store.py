@@ -1,45 +1,45 @@
-from flask import abort
-from flask_restx import Resource
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError
 from models import StoreModel
 from schemas import StoreSchema
 
 
-store_schema = StoreSchema()
-stores_schema = StoreSchema(many=True)
+blp = Blueprint("Stores", "stores", description="Operations on stores")
 
 
-class Store(Resource):
-    @classmethod
+@blp.route("/store/<string:name>")
+class Store(MethodView):
+    @blp.response(200, StoreSchema)
     def get(cls, name):
         store = StoreModel.find_by_name(name)
         if store:
-            return store_schema.dump(store)
-        abort(404, "Store not found.")
+            return store
+        abort(404, message="Store not found.")
 
-    @classmethod
+    @blp.response(201, StoreSchema)
     def post(cls, name):
         if StoreModel.find_by_name(name):
-            abort(400, f"A store with name '{name}' already exists.")
+            abort(400, message=f"A store with name '{name}' already exists.")
 
         store = StoreModel(name=name)
         try:
             store.save_to_db()
         except SQLAlchemyError:
-            abort(500, "An error occurred creating the store.")
+            abort(500, message="An error occurred creating the store.")
 
-        return store_schema.dump(store), 201
+        return store
 
-    @classmethod
     def delete(cls, name):
         store = StoreModel.find_by_name(name)
         if store:
             store.delete_from_db()
             return {"message": "Store deleted"}, 200
-        abort(404, "Store not found.")
+        abort(404, message="Store not found.")
 
 
-class StoreList(Resource):
-    @classmethod
+@blp.route("/stores")
+class StoreList(MethodView):
+    @blp.response(200, StoreSchema(many=True))
     def get(cls):
-        return stores_schema.dump(StoreModel.find_all())
+        return StoreModel.find_all()

@@ -1,81 +1,70 @@
-from flask import request
-from flask_restx import Resource, abort
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
 from flask_jwt_extended import get_jwt_identity, jwt_required, get_jwt
 from sqlalchemy.exc import SQLAlchemyError
 
-from marshmallow import ValidationError
 from models import ItemModel
-from schemas import ItemSchema
+from schemas import ItemSchema, ItemUpdateSchema
 
-item_schema = ItemSchema()
-items_schema = ItemSchema(many=True)
+blp = Blueprint("Items", "items", description="Operations on items")
 
 
-class Item(Resource):
+@blp.route("/item/<string:name>")
+class Item(MethodView):
     @jwt_required()
+    @blp.response(200, ItemSchema)
     def get(self, name):
         item = ItemModel.find_by_name(name)
         if item:
-            return item_schema.dump(item)
-        abort(404, "Item not found")
+            return item
+        abort(404, message="Item not found")
 
     @jwt_required(fresh=True)
-    def post(self, name):
-        try:
-            data = item_schema.load({**request.get_json(), "name": name})
-        except ValidationError as err:
-            abort(422, "A validation error occurred", errors=err.messages)
-
+    @blp.arguments(ItemSchema)
+    @blp.response(201, ItemSchema)
+    def post(self, item_data, name):
         if ItemModel.find_by_name(name):
-            abort(400, f"An item with name {name} already exists.")
+            abort(400, message=f"An item with name {name} already exists.")
 
-        item = ItemModel(**data)
+        item = ItemModel(**item_data, name=name)
 
         try:
             item.save_to_db()
         except SQLAlchemyError:
-            abort(500, "An error occurred while inserting the item.")
+            abort(500, message="An error occurred while inserting the item.")
 
-        return item_schema.dump(item), 201
+        return item
 
     @jwt_required()
     def delete(self, name):
         jwt = get_jwt()
         if not jwt["is_admin"]:
-            abort(401, "Admin privilege required.")
+            abort(401, message="Admin privilege required.")
 
         item = ItemModel.find_by_name(name)
         if item:
             item.delete_from_db()
             return {"message": "Item deleted."}
-        abort(404, "Item not found.")
+        abort(404, message="Item not found.")
 
-    def put(self, name):
-        try:
-            data = item_schema.load(request.get_json())
-        except ValidationError as err:
-            abort(422, "A validation error occurred", errors=err.messages)
-
+    @blp.arguments(ItemUpdateSchema)
+    @blp.response(200, ItemSchema)
+    def put(self, item_data, name):
         item = ItemModel.find_by_name(name)
 
         if item:
-            item.price = data["price"]
+            item.price = item_data["price"]
         else:
-            item = ItemModel(name, **data)
+            item = ItemModel(name, **item_data)
 
         item.save_to_db()
 
-        return item_schema.dump(item)
+        return item
 
 
-class ItemList(Resource):
-    @jwt_required(optional=True)
+@blp.route("/items")
+class ItemList(MethodView):
+    @jwt_required()
+    @blp.response(200, ItemSchema(many=True))
     def get(self):
-        user_id = get_jwt_identity()
-        items = ItemModel.find_all()
-        if user_id:
-            return items_schema.dump(items), 200
-        return {
-            "items": [item.name for item in items],
-            "message": "More data available if you log in.",
-        }, 200
+        return ItemModel.find_all()
