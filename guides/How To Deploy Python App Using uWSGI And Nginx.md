@@ -62,84 +62,11 @@ passwd johndoe
 
 ## Providing user with additional privilege
 
-Since we will be logging in as `johndoe` for most of the time in the future, we will want it to have some "extra power", that is, temporarily acting as a super user. To do this, we need to run the command:
+Since we will be logging in as `johndoe` for most of the time in the future, we will want it to have some "extra power", that is, temporarily acting as a super user. To do this, we have to add the user to the sudoers group running the command:
 
 ```
-visudo
+usermod -aG sudo johndoe
 ```
-
-first, and we will see a text file popping up. Then we navigate to the lines containing:
-
-```
-# User privilege specification
-root ALL=(ALL:ALL) ALL
-```
-
-You can do this with the arrow keys. We need to add a new line for our user in this section:
-
-```
-# User privilege specification
-root ALL=(ALL:ALL) ALL
-johndoe ALL=(ALL:ALL) ALL
-```
-
-Remember that the `ALL` has to be **all uppercase**, otherwise it will raise syntax error.
-
-After adding this line, use `ctrl + o` to save and press `ENTER` to overwrite, then press `ctrl + x` to quit.
-
-## Enable SSH for our new user
-
-Next, we want to allow us to login as `johndoe` using SSH, and we may also want to disable login as `root` from SSH to make our server more secure. To do this, use the command:
-
-```
-vi /etc/ssh/sshd_config
-```
-
-And we will be prompted with another text file. Navigate to the section which contains:
-
-```
-# Authentication
-PermitRootLogin yes
-```
-
-Press `i` on your keyboard to enter insert mode and change the `yes` to `no` to disallow login as root.
-
-Next, look for a configuration called `PasswordAuthentication`:
-
-```
-# Change to no to disable tunnelled clear text passwords
-PasswordAuthentication yes
-```
-
- **Important:** make sure to set it as `yes` so that you can use your password to login in the future. It should be set to `yes` already, however, there are some platforms that enforces SSH key authentication and set it to `no` instead.
-
-Then go to the bottom of the file and add the following lines:
-
-```
-AllowUsers johndoe
-```
-
-For this section, if you already have other users on the server, make sure to include them as well. On AWS, for instance, a user named `ubuntu` is initialized and used to login for the first time. If you choose to create a new user, say `johndoe`, then you will need to add them together into `AllowUsers`:
-
-```
-AllowUsers johndoe ubuntu
-```
-
-Otherwise, you will no longer be able to login as `ubuntu` in the future.
-
-Next, press `Esc` to quit insert mode, press `:` (colon) to enable the command function and enter `wq` to write and quit (after hitting `ENTER` to confirm).
-
-Some other useful vi commands are: `:q` to quit without modification and `:q!` to force quit and discard changes.
-
-Finally, we use the command:
-
-```
-service sshd reload
-```
-
-to enable our modifications.
-
-Now we've created a new user `johndoe` and enabled both its super user privilege and SSH access. Next, we'll be learning to link this user to our PostgreSQL database.
 
 # Configuring Postgres
 
@@ -195,12 +122,18 @@ To quit Postgres:
 \q
 ```
 
+Change to user johndoe
+
+```
+su johndoe
+```
+
 ## Improve security on our PostgreSQL database
 
 However, notice that we've created a password for the Postgres user but never have to use it just because we used the same username in UNIX and Postgres. It is safer to require a password when connecting to the database. Use the below command to configure Postgres security options.
 
 ```
-sudo vi /etc/postgresql/9.5/main/pg_hba.conf
+sudo vi /etc/postgresql/12/main/pg_hba.conf
 ```
 
 Navigate to the bottom of the file, and we may see something like this:
@@ -244,7 +177,7 @@ In this section, we will pull our code from `GitHub`, which integrates a popular
 First, we create a folder called `items-rest` for our app, since our sample project is a REST API which manages items of stores. We create this folder using the following command:
 
 ```
-sudo mkdir /var/www/html/items-rest
+sudo mkdir -p /var/www/html/items-rest
 ```
 
 The folder is owned by the `root` user since we used `sudo` to create it. We need to transfer ownership to our current user:
@@ -279,16 +212,16 @@ sudo apt-get install python3-pip python3-dev libpq-dev
 Next, we will install `virtualenv`, which is a python library used to create virtual environment. Since we may want to deploy several services on one server in the future, using virtual environment allows us to create independent environment for each project so that their dependencies won't affect each other. We may install `virtualenv` using the following command:
 
 ```
-pip install virtualenv
+sudo pip install virtualenv
 ```
 
 After it is installed, we can create a `virtualenv`:
 
 ```
-virtualenv venv --python=python3.8.5
+virtualenv venv --python=python3.8
 ```
 
-Note that `Ubuntu` usually comes with `Python3.8.5` and it is what we used in the sample code, if you choose to use different versions of `Python`, feel free to change it accordingly and it will be the Python version inside your `virtualenv`.
+Note that `Ubuntu 20.04` usually comes with `Python3.8` and it is what we used in the sample code, if you choose to use different versions of `Python`, feel free to change it accordingly and it will be the Python version inside your `virtualenv`.
 
 To activate `virtualenv`:
 
