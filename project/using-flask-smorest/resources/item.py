@@ -17,21 +17,21 @@ class Item(MethodView):
         item = ItemModel.find_by_name(name)
         if item:
             return item
-        abort(404, "Item not found")
+        abort(404, message="Item not found")
 
     @jwt_required(fresh=True)
     @blp.arguments(ItemSchema)
     @blp.response(201, ItemSchema)
     def post(self, item_data, name):
         if ItemModel.find_by_name(name):
-            abort(400, f"An item with name {name} already exists.")
+            abort(400, message=f"An item with name {name} already exists.")
 
         item = ItemModel(**item_data, name=name)
 
         try:
             item.save_to_db()
         except SQLAlchemyError:
-            abort(500, "An error occurred while inserting the item.")
+            abort(500, message="An error occurred while inserting the item.")
 
         return item
 
@@ -39,13 +39,13 @@ class Item(MethodView):
     def delete(self, name):
         jwt = get_jwt()
         if not jwt["is_admin"]:
-            abort(401, "Admin privilege required.")
+            abort(401, message="Admin privilege required.")
 
         item = ItemModel.find_by_name(name)
         if item:
             item.delete_from_db()
             return {"message": "Item deleted."}
-        abort(404, "Item not found.")
+        abort(404, message="Item not found.")
 
     @blp.arguments(ItemUpdateSchema)
     @blp.response(200, ItemSchema)
