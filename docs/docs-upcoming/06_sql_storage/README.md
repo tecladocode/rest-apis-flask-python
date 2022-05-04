@@ -1,0 +1,1 @@
+# Flask-Smorest for more efficient development
