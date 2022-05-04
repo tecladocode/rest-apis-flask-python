@@ -1,0 +1,3 @@
+[submodule "Flask-Smorest Docker"]
+	path = project/using-flask-smorest-docker
+	url = https://github.com/tecladocode/rest-api-smorest-docker
