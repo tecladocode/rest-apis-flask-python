@@ -111,3 +111,54 @@ The main characteristics (or constraints) of a REST API are:
 5. **Layered system**. REST APIs may be developed as multiple layers, where each layer interacts [only with the layer above and below it](https://excalidraw.com/#json=or3Umoigss4yIeuKg3cO8,qH6uDDCXc7DSjweqNvlmzw).
 
 If you'd like to read a very complete and exhaustive guide about everything that a REST API is, check out [this guide](https://restfulapi.net/).
+
+## The API we'll build in this course
+
+In this course we'll build a REST API to expose interactions with stores, items, tags, and users. The API will allow clients to:
+
+- Create and retrieve information about stores.
+- Create, retrieve, search for, update, and delete items in those stores.
+- Create tags and link them to items; and search for items with specific tags.
+- Add user authentication to the client apps using the API.
+
+The API will have these endpoints:
+
+- Users
+  - `POST /register` to create user accounts given an `email` and `password`.
+  - `POST /login` to get a JWT given an `email` and `password`.
+  - `POST /logout` to revoke a JWT.
+  - `POST /refresh` to get a fresh JWT given a refresh JWT.
+  - `GET /user/{user_id}` (dev-only) to get info about a user given their ID.
+  - `DELETE /user/{user_id}` (dev-only) to delete a user given their ID.
+- Stores
+  - `GET /stores` to get a list of all stores.
+  - `POST /stores` to create a store.
+  - `GET /stores/{id}` to get a single store, given its unique id.
+  - `DELETE /stores/{id}` to delete a store, given its unique id.
+- Items
+  - `GET /items` to get a list of all items in all stores.
+  - `POST /items` to create a new item, given its name and price in the body of the request.
+  - `GET /items/{id}` to get information about a specific item, given its unique id.
+  - `PUT /items/{id}` to update an item given its unique id. The item name or price can be given in the body of the request.
+  - `DELETE /items/{id}` to delete an item given its unique id.
+- Tags
+  - `GET /stores/{id}/tags` to get a list of tags in a store.
+  - `POST /stores/{id}/tags` to create a new tag.
+  - `POST /items/{id}/tags` to link an item in a store with a tag from the same store. This will take a list of tags in the body of the request so clients can link one or more tags at the same time.
+  - `DELETE /items/{item_id}/tags/{tag_id}` to unlink a tag from an item.
+  - `GET /tags/{id}` to get information about a tag given its unique id.
+  - `DELETE /tags/{id}` to delete a tag, which must have no associated items.
+
+As you can see, we've got a lot to build!
+
+We'll start building REST APIs in section 3, "Your first REST API". Here we'll create a simpler version of the REST API detailed above, without tags or user authentication.
+
+Then, over the following sections, we'll improve on this REST API. We'll add:
+
+- Flask extensions to simplify our code.
+- Use Docker to run the API more reliably.
+- Use PostgreSQL for data storage.
+- Add user authentication.
+- Add item tagging.
+- Add an admin panel so changing data manually is a bit easier.
+- And much more!
