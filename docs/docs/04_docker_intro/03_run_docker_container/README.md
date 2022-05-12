@@ -80,7 +80,7 @@ When we start a Docker container from this image, it will run the `flask run` co
 
 But the container's ports are not accessible from outside the container by default. We need to tell Docker that when we access a certain port in our computer, those requests and responses should be forwarded to a certain port in our container.
 
-So we'll run the container, but we must remember to a port (e.g. 5000) in our computer to port 5000 in the container
+So we'll run the container, but we must remember to forward a port (e.g. 5000) in our computer to port 5000 in the container
 
 To do so, run this command:
 
