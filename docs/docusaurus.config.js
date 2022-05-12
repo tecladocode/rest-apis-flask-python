@@ -70,7 +70,7 @@ const config = {
               },
               {
                 label: "Tutorial",
-                to: "/docs",
+                to: "/docs/course_intro/",
               },
             ],
           },
