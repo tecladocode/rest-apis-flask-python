@@ -108,6 +108,12 @@ Note that most of this is identical to the `Dockerfile` that you would create fo
 
 Use the `-e ENV_NAME=env_value` flag with `docker run`.
 
+:::caution Secrets in environment variables
+Passing secrets like database connection strings or API keys to Docker containers can be done with environment variables, but it isn't the most secure way (the official Docker tutorial [will tell you more](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/)).
+
+Instead a better option is to use your orchestration framework's secrets management system (that's a mouthful). The two major options are [Kubernetes](https://kubernetes.io/docs/concepts/configuration/secret/) and [Swarm](https://docs.docker.com/engine/swarm/secrets/), and each have their own secrets management system. More info on this later on!
+:::
+
 ## Networking between two containers
 
 First create a network with:
@@ -231,6 +237,13 @@ Create a `.dockerignore` file in the root directory of your project (where `dock
 ```
 node_modules
 .venv
+.env
 *.pyc
 __pycache__
 ```
+
+:::danger Secrets in Docker images
+Don't include any secrets (like database connection strings or API keys) in your code. For local development you can use a `.env` file, but don't include the `.env` file in your Docker image!
+
+One of the benefits of Docker images is you can share them with others easily, but that's why you have to be very careful with what you include in them.
+:::
