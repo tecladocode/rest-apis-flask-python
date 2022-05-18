@@ -1,7 +1,9 @@
 ---
-title: The lecture title goes here
-description: A brief description of the lecture goes here.
+title: Validation with marshmallow
+description: We can use the marshmallow library to validate request data from our API clients.
 ---
+
+# Validation with marshmallow
 
 - [ ] Set metadata above
 - [ ] Start writing!
@@ -12,6 +14,5 @@ description: A brief description of the lecture goes here.
 
 
 
-# Lecture Title
 
 
