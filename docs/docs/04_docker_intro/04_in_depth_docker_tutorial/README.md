@@ -132,7 +132,7 @@ Then create your containers and pass the network to them. For example, this star
 docker run -d \
     --network network-name --network-alias mysql --platform linux/amd64 \
     -v todo-mysql-data:/var/lib/mysql \
-    -e MYSQL_ROOT_PASSWORD=secret \
+    -e MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql_root_password \
     -e MYSQL_DATABASE=todos \
     mysql:5.7
 ```
@@ -145,11 +145,21 @@ docker run -dp 3000:3000 \
   --network network-name \
   -e MYSQL_HOST=mysql \
   -e MYSQL_USER=root \
-  -e MYSQL_PASSWORD=secret \
+  -e MYSQL_PASSWORD_FILE=/run/secrets/mysql_password \
   -e MYSQL_DB=todos \
   node:12-alpine \
   sh -c "npm install && npm run dev"
 ```
+
+:::caution
+In these I'm not passing the MySQL password directly as an environment variable. Instead, I'm passing the path to a file that contains the password.
+
+That file is created by your Docker orchestration framework's secrets management system. That's a mouthful to say: you define the secret in your orchestration framework, and the framework creates a file which contains the password. That way, the password isn't stored in the environment which is a bit unsafe.
+
+Your application (or, in this case, MySQL), would have to read the contents of the image to find the password.
+
+More info on this when we learn about deploying our app in production!
+:::
 
 ## How to run multiple containers using Docker Compose
 
@@ -172,7 +182,7 @@ services:
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: root
-      MYSQL_PASSWORD: secret
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
       MYSQL_DB: todos
   mysql:
     image: mysql:5.7
@@ -180,7 +190,7 @@ services:
     volumes:
       - todo-mysql-data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
       MYSQL_DATABASE: todos
 
 volumes:
