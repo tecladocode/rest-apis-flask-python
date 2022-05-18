@@ -1,7 +1,9 @@
 ---
-title: The lecture title goes here
-description: A brief description of the lecture goes here.
+title: Adding marshmallow schemas
+description: A marshmallow schema is useful for validation and serialization. Learn how to write them in this lecture.
 ---
+
+# Adding marshmallow schemas
 
 - [ ] Set metadata above
 - [ ] Start writing!
@@ -12,6 +14,6 @@ description: A brief description of the lecture goes here.
 
 
 
-# Lecture Title
+
 
 
