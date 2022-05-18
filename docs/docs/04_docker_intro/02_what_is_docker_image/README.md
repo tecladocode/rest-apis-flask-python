@@ -8,11 +8,11 @@ Creating a Docker image is straightforward (when you know how!). I'll guide you 
 
 ```dockerfile
 FROM python:3.10
+EXPOSE 5000
 WORKDIR /app
-COPY ./requirements.txt requirements.txt
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+RUN pip install flask
 COPY . .
-CMD ["gunicorn", "--bind", "0.0.0.0:80", "main:app"]
+CMD ["flask", "run", "--host", "0.0.0.0"]
 ```
 
 This is a `Dockerfile`, a definition of how to create a Docker image. Once you have this file, you can ask Docker to create the Docker image. Then, after creating the Docker image, you can ask Docker to run it as a container.
