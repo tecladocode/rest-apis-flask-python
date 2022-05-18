@@ -24,6 +24,7 @@ Inside the `Dockerfile` we're going to write this:
 
 ```dockerfile
 FROM python:3.10
+EXPOSE 5000
 WORKDIR /app
 RUN pip install flask
 COPY . .
@@ -33,10 +34,11 @@ CMD ["flask", "run", "--host", "0.0.0.0"]
 Here's a quick breakdown of what each line does:
 
 1. `FROM python:3.10` uses the `python:3.10` image as a base.
-2. `WORKDIR /app` does it so everything we do in the Docker image will happen in the image's `/app` directory.
-3. `RUN pip install flask` runs a command in the image. Here the command is `pip install flask`, which is what we need to run our app.
-4. `COPY . .` is a bit cryptic! It copies everything in the current folder (so `app.py`) into the image's current folder (so `/app`).
-5. `CMD ["flask", "run", "--host", "0.0.0.0"]` tells the image what command to run when you start a container. Here the command is `flask run --host=0.0.0.0`.
+2. `EXPOSE 5000` is basically documentation[^1]. It tells the user of the Dockerfile that port 5000 is something the running container will use.
+3. `WORKDIR /app` does it so everything we do in the Docker image will happen in the image's `/app` directory.
+4. `RUN pip install flask` runs a command in the image. Here the command is `pip install flask`, which is what we need to run our app.
+5. `COPY . .` is a bit cryptic! It copies everything in the current folder (so `app.py`) into the image's current folder (so `/app`).
+6. `CMD ["flask", "run", "--host", "0.0.0.0"]` tells the image what command to run when you start a container. Here the command is `flask run --host=0.0.0.0`.
 
 :::tip
 We need `--host=0.0.0.0` to make Docker be able to do port forwarding, as otherwise the Flask app will only be accessible within the container, but not outside the container.
@@ -121,3 +123,5 @@ docker run -dp 5001:5000 rest-apis-flask-python
 Try making requests using the URL `127.0.0.1:5000` with Insomnia REST Client or Postman, and you should see it working well!
 
 ![Insomnia REST Client successfully made a request to the API running in Docker](assets/running-app-docker.png)
+
+[^1]: [Docker `EXPOSE` command (Official Documentation)](https://docs.docker.com/engine/reference/builder/#expose)
