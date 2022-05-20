@@ -11,39 +11,16 @@ description: "Let's add a few routes to our first REST API, so it better matches
 - [x] Create `end` folder
 - [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
 
-## New files
+## Starting code from section 4
 
-Let's start off by creating a `requirements.txt` file with all our dependencies:
+This is the "First REST API" project from Section 4:
 
-```txt title="requirements.txt"
-flask
-flask-smorest
-python-dotenv
-```
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-We're adding `flask-smorest` to help us write REST APIs more easily, and generate documentation for us.
-
-We're adding `python-dotenv` so it's easier for us to load environment variables and use the `.flaskenv` file.
-
-Next, let's create the `.flaskenv` file:
-
-```txt title=".flaskenv"
-FLASK_APP=app
-FLASK_ENV=development
-```
-
-If we have the `python-dotenv` library installed, when we run the `flask run` command, Flask will read the variables inside `.flaskenv` and use them to configure the Flask app.
-
-The configuration that we'll do is to define the Flask app file (here, `app.py`). Then we'll also set the Flask environment to `development`, which does a couple things:
-
-- Sets debug mode to true, which makes the app give us better error messages
-- Sets the app reloading to true, so the app restarts when we make code changes
-
-We don't want debug mode to be enabled in production (when we deploy our app), but while we're doing development it's definitely a time-saving tool!
-
-## Code improvements
-
-This is the "First REST API" project from Section 3:
+<div className="codeTabContainer">
+<Tabs>
+<TabItem value="app" label="app.py" default>
 
 ```py title="app.py"
 import uuid
@@ -104,6 +81,55 @@ def create_store():
 def get_all_stores():
     return {"stores": list(stores.value())}
 ```
+
+</TabItem>
+<TabItem value="docker" label="Dockerfile">
+
+```docker
+FROM python:3.10
+EXPOSE 5000
+WORKDIR /app
+RUN pip install flask
+COPY . .
+CMD ["flask", "run", "--host", "0.0.0.0"]
+```
+
+</TabItem>
+</Tabs>
+</div>
+
+
+## New files
+
+Let's start off by creating a `requirements.txt` file with all our dependencies:
+
+```txt title="requirements.txt"
+flask
+flask-smorest
+python-dotenv
+```
+
+We're adding `flask-smorest` to help us write REST APIs more easily, and generate documentation for us.
+
+We're adding `python-dotenv` so it's easier for us to load environment variables and use the `.flaskenv` file.
+
+Next, let's create the `.flaskenv` file:
+
+```txt title=".flaskenv"
+FLASK_APP=app
+FLASK_ENV=development
+```
+
+If we have the `python-dotenv` library installed, when we run the `flask run` command, Flask will read the variables inside `.flaskenv` and use them to configure the Flask app.
+
+The configuration that we'll do is to define the Flask app file (here, `app.py`). Then we'll also set the Flask environment to `development`, which does a couple things:
+
+- Sets debug mode to true, which makes the app give us better error messages
+- Sets the app reloading to true, so the app restarts when we make code changes
+
+We don't want debug mode to be enabled in production (when we deploy our app), but while we're doing development it's definitely a time-saving tool!
+
+## Code improvements
 
 ### Creating a database file
 
