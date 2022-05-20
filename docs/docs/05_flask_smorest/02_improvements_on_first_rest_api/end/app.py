@@ -8,48 +8,12 @@ from db import stores, items
 app = Flask(__name__)
 
 
-@app.get("/items/<string:id>")
+@app.get("/items/<string:item_id>")
 def get_item(item_id):
     try:
         return items[item_id]
     except KeyError:
         abort(404, message="Item not found.")
-
-
-@app.delete("/items/<string:id>")
-def delete_item(item_id):
-    try:
-        del items[item_id]
-        return {"message": "Item deleted."}
-    except KeyError:
-        abort(404, message="Item not found.")
-
-
-@app.put("/items/<string:id>")
-def update_item(item_id):
-    item_data = request.get_json()
-    # There's  more validation to do here!
-    # Like making sure price is a number, and also both items are optional
-    # Difficult to do with an if statement...
-    if "price" not in item_data or "name" not in item_data:
-        abort(
-            400,
-            message="Bad request. Ensure 'price', and 'name' are included in the JSON payload.",
-        )
-    try:
-        item = items[item_id]
-
-        # https://blog.teclado.com/python-dictionary-merge-update-operators/
-        item |= item_data
-
-        return item
-    except KeyError:
-        abort(404, message="Item not found.")
-
-
-@app.get("/items")
-def get_all_items():
-    return {"items": list(items.values())}
 
 
 @app.post("/items")
@@ -81,28 +45,50 @@ def create_item():
     return item
 
 
-@app.get("/stores/<string:id>")
+@app.delete("/items/<string:item_id>")
+def delete_item(item_id):
+    try:
+        del items[item_id]
+        return {"message": "Item deleted."}
+    except KeyError:
+        abort(404, message="Item not found.")
+
+
+@app.put("/items/<string:item_id>")
+def update_item(item_id):
+    item_data = request.get_json()
+    # There's  more validation to do here!
+    # Like making sure price is a number, and also both items are optional
+    # Difficult to do with an if statement...
+    if "price" not in item_data or "name" not in item_data:
+        abort(
+            400,
+            message="Bad request. Ensure 'price', and 'name' are included in the JSON payload.",
+        )
+    try:
+        item = items[item_id]
+
+        # https://blog.teclado.com/python-dictionary-merge-update-operators/
+        item |= item_data
+
+        return item
+    except KeyError:
+        abort(404, message="Item not found.")
+
+
+@app.get("/items")
+def get_all_items():
+    return {"items": list(items.values())}
+
+
+@app.get("/stores/<string:store_id>")
 def get_store(store_id):
     try:
-        # You presumably would want to include the store's items here too
-        # More on that when we look at databases
+        # Here you might also want to add the items in this store
+        # We'll do that later on in the course
         return stores[store_id]
     except KeyError:
         abort(404, message="Store not found.")
-
-
-@app.delete("/stores/<string:id>")
-def delete_store(store_id):
-    try:
-        del stores[store_id]
-        return {"message": "Store deleted."}
-    except KeyError:
-        abort(404, message="Store not found.")
-
-
-@app.get("/stores")
-def get_all_stores():
-    return {"stores": list(stores.values())}
 
 
 @app.post("/stores")
@@ -122,3 +108,17 @@ def create_store():
     stores[store_id] = store
 
     return store
+
+
+@app.delete("/stores/<string:store_id>")
+def delete_store(store_id):
+    try:
+        del stores[store_id]
+        return {"message": "Store deleted."}
+    except KeyError:
+        abort(404, message="Store not found.")
+
+
+@app.get("/stores")
+def get_all_stores():
+    return {"stores": list(stores.values())}

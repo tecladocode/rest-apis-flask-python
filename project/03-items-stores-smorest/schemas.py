@@ -20,8 +20,8 @@ class ItemUpdateSchema(Schema):
 
 
 class StoreSchema(Schema):
-    id = fields.Str()
-    name = fields.Str()
+    id = fields.Str(dump_only=True)
+    name = fields.Str(required=True)
 
 
 class StoreWitoutItemsSchema(Schema):
