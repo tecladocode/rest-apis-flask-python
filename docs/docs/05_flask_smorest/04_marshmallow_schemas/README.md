@@ -5,11 +5,10 @@ description: A marshmallow schema is useful for validation and serialization. Le
 
 # Adding marshmallow schemas
 
-- [ ] Set metadata above
-- [ ] Start writing!
-- [ ] Create `start` folder
-- [ ] Create `end` folder
-- [ ] Write TL;DR
+- [x] Set metadata above
+- [x] Start writing!
+- [x] Create `start` folder
+- [x] Create `end` folder
 - [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
 
 Something that we're lacking in our API at the moment is validation. We've done a _tiny_ bit of it with this kind of code:

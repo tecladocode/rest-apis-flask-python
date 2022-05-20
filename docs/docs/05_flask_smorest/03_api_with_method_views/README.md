@@ -5,11 +5,10 @@ description: Flask-Smorest MethodViews allow us to simplify API Resources by def
 
 # How to use Flask-Smorest MethodViews and Blueprints
 
-- [ ] Set metadata above
-- [ ] Start writing!
-- [ ] Create `start` folder
-- [ ] Create `end` folder
-- [ ] Write TL;DR
+- [x] Set metadata above
+- [x] Start writing!
+- [x] Create `start` folder
+- [x] Create `end` folder
 - [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
 
 Let's improve the structure of our code by splitting items and stores endpoints into their own files.

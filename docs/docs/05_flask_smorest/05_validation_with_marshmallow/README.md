@@ -5,11 +5,10 @@ description: We can use the marshmallow library to validate request data from ou
 
 # Validation with marshmallow
 
-- [ ] Set metadata above
-- [ ] Start writing!
-- [ ] Create `start` folder
-- [ ] Create `end` folder
-- [ ] Write TL;DR
+- [x] Set metadata above
+- [x] Start writing!
+- [x] Create `start` folder
+- [x] Create `end` folder
 - [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
 
 Now that we've got our schemas written, let's use them to validate incoming data to our API.
