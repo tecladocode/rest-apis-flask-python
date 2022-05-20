@@ -8,22 +8,11 @@ class ItemSchema(Schema):
     store_id = fields.Int(required=True)
 
 
-class ItemWithoutStoreSchema(Schema):
-    id = fields.Str(dump_only=True)
-    name = fields.Str(required=True)
-    price = fields.Float(required=True)
-
-
 class ItemUpdateSchema(Schema):
     name = fields.Str()
     price = fields.Float()
 
 
 class StoreSchema(Schema):
-    id = fields.Str()
-    name = fields.Str()
-
-
-class StoreWitoutItemsSchema(Schema):
-    id = fields.Str()
-    name = fields.Str()
+    id = fields.Str(dump_only=True)
+    name = fields.Str(required=True)

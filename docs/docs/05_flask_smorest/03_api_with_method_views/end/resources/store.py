@@ -10,7 +10,7 @@ blp = Blueprint("Stores", "stores", description="Operations on stores")
 
 @blp.route("/stores/<string:store_id>")
 class Store(MethodView):
-    def get(cls, store_id):
+    def get(self, store_id):
         try:
             # You presumably would want to include the store's items here too
             # More on that when we look at databases
@@ -18,7 +18,7 @@ class Store(MethodView):
         except KeyError:
             abort(404, message="Store not found.")
 
-    def delete(cls, store_id):
+    def delete(self, store_id):
         try:
             del stores[store_id]
             return {"message": "Store deleted."}
@@ -28,10 +28,10 @@ class Store(MethodView):
 
 @blp.route("/stores")
 class StoreList(MethodView):
-    def get(cls):
+    def get(self):
         return {"stores": list(stores.values())}
 
-    def post(cls):
+    def post(self):
         store_data = request.get_json()
         if "name" not in store_data:
             abort(

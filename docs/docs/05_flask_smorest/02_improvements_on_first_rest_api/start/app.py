@@ -7,10 +7,10 @@ stores = {}
 items = {}
 
 
-@app.get("/item/<string:id>")
-def get_item(id):
+@app.get("/items/<string:item_id>")
+def get_item(item_id):
     try:
-        return items[id]
+        return items[item_id]
     except KeyError:
         return {"message": "Item not found"}, 404
 
@@ -30,15 +30,15 @@ def create_item():
 
 @app.get("/items")
 def get_all_items():
-    return {"items": list(items.value())}
+    return {"items": list(items.values())}
 
 
-@app.get("/stores/<string:id>")
-def get_store(id):
+@app.get("/stores/<string:store_id>")
+def get_store(store_id):
     try:
         # Here you might also want to add the items in this store
         # We'll do that later on in the course
-        return stores[id]
+        return stores[store_id]
     except KeyError:
         return {"message": "Store not found"}, 404
 
@@ -54,4 +54,4 @@ def create_store():
 
 @app.get("/stores")
 def get_all_stores():
-    return {"stores": list(stores.value())}
+    return {"stores": list(stores.values())}
