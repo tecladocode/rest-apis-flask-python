@@ -10,7 +10,7 @@ Docker containers are a bit different because they don't emulate an Operating Sy
 
 Containers have their own storage and networking, but because they don't have to emulate the operating system and everything that entails, they are much more lightweight and efficient. Another benefit of containers is that their start-up time is very fast.
 
-Naturally, there's pros and cons to both. For example, you can't run a Windows Docker container if you are using Mac OS in your machine. You'd have to run a Windows Virtual Machine, and then run Docker containers in that, which isn't very efficient!
+There are pros and cons to both. For example, you can't run a Windows Docker container if you are using Mac OS in your machine. You'd have to run a Windows Virtual Machine, and then run Docker containers in that, which isn't very efficient!
 
 :::caution
 Because Docker containers use your OS kernel, you can run Linux images in a Mac OS container.

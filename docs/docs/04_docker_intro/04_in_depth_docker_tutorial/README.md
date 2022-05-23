@@ -165,7 +165,7 @@ More info on this when we learn about deploying our app in production!
 
 1. Create a `docker-compose.yml` file in the root of your project.
 2. Turn each of the `docker run` commands into a `service` in the `docker-compose.yml` file.
-3. This is basically re-creating the flags passed to the `docker run` command, but in YAML format.
+3. This is re-creating the flags passed to the `docker run` command, but in YAML format.
 
 Example of the two `docker run`s above:
 
@@ -205,7 +205,7 @@ Tear it down and remove the containers (but not the volumes) with `docker compos
 
 ## Caching in Dockerfile layers
 
-Each layer (basically line of text) in a Dockerfile uses caching.
+Each layer (i.e. each line of text) in a Dockerfile uses caching.
 
 That means that if Docker doesn't detect that a layer has changed, it won't re-run it. It'll use the last value / files that were generated for the last build.
 
