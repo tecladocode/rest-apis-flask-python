@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[![Udemy rating 4.6/5](https://img.shields.io/badge/udemy-4.6%2F5-brightgreen)](https://go.tecla.do/rest-apis-sale) ![GitHub last commit](https://img.shields.io/github/last-commit/tecladocode/rest-apis-flask-python) ![Python 3.10](https://img.shields.io/badge/python-3.10-yellow) [![Discord](https://img.shields.io/discord/614395983807250433)](https://discord.gg/78Nvd3p) [![Twitter Follow](https://img.shields.io/twitter/follow/jslvtr?style=social) ](https://twitter.com/jslvtr)
+[![Udemy rating 4.6/5](https://img.shields.io/badge/udemy-4.6%2F5-brightgreen)](https://go.tecla.do/rest-apis-sale) ![GitHub last commit](https://img.shields.io/github/last-commit/tecladocode/rest-apis-flask-python/develop) ![Python 3.10](https://img.shields.io/badge/python-3.10-yellow) [![Discord](https://img.shields.io/discord/614395983807250433)](https://discord.gg/78Nvd3p) [![Twitter Follow](https://img.shields.io/twitter/follow/jslvtr?style=social) ](https://twitter.com/jslvtr)
 
 </div>
 
