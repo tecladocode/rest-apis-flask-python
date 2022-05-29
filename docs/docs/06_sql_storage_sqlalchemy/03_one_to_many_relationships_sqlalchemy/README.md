@@ -73,3 +73,48 @@ And here's how you would do some filtering:
 ```python
 store.items.filter_by(name=="Chair").first()
 ```
+
+## Updating our marshmallow schemas
+
+Now that the models have these relationships, we can modify our marshmallow schemas so they will return some or all of the information about the related models.
+
+We do this with the `Nested` marshmallow field.
+
+:::caution
+Something to be careful about is having schema A which has a nested schema B, which has a nested schema A.
+
+This will lead to an infinite nesting, which is obviously never what you want!
+:::
+
+To avoid infinite nesting, we are renaming our schemas which _don't_ use nested fields to `Plain`, such as `PlainItemSchema` and `PlainStoreSchema`.
+
+Then the schemas that _do_ use nesting can be called `ItemSchema` and `StoreSchema`, and they inherit from the plain schemas. This reduces duplication and prevents infinite nesting.
+
+```python title="schemas.py"
+from marshmallow import Schema, fields
+
+
+class PlainItemSchema(Schema):
+    id = fields.Int(dump_only=True)
+    name = fields.Str(required=True)
+    price = fields.Float(required=True)
+
+
+class PlainStoreSchema(Schema):
+    id = fields.Int(dump_only=True)
+    name = fields.Str()
+
+
+class ItemSchema(PlainItemSchema):
+    store_id = fields.Int(required=True, load_only=True)
+    store = fields.Nested(lambda: PlainStoreSchema(), dump_only=True)
+
+
+class ItemUpdateSchema(Schema):
+    name = fields.Str()
+    price = fields.Float()
+
+
+class StoreSchema(PlainStoreSchema):
+    items = fields.List(fields.Nested(PlainItemSchema()), dump_only=True)
+```
