@@ -1,0 +1,143 @@
+---
+title: One-to-many relationships review
+description: A super-quick look at creating the Tag model and setting up the one-to-many relationship with Stores.
+---
+
+# One-to-many relationship between Tag and Store
+
+Since we've already learned how to set up one-to-many relationships with SQLAlchemy when we looked at Items and Stores, let's go quickly in this section.
+
+## The SQLAlchemy models
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<div className="codeTabContainer">
+<Tabs>
+<TabItem value="tag" label="models/tag.py" default>
+
+```python title="models/tag.py"
+from db import db
+
+
+class TagModel(db.Model):
+    __tablename__ = "tags"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), unique=True, nullable=False)
+    store_id = db.Column(db.String(), db.ForeignKey("stores.id"), nullable=False)
+
+    store = db.relationship("StoreModel", back_populates="tags")
+```
+
+</TabItem>
+<TabItem value="store" label="models/store.py">
+
+```python title="models/store.py"
+from db import db
+
+
+class StoreModel(db.Model):
+    __tablename__ = "stores"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), unique=True, nullable=False)
+
+    items = db.relationship("ItemModel", back_populates="store", lazy="dynamic")
+    # highlight-start
+    tags = db.relationship("TagModel", back_populates="store", lazy="dynamic")
+    # highlight-end
+```
+
+</TabItem>
+</Tabs>
+</div>
+
+## The marshmallow schemas
+
+These are the new schemas we'll add. Note that none of the tag schemas have any notion of "items". We'll add those to the schemas when we construct the many-to-many relationship.
+
+In the `StoreSchema` we add a new list field for the nested `PlainTagSchema`, just as it has with `PlainItemSchema`.
+
+```python title="schemas.py"
+class PlainTagSchema(Schema):
+    id = fields.Int(dump_only=True)
+    name = fields.Str()
+
+
+class StoreSchema(PlainStoreSchema):
+    items = fields.List(fields.Nested(PlainItemSchema()), dump_only=True)
+    # highlight-start
+    tags = fields.List(fields.Nested(PlainTagSchema()), dump_only=True)
+    # highlight-end
+
+
+class TagSchema(PlainTagSchema):
+    store_id = fields.Int(load_only=True)
+    store = fields.Nested(PlainStoreSchema(), dump_only=True)
+```
+
+## The API endpoints
+
+Let's add the Tag endpoints that aren't related to Items:
+
+
+| Method     | Endpoint                | Description                                             |
+| ---------- | ----------------------- | ------------------------------------------------------- |
+| ✅ `GET`    | `/stores/{id}/tags`     | Get a list of tags in a store.                          |
+| ✅ `POST`   | `/stores/{id}/tags`     | Create a new tag.                                       |
+| ❌ `POST`   | `/items/{id}/tags/{id}` | Link an item in a store with a tag from the same store. |
+| ❌ `DELETE` | `/items/{id}/tags/{id}` | Unlink a tag from an item.                              |
+| ✅ `GET`    | `/tags/{id}`            | Get information about a tag given its unique id.        |
+| ❌ `DELETE` | `/tags/{id}`            | Delete a tag, which must have no associated items.      |
+
+Here's the code we need to write to add these endpoints:
+
+```python title="resources/tag.py"
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
+from sqlalchemy.exc import SQLAlchemyError
+
+from db import db
+from models import TagModel, StoreModel
+from schemas import TagSchema
+
+blp = Blueprint("Tags", "tags", description="Operations on tags")
+
+
+@blp.route("/stores/<string:store_id>/tags")
+class TagsInStore(MethodView):
+    @blp.response(200, TagSchema(many=True))
+    def get(self, store_id):
+        store = StoreModel.query.get_or_404(store_id)
+
+        return store.tags.all()
+
+    @blp.arguments(TagSchema)
+    @blp.response(201, TagSchema)
+    def post(self, tag_data, store_id):
+        if TagModel.query.filter(TagModel.store_id == store_id).first():
+            abort(400, message="A tag with that name already exists in that store.")
+
+        tag = TagModel(**tag_data, store_id=store_id)
+
+        try:
+            db.session.add(tag)
+            db.session.commit()
+        except SQLAlchemyError as e:
+            abort(
+                500,
+                message=str(e),
+            )
+
+        return tag
+
+
+@blp.route("/tags/<string:tag_id>")
+class Tag(MethodView):
+    @blp.response(200, TagSchema)
+    def get(self, tag_id):
+        tag = TagModel.query.get_or_404(tag_id)
+        return tag
+
+```
