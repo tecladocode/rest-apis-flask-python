@@ -119,6 +119,13 @@ Next up, let's add the nested fields to the marshmallow schemas.
 The `TagAndItemSchema` will be used to return information about both the Item and Tag that have been modified in an endpoint, together with an informative message.
 
 ```python title="schemas.py"
+class ItemSchema(PlainItemSchema):
+    store_id = fields.Int(required=True, load_only=True)
+    store = fields.Nested(PlainStoreSchema(), dump_only=True)
+    # highlight-start
+    tags = fields.List(fields.Nested(PlainTagSchema()), dump_only=True)
+    # highlight-end
+
 class TagSchema(PlainTagSchema):
     store_id = fields.Int(load_only=True)
     # highlight-start
@@ -135,6 +142,19 @@ class TagAndItemSchema(Schema):
 ```
 
 ## The API endpoints
+
+Now let's add the rest of our API endpoints (grayed out are the ones we implemented in [one-to-many relationships review](../one_to_many_review/))!
+
+| Method                                         | Endpoint                                                  | Description                                                                            |
+| ---------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| <span style={{opacity: "50%"}}>✅ `GET`</span>  | <span style={{opacity: "50%"}}>`/stores/{id}/tags`</span> | <span style={{opacity: "50%"}}>Get a list of tags in a store.</span>                   |
+| <span style={{opacity: "50%"}}>✅ `POST`</span> | <span style={{opacity: "50%"}}>`/stores/{id}/tags`</span> | <span style={{opacity: "50%"}}>Create a new tag.</span>                                |
+| ✅ `POST`                                       | `/items/{id}/tags/{id}`                                   | Link an item in a store with a tag from the same store.                                |
+| ✅ `DELETE`                                     | `/items/{id}/tags/{id}`                                   | Unlink a tag from an item.                                                             |
+| <span style={{opacity: "50%"}}>✅ `GET`</span>  | <span style={{opacity: "50%"}}>`/tags/{id}`</span>        | <span style={{opacity: "50%"}}>Get information about a tag given its unique id.</span> |
+| ✅ `DELETE`                                     | `/tags/{id}`                                              | Delete a tag, which must have no associated items.                                     |
+
+Here's the code (new lines highlighted):
 
 ```python title="resources/tag.py"
 from flask.views import MethodView
@@ -243,3 +263,7 @@ class Tag(MethodView):
         )
     # highlight-end
 ```
+
+And with that, we're done!
+
+Now we're ready to look at securing API endpoints with user authentication.
