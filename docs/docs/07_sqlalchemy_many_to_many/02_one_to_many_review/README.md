@@ -3,6 +3,12 @@ title: One-to-many relationships review
 description: A super-quick look at creating the Tag model and setting up the one-to-many relationship with Stores.
 ---
 
+- [x] Set metadata above
+- [x] Start writing!
+- [x] Create `start` folder
+- [x] Create `end` folder
+- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
+
 # One-to-many relationship between Tag and Store
 
 Since we've already learned how to set up one-to-many relationships with SQLAlchemy when we looked at Items and Stores, let's go quickly in this section.
@@ -139,5 +145,51 @@ class Tag(MethodView):
     def get(self, tag_id):
         tag = TagModel.query.get_or_404(tag_id)
         return tag
+```
 
+## Register the Tag blueprint in `app.py`
+
+Finally, we need to remember to import the blueprint and register it!
+
+```python title="app.py"
+from flask import Flask
+from flask_smorest import Api
+
+import models
+
+from db import db
+from resources.item import blp as ItemBlueprint
+from resources.store import blp as StoreBlueprint
+# highlight-start
+from resources.tag import blp as TagBlueprint
+# highlight-end
+
+
+def create_app(db_url=None):
+    app = Flask(__name__)
+    app.config["API_TITLE"] = "Stores REST API"
+    app.config["API_VERSION"] = "v1"
+    app.config["OPENAPI_VERSION"] = "3.0.3"
+    app.config["OPENAPI_URL_PREFIX"] = "/"
+    app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
+    app.config[
+        "OPENAPI_SWAGGER_UI_URL"
+    ] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
+    app.config["SQLALCHEMY_DATABASE_URI"] = db_url or "sqlite:///data.db"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["PROPAGATE_EXCEPTIONS"] = True
+    db.init_app(app)
+    api = Api(app)
+
+    @app.before_first_request
+    def create_tables():
+        db.create_all()
+
+    api.register_blueprint(ItemBlueprint)
+    api.register_blueprint(StoreBlueprint)
+    # highlight-start
+    api.register_blueprint(TagBlueprint)
+    # highlight-end
+
+    return app
 ```

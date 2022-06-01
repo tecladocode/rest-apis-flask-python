@@ -5,6 +5,12 @@ description: Learn to set up a many-to-many relationship between two models usin
 
 # Many-to-many relationships
 
+- [x] Set metadata above
+- [x] Start writing!
+- [x] Create `start` folder
+- [x] Create `end` folder
+- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
+
 ## The SQLAlchemy models
 
 In one-to-many relationships, one of the models has a foreign key that links it to another model. 
@@ -162,8 +168,8 @@ from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError
 
 from db import db
-from models import TagModel, StoreModel, ItemModel
 # highlight-start
+from models import TagModel, StoreModel, ItemModel
 from schemas import TagSchema, TagAndItemSchema
 # highlight-end
 
