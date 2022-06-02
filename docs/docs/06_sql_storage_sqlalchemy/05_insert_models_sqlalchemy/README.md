@@ -32,21 +32,21 @@ Similarly in our `Store` resource:
 
 ```python title="resources/store.py"
 @blp.arguments(StoreSchema)
-    @blp.response(201, StoreSchema)
-    def post(self, store_data):
-        store = StoreModel(**store_data)
-        try:
-            db.session.add(store)
-            db.session.commit()
-        except IntegrityError:
-            abort(
-                400,
-                message="A store with that name already exists.",
-            )
-        except SQLAlchemyError:
-            abort(500, message="An error occurred creating the store.")
+@blp.response(201, StoreSchema)
+def post(self, store_data):
+    store = StoreModel(**store_data)
+    try:
+        db.session.add(store)
+        db.session.commit()
+    except IntegrityError:
+        abort(
+            400,
+            message="A store with that name already exists.",
+        )
+    except SQLAlchemyError:
+        abort(500, message="An error occurred creating the store.")
 
-        return store
+    return store
 ```
 
 Note here we're catching two different errors, `IntegrityError` for when a client attempts to create a store with a name that already exists, and `SQLAlchemyError` for anything else.
