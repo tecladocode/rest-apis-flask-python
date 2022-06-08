@@ -63,6 +63,15 @@ class ItemsTags(db.Model):
     tag_id = db.Column(db.Integer, db.ForeignKey("tags.id"))
 ```
 
+Let's also add this to our `models/__init__.py` file:
+
+```python title="models/__init__.py"
+from models.item import ItemModel
+from models.tag import TagModel
+from models.store import StoreModel
+from models.item_tags import ItemsTags
+```
+
 ### Using the secondary table in the main models
 
 
