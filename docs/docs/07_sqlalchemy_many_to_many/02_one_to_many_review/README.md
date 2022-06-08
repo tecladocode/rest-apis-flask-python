@@ -59,6 +59,8 @@ class StoreModel(db.Model):
 </Tabs>
 </div>
 
+Remember to import the `TagModel` in `models/__init__.py` so that it is then imported by `app.py`. Otherwise SQLAlchemy won't know about it, and it won't be able to create the tables.
+
 ## The marshmallow schemas
 
 These are the new schemas we'll add. Note that none of the tag schemas have any notion of "items". We'll add those to the schemas when we construct the many-to-many relationship.
