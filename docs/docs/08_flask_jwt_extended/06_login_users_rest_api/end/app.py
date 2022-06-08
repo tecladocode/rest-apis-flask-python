@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_smorest import Api
 from flask_jwt_extended import JWTManager
 
@@ -26,11 +26,6 @@ def create_app(db_url=None):
     db.init_app(app)
     api = Api(app)
 
-    """
-    JWT related configuration. The following functions includes:
-    1) add claims to each jwt
-    2) customize the token expired error message
-    """
     app.config["JWT_SECRET_KEY"] = "jose"
     jwt = JWTManager(app)
 

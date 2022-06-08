@@ -27,19 +27,8 @@ def create_app(db_url=None):
     db.init_app(app)
     api = Api(app)
 
-    """
-    JWT related configuration. The following functions includes:
-    1) add claims to each jwt
-    2) customize the token expired error message
-    """
     app.config["JWT_SECRET_KEY"] = "jose"
     jwt = JWTManager(app)
-
-    """
-    `claims` are data we choose to attach to each jwt payload
-    and for each jwt protected endpoint, we can retrieve these claims via `get_jwt_claims()`
-    one possible use case for claims are access level control, which is shown below
-    """
 
     # @jwt.additional_claims_loader
     # def add_claims_to_jwt(identity):
