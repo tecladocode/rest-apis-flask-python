@@ -6,7 +6,7 @@ description: Let's look at what we'll do in this section. There are no changes t
 # Project Overview (and why use SQLAlchemy)
 
 - [x] Set metadata above
-- [ ] Start writing!
+- [x] Start writing!
 
 In this section we'll make absolutely no changes to the API! However, we will completely change the way we store data.
 

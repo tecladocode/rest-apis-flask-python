@@ -6,7 +6,7 @@ description: Learn about fresh and non-fresh tokens, as well as how to use a ref
 # Token refreshing with Flask-JWT-Extended
 
 - [x] Set metadata above
-- [ ] Start writing!
+- [x] Start writing!
 - [x] Create `start` folder
 - [x] Create `end` folder
 - [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
