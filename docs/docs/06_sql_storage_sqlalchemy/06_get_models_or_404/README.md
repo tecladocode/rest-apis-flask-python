@@ -31,7 +31,7 @@ We're going to use `.get_or_404()` repeatedly in our resources!
 For now, and since we'll need an `ItemModel` instance in all our `Item` resource methods, let's add that:
 
 ```python title="resources/item.py"
-@blp.route("/items/<string:item_id>")
+@blp.route("/item/<string:item_id>")
 class Item(MethodView):
     @blp.response(200, ItemSchema)
     def get(self, item_id):
@@ -58,7 +58,7 @@ class Item(MethodView):
 Similarly in our `Store` resource:
 
 ```python title="resources/store.py"
-@blp.route("/stores/<string:store_id>")
+@blp.route("/store/<string:store_id>")
 class Store(MethodView):
     @blp.response(200, StoreSchema)
     def get(self, store_id):

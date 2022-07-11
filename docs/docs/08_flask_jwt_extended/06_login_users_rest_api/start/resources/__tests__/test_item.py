@@ -1,6 +1,6 @@
 def test_create_item_in_store(client, created_store_id):
     response = client.post(
-        "/items",
+        "/item",
         json={"name": "Test Item", "price": 10.5, "store_id": created_store_id},
     )
 
@@ -13,7 +13,7 @@ def test_create_item_in_store(client, created_store_id):
 def test_create_item_with_store_id_not_found(client):
     # Note that this will fail if foreign key constraints are enabled.
     response = client.post(
-        "/items",
+        "/item",
         json={"name": "Test Item", "price": 10.5, "store_id": 1},
     )
 
@@ -25,7 +25,7 @@ def test_create_item_with_store_id_not_found(client):
 
 def test_create_item_with_unknown_data(client):
     response = client.post(
-        "/items",
+        "/item",
         json={
             "name": "Test Item",
             "price": 10.5,
@@ -40,7 +40,7 @@ def test_create_item_with_unknown_data(client):
 
 def test_delete_item(client, created_item_id):
     response = client.delete(
-        f"/items/{created_item_id}",
+        f"/item/{created_item_id}",
     )
 
     assert response.status_code == 200
@@ -49,7 +49,7 @@ def test_delete_item(client, created_item_id):
 
 def test_update_item(client, created_item_id):
     response = client.put(
-        f"/items/{created_item_id}",
+        f"/item/{created_item_id}",
         json={"name": "Test Item (updated)", "price": 12.5},
     )
 
@@ -60,16 +60,16 @@ def test_update_item(client, created_item_id):
 
 def test_get_all_items(client):
     response = client.post(
-        "/items",
+        "/item",
         json={"name": "Test Item", "price": 10.5, "store_id": 1},
     )
     response = client.post(
-        "/items",
+        "/item",
         json={"name": "Test Item 2", "price": 10.5, "store_id": 1},
     )
 
     response = client.get(
-        "/items",
+        "/item",
     )
 
     assert response.status_code == 200
@@ -81,7 +81,7 @@ def test_get_all_items(client):
 
 def test_get_all_items_empty(client):
     response = client.get(
-        "/items",
+        "/item",
     )
 
     assert response.status_code == 200
@@ -90,7 +90,7 @@ def test_get_all_items_empty(client):
 
 def test_get_item_details(client, created_item_id, created_store_id):
     response = client.get(
-        f"/items/{created_item_id}",
+        f"/item/{created_item_id}",
     )
 
     assert response.status_code == 200
@@ -100,9 +100,9 @@ def test_get_item_details(client, created_item_id, created_store_id):
 
 
 def test_get_item_details_with_tag(client, created_item_id, created_tag_id):
-    client.post(f"/items/{created_item_id}/tags/{created_tag_id}")
+    client.post(f"/item/{created_item_id}/tag/{created_tag_id}")
     response = client.get(
-        f"/items/{created_item_id}",
+        f"/item/{created_item_id}",
     )
 
     assert response.status_code == 200
@@ -113,7 +113,7 @@ def test_get_item_details_with_tag(client, created_item_id, created_tag_id):
 
 def test_get_item_detail_not_found(client):
     response = client.get(
-        "/items/1",
+        "/item/1",
     )
 
     assert response.status_code == 404

@@ -10,7 +10,7 @@ from schemas import StoreSchema
 blp = Blueprint("Stores", "stores", description="Operations on stores")
 
 
-@blp.route("/stores/<string:store_id>")
+@blp.route("/store/<string:store_id>")
 class Store(MethodView):
     @blp.response(200, StoreSchema)
     def get(self, store_id):
@@ -24,7 +24,7 @@ class Store(MethodView):
         return {"message": "Store deleted"}, 200
 
 
-@blp.route("/stores")
+@blp.route("/store")
 class StoreList(MethodView):
     @blp.response(200, StoreSchema(many=True))
     def get(self):

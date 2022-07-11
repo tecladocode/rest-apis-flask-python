@@ -62,7 +62,7 @@ class Item(MethodView):
         return item
 
 
-@blp.route("/items")
+@blp.route("/item")
 class ItemList(MethodView):
     @jwt_required()
     @blp.response(200, ItemSchema(many=True))

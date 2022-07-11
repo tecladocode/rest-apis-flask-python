@@ -90,14 +90,14 @@ class TagSchema(PlainTagSchema):
 Let's add the Tag endpoints that aren't related to Items:
 
 
-| Method     | Endpoint                | Description                                             |
-| ---------- | ----------------------- | ------------------------------------------------------- |
-| ✅ `GET`    | `/stores/{id}/tags`     | Get a list of tags in a store.                          |
-| ✅ `POST`   | `/stores/{id}/tags`     | Create a new tag.                                       |
-| ❌ `POST`   | `/items/{id}/tags/{id}` | Link an item in a store with a tag from the same store. |
-| ❌ `DELETE` | `/items/{id}/tags/{id}` | Unlink a tag from an item.                              |
-| ✅ `GET`    | `/tags/{id}`            | Get information about a tag given its unique id.        |
-| ❌ `DELETE` | `/tags/{id}`            | Delete a tag, which must have no associated items.      |
+| Method     | Endpoint              | Description                                             |
+| ---------- | --------------------- | ------------------------------------------------------- |
+| ✅ `GET`    | `/store/{id}/tag`     | Get a list of tags in a store.                          |
+| ✅ `POST`   | `/store/{id}/tag`     | Create a new tag.                                       |
+| ❌ `POST`   | `/item/{id}/tag/{id}` | Link an item in a store with a tag from the same store. |
+| ❌ `DELETE` | `/item/{id}/tag/{id}` | Unlink a tag from an item.                              |
+| ✅ `GET`    | `/tag/{id}`           | Get information about a tag given its unique id.        |
+| ❌ `DELETE` | `/tag/{id}`           | Delete a tag, which must have no associated items.      |
 
 Here's the code we need to write to add these endpoints:
 
@@ -113,7 +113,7 @@ from schemas import TagSchema
 blp = Blueprint("Tags", "tags", description="Operations on tags")
 
 
-@blp.route("/stores/<string:store_id>/tags")
+@blp.route("/store/<string:store_id>/tag")
 class TagsInStore(MethodView):
     @blp.response(200, TagSchema(many=True))
     def get(self, store_id):
@@ -141,7 +141,7 @@ class TagsInStore(MethodView):
         return tag
 
 
-@blp.route("/tags/<string:tag_id>")
+@blp.route("/tag/<string:tag_id>")
 class Tag(MethodView):
     @blp.response(200, TagSchema)
     def get(self, tag_id):

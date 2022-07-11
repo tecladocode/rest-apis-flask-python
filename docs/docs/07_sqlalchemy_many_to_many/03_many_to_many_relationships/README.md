@@ -160,14 +160,14 @@ class TagAndItemSchema(Schema):
 
 Now let's add the rest of our API endpoints (grayed out are the ones we implemented in [one-to-many relationships review](../one_to_many_review/))!
 
-| Method                                         | Endpoint                                                  | Description                                                                            |
-| ---------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| <span style={{opacity: "50%"}}>✅ `GET`</span>  | <span style={{opacity: "50%"}}>`/stores/{id}/tags`</span> | <span style={{opacity: "50%"}}>Get a list of tags in a store.</span>                   |
-| <span style={{opacity: "50%"}}>✅ `POST`</span> | <span style={{opacity: "50%"}}>`/stores/{id}/tags`</span> | <span style={{opacity: "50%"}}>Create a new tag.</span>                                |
-| ✅ `POST`                                       | `/items/{id}/tags/{id}`                                   | Link an item in a store with a tag from the same store.                                |
-| ✅ `DELETE`                                     | `/items/{id}/tags/{id}`                                   | Unlink a tag from an item.                                                             |
-| <span style={{opacity: "50%"}}>✅ `GET`</span>  | <span style={{opacity: "50%"}}>`/tags/{id}`</span>        | <span style={{opacity: "50%"}}>Get information about a tag given its unique id.</span> |
-| ✅ `DELETE`                                     | `/tags/{id}`                                              | Delete a tag, which must have no associated items.                                     |
+| Method                                         | Endpoint                                                | Description                                                                            |
+| ---------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| <span style={{opacity: "50%"}}>✅ `GET`</span>  | <span style={{opacity: "50%"}}>`/store/{id}/tag`</span> | <span style={{opacity: "50%"}}>Get a list of tags in a store.</span>                   |
+| <span style={{opacity: "50%"}}>✅ `POST`</span> | <span style={{opacity: "50%"}}>`/store/{id}/tag`</span> | <span style={{opacity: "50%"}}>Create a new tag.</span>                                |
+| ✅ `POST`                                       | `/item/{id}/tag/{id}`                                   | Link an item in a store with a tag from the same store.                                |
+| ✅ `DELETE`                                     | `/item/{id}/tag/{id}`                                   | Unlink a tag from an item.                                                             |
+| <span style={{opacity: "50%"}}>✅ `GET`</span>  | <span style={{opacity: "50%"}}>`/tag/{id}`</span>       | <span style={{opacity: "50%"}}>Get information about a tag given its unique id.</span> |
+| ✅ `DELETE`                                     | `/tag/{id}`                                             | Delete a tag, which must have no associated items.                                     |
 
 Here's the code (new lines highlighted):
 
@@ -185,7 +185,7 @@ from schemas import TagSchema, TagAndItemSchema
 blp = Blueprint("Tags", "tags", description="Operations on tags")
 
 
-@blp.route("/stores/<string:store_id>/tags")
+@blp.route("/store/<string:store_id>/tag")
 class TagsInStore(MethodView):
     @blp.response(200, TagSchema(many=True))
     def get(self, store_id):
@@ -213,7 +213,7 @@ class TagsInStore(MethodView):
         return tag
 
 # highlight-start
-@blp.route("/items/<string:item_id>/tags/<string:tag_id>")
+@blp.route("/item/<string:item_id>/tag/<string:tag_id>")
 class LinkTagsToItem(MethodView):
     @blp.response(201, TagSchema)
     def post(self, item_id, tag_id):
@@ -247,7 +247,7 @@ class LinkTagsToItem(MethodView):
 # highlight-end
 
 
-@blp.route("/tags/<string:tag_id>")
+@blp.route("/tag/<string:tag_id>")
 class Tag(MethodView):
     @blp.response(200, TagSchema)
     def get(self, tag_id):

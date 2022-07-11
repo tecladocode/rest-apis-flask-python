@@ -15,7 +15,7 @@ def get_item(id):
         return {"message": "Item not found"}, 404
 
 
-@app.post("/items")
+@app.post("/item")
 def create_item():
     request_data = request.get_json()
     new_item_id = uuid.uuid4().hex
@@ -28,12 +28,12 @@ def create_item():
     return new_item
 
 
-@app.get("/items")
+@app.get("/item")
 def get_all_items():
     return {"items": list(items.value())}
 
 
-@app.get("/stores/<string:id>")
+@app.get("/store/<string:id>")
 def get_store(id):
     try:
         # Here you might also want to add the items in this store
@@ -43,7 +43,7 @@ def get_store(id):
         return {"message": "Store not found"}, 404
 
 
-@app.post("/stores")
+@app.post("/store")
 def create_store():
     request_data = request.get_json()
     new_store_id = uuid.uuid4().hex
@@ -52,6 +52,6 @@ def create_store():
     return new_store, 201
 
 
-@app.get("/stores")
-def get_all_stores():
+@app.get("/store")
+def get_stores():
     return {"stores": list(stores.value())}

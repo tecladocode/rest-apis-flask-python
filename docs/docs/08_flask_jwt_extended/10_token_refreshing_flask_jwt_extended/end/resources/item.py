@@ -10,7 +10,7 @@ from schemas import ItemSchema, ItemUpdateSchema
 blp = Blueprint("Items", "items", description="Operations on items")
 
 
-@blp.route("/items/<string:item_id>")
+@blp.route("/item/<string:item_id>")
 class Item(MethodView):
     @jwt_required()
     @blp.response(200, ItemSchema)
@@ -46,7 +46,7 @@ class Item(MethodView):
         return item
 
 
-@blp.route("/items")
+@blp.route("/item")
 class ItemList(MethodView):
     @jwt_required()
     @blp.response(200, ItemSchema(many=True))

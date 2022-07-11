@@ -364,7 +364,7 @@
 							"raw": "{\n  \"username\" : \"cristiano\",\n  \"password\" : \"12345678\"\n}"
 						},
 						"url": {
-							"raw": "{{local_flask}}/items",
+							"raw": "{{local_flask}}/item",
 							"host": [
 								"{{local_flask}}"
 							],
@@ -385,7 +385,7 @@
 							"raw": "{\n  \"username\" : \"cristiano\",\n  \"password\" : \"12345678\"\n}"
 						},
 						"url": {
-							"raw": "{{local_flask}}/items",
+							"raw": "{{local_flask}}/item",
 							"host": [
 								"{{local_flask}}"
 							],
@@ -466,7 +466,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{server_address}}/stores",
+							"raw": "{{server_address}}/store",
 							"host": [
 								"{{server_address}}"
 							],

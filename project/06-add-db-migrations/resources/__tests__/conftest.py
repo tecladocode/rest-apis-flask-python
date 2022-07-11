@@ -4,7 +4,7 @@ import pytest
 @pytest.fixture()
 def created_store_id(client):
     response = client.post(
-        "/stores",
+        "/store",
         json={"name": "Test Store"},
     )
 
@@ -14,8 +14,8 @@ def created_store_id(client):
 @pytest.fixture()
 def created_item_id(client, created_store_id):
     response = client.post(
-        "/items",
-        json={"name": "Test Item", "price": 10.5, "store_id": created_store_id}
+        "/item",
+        json={"name": "Test Item", "price": 10.5, "store_id": created_store_id},
     )
 
     return response.json["id"]
@@ -24,7 +24,7 @@ def created_item_id(client, created_store_id):
 @pytest.fixture()
 def created_tag_id(client, created_store_id):
     response = client.post(
-        f"/stores/{created_store_id}/tags",
+        f"/store/{created_store_id}/tag",
         json={"name": "Test Tag"},
     )
 

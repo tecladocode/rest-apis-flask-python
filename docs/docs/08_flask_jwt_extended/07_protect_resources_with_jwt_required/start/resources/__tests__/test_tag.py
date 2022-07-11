@@ -6,10 +6,10 @@ LOGGER = logging.getLogger(__name__)
 
 @pytest.fixture()
 def created_tag_with_item_id(client, created_item_id, created_tag_id):
-    client.post(f"/items/{created_item_id}/tags/{created_tag_id}")
+    client.post(f"/item/{created_item_id}/tag/{created_tag_id}")
 
     response = client.get(
-        f"/tags/{created_tag_id}",
+        f"/tag/{created_tag_id}",
     )
 
     return response.json["id"]
@@ -17,7 +17,7 @@ def created_tag_with_item_id(client, created_item_id, created_tag_id):
 
 def test_get_tag(client, created_tag_id):
     response = client.get(
-        f"/tags/{created_tag_id}",
+        f"/tag/{created_tag_id}",
     )
 
     assert response.status_code == 200
@@ -31,7 +31,7 @@ def test_get_tag(client, created_tag_id):
 
 def test_get_tag_not_found(client):
     response = client.get(
-        "/tags/1",
+        "/tag/1",
     )
 
     assert response.status_code == 404
@@ -40,7 +40,7 @@ def test_get_tag_not_found(client):
 
 def test_items_linked_with_tag(client, created_tag_with_item_id):
     response = client.get(
-        f"/tags/{created_tag_with_item_id}",
+        f"/tag/{created_tag_with_item_id}",
     )
 
     assert response.status_code == 200
@@ -54,10 +54,10 @@ def test_items_linked_with_tag(client, created_tag_with_item_id):
 
 
 def test_unlink_tag_from_item(client, created_item_id, created_tag_with_item_id):
-    client.delete(f"/items/{created_item_id}/tags/{created_tag_with_item_id}")
+    client.delete(f"/item/{created_item_id}/tag/{created_tag_with_item_id}")
 
     response = client.get(
-        f"/tags/{created_tag_with_item_id}",
+        f"/tag/{created_tag_with_item_id}",
     )
 
     assert response.status_code == 200
@@ -65,10 +65,10 @@ def test_unlink_tag_from_item(client, created_item_id, created_tag_with_item_id)
 
 
 def test_delete_tag_without_items(client, created_tag_id):
-    delete_response = client.delete(f"/tags/{created_tag_id}")
+    delete_response = client.delete(f"/tag/{created_tag_id}")
 
     response = client.get(
-        f"/tags/{created_tag_id}",
+        f"/tag/{created_tag_id}",
     )
 
     assert delete_response.status_code == 202
@@ -78,7 +78,7 @@ def test_delete_tag_without_items(client, created_tag_id):
 
 
 def test_delete_tag_still_has_items(client, created_tag_with_item_id):
-    response = client.delete(f"/tags/{created_tag_with_item_id}")
+    response = client.delete(f"/tag/{created_tag_with_item_id}")
 
     assert response.status_code == 400
     assert (
@@ -89,7 +89,7 @@ def test_delete_tag_still_has_items(client, created_tag_with_item_id):
 
 def test_delete_tag_not_found(client):
     response = client.delete(
-        "/tags/1",
+        "/tag/1",
     )
 
     assert response.status_code == 404
@@ -98,7 +98,7 @@ def test_delete_tag_not_found(client):
 
 def test_get_all_tags_in_store(client, created_store_id, created_tag_id):
     response = client.get(
-        f"/stores/{created_store_id}/tags",
+        f"/store/{created_store_id}/tag",
     )
 
     assert response.status_code == 200
@@ -114,7 +114,7 @@ def test_get_all_tags_in_store(client, created_store_id, created_tag_id):
 
 def test_get_all_tags_in_store_not_found(client):
     response = client.get(
-        "/stores/1/tags",
+        "/store/1/tag",
     )
 
     assert response.status_code == 404

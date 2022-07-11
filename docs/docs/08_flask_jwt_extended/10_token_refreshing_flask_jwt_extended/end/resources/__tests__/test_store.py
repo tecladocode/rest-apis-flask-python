@@ -1,6 +1,6 @@
 def test_get_store(client, created_store_id):
     response = client.get(
-        f"/stores/{created_store_id}",
+        f"/store/{created_store_id}",
     )
 
     assert response.status_code == 200
@@ -14,7 +14,7 @@ def test_get_store(client, created_store_id):
 
 def test_get_store_not_found(client):
     response = client.get(
-        "/stores/1",
+        "/store/1",
     )
 
     assert response.status_code == 404
@@ -23,13 +23,13 @@ def test_get_store_not_found(client):
 
 def test_get_store_with_item(client, fresh_jwt, created_store_id):
     client.post(
-        "/items",
+        "/item",
         json={"name": "Test Item", "price": 10.5, "store_id": created_store_id},
         headers={"Authorization": f"Bearer {fresh_jwt}"},
     )
 
     response = client.get(
-        f"/stores/{created_store_id}",
+        f"/store/{created_store_id}",
     )
 
     assert response.status_code == 200
@@ -44,12 +44,12 @@ def test_get_store_with_item(client, fresh_jwt, created_store_id):
 
 def test_get_store_with_tag(client, created_store_id):
     client.post(
-        f"/stores/{created_store_id}/tags",
+        f"/store/{created_store_id}/tag",
         json={"name": "Test Tag"},
     )
 
     response = client.get(
-        f"/stores/{created_store_id}",
+        f"/store/{created_store_id}",
     )
 
     assert response.status_code == 200
@@ -58,7 +58,7 @@ def test_get_store_with_tag(client, created_store_id):
 
 def test_create_store(client):
     response = client.post(
-        "/stores",
+        "/store",
         json={"name": "Test Store"},
     )
 
@@ -68,14 +68,14 @@ def test_create_store(client):
 
 def test_create_store_with_items(client, created_store_id, fresh_jwt):
     client.post(
-        "/items",
+        "/item",
         json={"name": "Test Item", "price": 10.5, "store_id": 1},
         headers={"Authorization": f"Bearer {fresh_jwt}"},
     )
 
     # Get the store with id 1 and check the items contains the newly created item
     response = client.get(
-        f"/stores/{created_store_id}",
+        f"/store/{created_store_id}",
     )
 
     assert response.status_code == 200
@@ -90,7 +90,7 @@ def test_create_store_with_items(client, created_store_id, fresh_jwt):
 
 def test_delete_store(client, created_store_id):
     response = client.delete(
-        f"/stores/{created_store_id}",
+        f"/store/{created_store_id}",
     )
 
     assert response.status_code == 200
@@ -99,7 +99,7 @@ def test_delete_store(client, created_store_id):
 
 def test_delete_store_doesnt_exist(client):
     response = client.delete(
-        "/stores/1",
+        "/store/1",
     )
 
     assert response.status_code == 404
@@ -108,7 +108,7 @@ def test_delete_store_doesnt_exist(client):
 
 def test_get_store_list_empty(client):
     response = client.get(
-        "/stores",
+        "/store",
     )
 
     assert response.status_code == 200
@@ -117,12 +117,12 @@ def test_get_store_list_empty(client):
 
 def test_get_store_list_single(client):
     client.post(
-        "/stores",
+        "/store",
         json={"name": "Test Store"},
     )
 
     response = client.get(
-        "/stores",
+        "/store",
     )
 
     assert response.status_code == 200
@@ -131,16 +131,16 @@ def test_get_store_list_single(client):
 
 def test_get_store_list_multiple(client):
     client.post(
-        "/stores",
+        "/store",
         json={"name": "Test Store"},
     )
     client.post(
-        "/stores",
+        "/store",
         json={"name": "Test Store 2"},
     )
 
     response = client.get(
-        "/stores",
+        "/store",
     )
 
     assert response.status_code == 200
@@ -152,17 +152,17 @@ def test_get_store_list_multiple(client):
 
 def test_get_store_list_with_items(client, fresh_jwt):
     client.post(
-        "/stores",
+        "/store",
         json={"name": "Test Store"},
     )
     client.post(
-        "/items",
+        "/item",
         json={"name": "Test Item", "price": 10.5, "store_id": 1},
         headers={"Authorization": f"Bearer {fresh_jwt}"},
     )
 
     response = client.get(
-        "/stores",
+        "/store",
     )
 
     assert response.status_code == 200
@@ -184,15 +184,15 @@ def test_get_store_list_with_items(client, fresh_jwt):
 
 def test_get_store_list_with_tags(client):
     resp = client.post(
-        "/stores",
+        "/store",
         json={"name": "Test Store"},
     )
     client.post(
-        f"/stores/{resp.json['id']}/tags",
+        f"/store/{resp.json['id']}/tag",
         json={"name": "Test Tag"},
     )
     response = client.get(
-        "/stores",
+        "/store",
     )
 
     assert response.status_code == 200
@@ -208,12 +208,12 @@ def test_get_store_list_with_tags(client):
 
 def test_create_store_duplicate_name(client):
     client.post(
-        "/stores",
+        "/store",
         json={"name": "Test Store"},
     )
 
     response = client.post(
-        "/stores",
+        "/store",
         json={"name": "Test Store"},
     )
     assert response.status_code == 400

@@ -37,7 +37,7 @@ Then, create a new Request Collection. Call it "Stores REST API".
 In the Request Collection, we can now add requests! Each request has a few parts:
 
 - A **method**, such as `GET` or `POST`. The method is just a piece of data sent to the server, but _usually_ certain methods are used for certain things.
-- The **URL** that you want to request. For our API, this is formed of the "Base URL" (for Flask apps, that's `http://127.0.0.1:5000`), and the endpoint (e.g. `/stores`).
+- The **URL** that you want to request. For our API, this is formed of the "Base URL" (for Flask apps, that's `http://127.0.0.1:5000`), and the endpoint (e.g. `/store`).
 - The **body**, or any data that you want to send in the request. For example, when creating stores or items we might send some data.
 - The **headers**, which are other pieces of data with specific names, that the server can use. For example, a header might be sent to help the server understand _who_ is making the request.
 

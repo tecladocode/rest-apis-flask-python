@@ -1,6 +1,6 @@
 def test_create_item_in_store(client, jwt, created_store_id):
     response = client.post(
-        "/items",
+        "/item",
         json={"name": "Test Item", "price": 10.5, "store_id": created_store_id},
         headers={"Authorization": f"Bearer {jwt}"},
     )
@@ -14,7 +14,7 @@ def test_create_item_in_store(client, jwt, created_store_id):
 def test_create_item_with_store_id_not_found(client, jwt):
     # Note that this will fail if foreign key constraints are enabled.
     response = client.post(
-        "/items",
+        "/item",
         json={"name": "Test Item", "price": 10.5, "store_id": 1},
         headers={"Authorization": f"Bearer {jwt}"},
     )
@@ -27,7 +27,7 @@ def test_create_item_with_store_id_not_found(client, jwt):
 
 def test_create_item_with_unknown_data(client, jwt):
     response = client.post(
-        "/items",
+        "/item",
         json={
             "name": "Test Item",
             "price": 10.5,
@@ -43,7 +43,7 @@ def test_create_item_with_unknown_data(client, jwt):
 
 def test_delete_item(client, admin_jwt, created_item_id):
     response = client.delete(
-        f"/items/{created_item_id}",
+        f"/item/{created_item_id}",
         headers={"Authorization": f"Bearer {admin_jwt}"},
     )
 
@@ -53,7 +53,7 @@ def test_delete_item(client, admin_jwt, created_item_id):
 
 def test_delete_item_without_admin(client, jwt, created_item_id):
     response = client.delete(
-        f"/items/{created_item_id}",
+        f"/item/{created_item_id}",
         headers={"Authorization": f"Bearer {jwt}"},
     )
 
@@ -63,7 +63,7 @@ def test_delete_item_without_admin(client, jwt, created_item_id):
 
 def test_update_item(client, jwt, created_item_id):
     response = client.put(
-        f"/items/{created_item_id}",
+        f"/item/{created_item_id}",
         json={"name": "Test Item (updated)", "price": 12.5},
         headers={"Authorization": f"Bearer {jwt}"},
     )
@@ -75,18 +75,18 @@ def test_update_item(client, jwt, created_item_id):
 
 def test_get_all_items(client, jwt):
     response = client.post(
-        "/items",
+        "/item",
         json={"name": "Test Item", "price": 10.5, "store_id": 1},
         headers={"Authorization": f"Bearer {jwt}"},
     )
     response = client.post(
-        "/items",
+        "/item",
         json={"name": "Test Item 2", "price": 10.5, "store_id": 1},
         headers={"Authorization": f"Bearer {jwt}"},
     )
 
     response = client.get(
-        "/items",
+        "/item",
         headers={"Authorization": f"Bearer {jwt}"},
     )
 
@@ -99,7 +99,7 @@ def test_get_all_items(client, jwt):
 
 def test_get_all_items_empty(client, jwt):
     response = client.get(
-        "/items",
+        "/item",
         headers={"Authorization": f"Bearer {jwt}"},
     )
 
@@ -109,7 +109,7 @@ def test_get_all_items_empty(client, jwt):
 
 def test_get_item_details(client, jwt, created_item_id, created_store_id):
     response = client.get(
-        f"/items/{created_item_id}",
+        f"/item/{created_item_id}",
         headers={"Authorization": f"Bearer {jwt}"},
     )
 
@@ -120,9 +120,9 @@ def test_get_item_details(client, jwt, created_item_id, created_store_id):
 
 
 def test_get_item_details_with_tag(client, jwt, created_item_id, created_tag_id):
-    client.post(f"/items/{created_item_id}/tags/{created_tag_id}")
+    client.post(f"/item/{created_item_id}/tag/{created_tag_id}")
     response = client.get(
-        f"/items/{created_item_id}",
+        f"/item/{created_item_id}",
         headers={"Authorization": f"Bearer {jwt}"},
     )
 
@@ -134,7 +134,7 @@ def test_get_item_details_with_tag(client, jwt, created_item_id, created_tag_id)
 
 def test_get_item_detail_not_found(client, jwt):
     response = client.get(
-        "/items/1",
+        "/item/1",
         headers={"Authorization": f"Bearer {jwt}"},
     )
 
