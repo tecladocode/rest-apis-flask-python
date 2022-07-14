@@ -16,7 +16,13 @@ const config = {
   favicon: "img/favicon.ico",
   organizationName: "tecladocode", // Usually your GitHub org/user name.
   projectName: "rest-apis-flask-python", // Usually your repo name.
-
+  scripts: [
+    {
+      src: "https://plausible.io/js/plausible.js",
+      defer: true,
+      "data-domain": "rest-apis-flask.teclado.com",
+    },
+  ],
   presets: [
     [
       "@docusaurus/preset-classic",
