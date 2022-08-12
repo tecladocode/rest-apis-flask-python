@@ -23,7 +23,7 @@ class Item(MethodView):
     @blp.arguments(ItemUpdateSchema)
     @blp.response(200, ItemSchema)
     def put(self, item_data, item_id):
-        item = ItemModel.query.get_or_404(item_id)
+        item = ItemModel.query.get(item_id)
 
         raise NotImplementedError("Updating an item is not implemented.")
 
