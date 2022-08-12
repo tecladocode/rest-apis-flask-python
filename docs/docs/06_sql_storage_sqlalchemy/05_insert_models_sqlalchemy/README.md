@@ -14,6 +14,13 @@ description: Learn how to use SQLAlchemy to add new rows to our SQL database.
 Inserting models with SQLAlchemy couldn't be easier! We'll use the `db.session`[^1] variable to `.add()` a model. Let's begin working on our `Item` resource:
 
 ```python title="resources/item.py"
+from sqlalchemy.exc import SQLAlchemyError
+
+from db import db
+from models import ItemModel
+
+...
+
 @blp.arguments(ItemSchema)
 @blp.response(201, ItemSchema)
 def post(self, item_data):
@@ -31,6 +38,13 @@ def post(self, item_data):
 Similarly in our `Store` resource:
 
 ```python title="resources/store.py"
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+
+from db import db
+from models import StoreModel
+
+...
+
 @blp.arguments(StoreSchema)
 @blp.response(201, StoreSchema)
 def post(self, store_data):
