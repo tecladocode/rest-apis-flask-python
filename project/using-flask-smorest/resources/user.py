@@ -65,16 +65,14 @@ class User(MethodView):
     when we are manipulating data regarding the users.
     """
 
-    @classmethod
     @blp.response(200, UserSchema)
-    def get(cls, user_id: int):
+    def get(self, user_id):
         user = UserModel.find_by_id(user_id)
         if not user:
             abort(404, message="User not found.")
         return user
 
-    @classmethod
-    def delete(cls, user_id: int):
+    def delete(self, user_id):
         user = UserModel.find_by_id(user_id)
         if not user:
             abort(404, message="User not found.")
