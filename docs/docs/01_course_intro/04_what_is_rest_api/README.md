@@ -62,9 +62,9 @@ That data might look like this:
 
 ### The purpose of APIs
 
-Okay, we've learned that we can make a Flask app and expose certain functions to the public by using endpoints. Clients can then make requests (we'll learn how later), and get data.
+We've learned that we can make a Flask app and expose certain functions to the public by using endpoints. Clients can then make requests (we'll learn how later), and get data.
 
-Clients can also send data, which the functions can use.
+Clients can also send data, which the Flask functions can use.
 
 But _why_? If you want to use certain functions, why not just code them in your application?
 
@@ -74,9 +74,13 @@ Let's say you want to build a weather app.
 
 You could try to install sensors at the top of your house, connect them directly to the computer running your code, and then offer weather info based on what the sensors say...
 
-Or you could request weather data from the OpenWeatherMap API, just as tens of thousands of other devices do. 
+Or you could request weather data from the OpenWeatherMap API, just as tens of thousands of other devices do.
 
 Much easier, and all you have to do is make a request to the API!
+
+### What is a client?
+
+An API client can be any device, such as a web app or a mobile app.
 
 ### Making an API for your own consumption
 

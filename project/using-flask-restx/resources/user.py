@@ -78,14 +78,13 @@ class User(Resource):
     """
 
     @api.marshal_with(user_outputs)
-    def get(cls, user_id: int):
+    def get(cls, user_id):
         user = UserModel.find_by_id(user_id)
         if not user:
             abort(404, "User not found.")
         return user, 200
 
-    @classmethod
-    def delete(cls, user_id: int):
+    def delete(self, user_id):
         user = UserModel.find_by_id(user_id)
         if not user:
             abort(404, "User not found.")

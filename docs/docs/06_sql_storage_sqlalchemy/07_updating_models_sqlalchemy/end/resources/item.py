@@ -23,13 +23,13 @@ class Item(MethodView):
     @blp.arguments(ItemUpdateSchema)
     @blp.response(200, ItemSchema)
     def put(self, item_data, item_id):
-        item = ItemModel.query.get_or_404(item_id)
+        item = ItemModel.query.get(item_id)
 
         if item:
             item.price = item_data["price"]
             item.name = item_data["name"]
         else:
-            item = ItemModel(**item_data)
+            item = ItemModel(id=item_id, **item_data)
 
         db.session.add(item)
         db.session.commit()
