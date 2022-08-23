@@ -69,4 +69,4 @@ Access tokens don't last forever: they normally have expiry times within 30 days
 
 Tokens are more secure if they expire sooner because if the user forgets to log out of a shared device, and someone else tries to use their account, the token will expire and they will be unable to use the account.
 
-Obviously, it's not a great experience for users if they have to keep re-entering their username and password constantly. Towards the end of this section we will learn about [token refreshing](../11_token_refreshing_flask_jwt_extended/README.md), which is a way to reduce the amount of times users have to re-authenticate, without affecting security too much.
+Obviously, it's not a great experience for users if they have to keep re-entering their username and password constantly. Towards the end of this section we will learn about [token refreshing](../12_token_refreshing_flask_jwt_extended/README.md), which is a way to reduce the amount of times users have to re-authenticate, without affecting security too much.

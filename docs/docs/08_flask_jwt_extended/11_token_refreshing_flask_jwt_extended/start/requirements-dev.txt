@@ -1,3 +1,0 @@
-pytest
-black
-flake8
