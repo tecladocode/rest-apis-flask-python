@@ -63,7 +63,7 @@ This is in contrast to a Bind Mount, which is another type of volume where the D
 | Feature                                      | Named Volumes               | Bind Mounts                     |
 | -------------------------------------------- | --------------------------- | ------------------------------- |
 | Host Location                                | Docker chooses              | You control                     |
-| Mount Example (using `v`)                    | `my-colume:/usr/local/data` | `/path/to/data:/usr/local/data` |
+| Mount Example (using `v`)                    | `my-volume:/usr/local/data` | `/path/to/data:/usr/local/data` |
 | Populates new volume with container contents | Yes                         | No                              |
 | Supports Volume Drivers                      | Yes                         | No                              |
 
