@@ -5,12 +5,6 @@ description: Use SQLAlchemy to handle removal of a specific model.
 
 # Delete models with SQLAlchemy
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 Just as with adding, deleting models is a matter of using `db.session`, and then committing when the deletion is complete:
 
 ```python title="resources/item.py"

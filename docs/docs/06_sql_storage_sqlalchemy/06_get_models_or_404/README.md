@@ -5,12 +5,6 @@ description: Learn how to fetch a specific model using its primary key column, a
 
 # Get models by ID from the database using SQLAlchemy
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 Using the model class's `query` attribute, we have access to two very handy methods:
 
 - `ItemModel.query.get(item_id)` gives us an `ItemModel` object from the database where the `item_id` matches the primary key.

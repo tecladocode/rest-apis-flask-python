@@ -5,12 +5,6 @@ description: "Use dictionaries instead of lists for data storage, and store stor
 
 # Data model improvements
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 ## Starting code from section 4
 
 This is the "First REST API" project from Section 4:

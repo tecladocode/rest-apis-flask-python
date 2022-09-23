@@ -5,12 +5,6 @@ description: Model relationships let us easily retrieve information about a rela
 
 # One-to-many relationships with SQLAlchemy
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 ```python title="models/item.py"
 from db import db
 

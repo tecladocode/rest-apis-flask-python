@@ -5,12 +5,6 @@ description: Install and set up the Flask-JWT-Extended extension with our REST A
 
 # Flask-JWT-Extended setup
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 First, let's update our requirements:
 
 ```diff title="requirements.txt"

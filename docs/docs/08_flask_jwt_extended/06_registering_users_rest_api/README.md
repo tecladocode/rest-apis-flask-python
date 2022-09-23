@@ -5,12 +5,6 @@ description: Learn how to add a registration endpoint to a REST API using Flask-
 
 # How to add a register endpoint to the REST API
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 Registering users sounds like a conceptually very difficult thing, but let's break it down into steps:
 
 - Receive username and password from the client (as JSON).

@@ -5,12 +5,6 @@ description: Learn how to use SQLAlchemy to add new rows to our SQL database.
 
 # Insert models in the database with SQLAlchemy
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 Inserting models with SQLAlchemy couldn't be easier! We'll use the `db.session`[^1] variable to `.add()` a model. Let's begin working on our `Item` resource:
 
 ```python title="resources/item.py"

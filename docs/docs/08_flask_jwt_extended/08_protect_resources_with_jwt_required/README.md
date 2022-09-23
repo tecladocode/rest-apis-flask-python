@@ -5,12 +5,6 @@ description: Use jwt_required from Flask-JWT-Extended to prevent unauthorised us
 
 # Protect endpoints by requiring a JWT
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 Now that our users can sign up and log in, that means we can start _requiring login_ for certain endpoints.
 
 All this means in practice is that the client making the request must send a valid JWT.

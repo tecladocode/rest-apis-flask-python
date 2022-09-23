@@ -5,12 +5,6 @@ description: Learn about fresh and non-fresh tokens, as well as how to use a ref
 
 # Token refreshing with Flask-JWT-Extended
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 One of the problems with JWT authentication is that JWTs expire, and then the user has to re-authenticate by providing their username and password.
 
 How long to set the JWT expiry time is tricky. If it's very long, it's more likely that a different person may use the same device to access the website, and the previous user's account will still be logged in. If it's very short though, it's really annoying for users.

@@ -5,12 +5,6 @@ description: "Learn how to get your code instantly synced up to the Docker conta
 
 # Reloading API code in Docker container
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 ## Updating Dockerfile to use `requirements.txt`
 
 This is the Dockerfile as we've got it:

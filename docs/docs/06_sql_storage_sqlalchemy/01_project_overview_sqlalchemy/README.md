@@ -5,9 +5,6 @@ description: Let's look at what we'll do in this section. There are no changes t
 
 # Project Overview (and why use SQLAlchemy)
 
-- [x] Set metadata above
-- [x] Start writing!
-
 In this section we'll make absolutely no changes to the API! However, we will completely change the way we store data.
 
 Up until now, we've been storing data in an "in-memory database": a couple of Python dictionaries. When we stop the app, the data is destroyed. This is obviously not great, so we want to move to a proper store that can keep data around between app restarts!

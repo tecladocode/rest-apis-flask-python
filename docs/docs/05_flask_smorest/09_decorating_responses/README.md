@@ -5,12 +5,6 @@ description: Add response serialization and status code to API endpoints, and ad
 
 # Decorating responses with Flask-Smorest
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 We can use marshmallow schemas for serialization when we respond to a client. To do so, we need to tell Flask-Smorest what Schema to use when responding.
 
 This will do a few things:

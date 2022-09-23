@@ -5,12 +5,6 @@ description: Learn how to add a login endpoint that returns a JWT to a REST API 
 
 # How to add a login endpoint to the REST API
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 Now that we've done registration, we can do log in! It's very similar.
 
 Let's import `flask_jwt_extended.create_access_token` so that when we receive a valid username and password from the client, we can create a JWT and send it back:

@@ -5,12 +5,6 @@ description: Create the SQLAlchemy User model and marshmallow schema.
 
 # The User model and schema
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 Just as we did with items, stores, and tags, let's create two classes for our users:
 
 - The SQLAlchemy model, to interact with the database.

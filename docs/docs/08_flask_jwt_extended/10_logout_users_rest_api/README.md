@@ -5,12 +5,6 @@ description: Create a logout endpoint that blocks certain JWTs from making furth
 
 # How to add logout to the REST API
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 To log an user out we must _revoke_ their JWT. That way, if they send us the same JWT again, we can check whether it's been revoked or not. If it has, then we won't authorize them.
 
 To do this, we need a central store of revoked JWTs that we keep around at least until the revoked JWT has expired.

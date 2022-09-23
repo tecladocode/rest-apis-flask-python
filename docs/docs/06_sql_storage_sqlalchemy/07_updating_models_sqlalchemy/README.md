@@ -5,12 +5,6 @@ description: How to make changes to an existing model, or insert one if it doesn
 
 # Updating models with SQLAlchemy
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 A frequent operation in REST APIs is the "upsert", or "update or insert".
 
 This is an idempotent operation where we send the data we want the API to store. If the data identifier already exists, an update is done. If it doesn't, it is created.

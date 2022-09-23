@@ -5,12 +5,6 @@ description: Link Flask-SQLAlchemy with our Flask app and create the initial tab
 
 # Configure Flask-SQLAlchemy
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 We want to add two imports to `app.py`:
 
 ```python title="app.py"

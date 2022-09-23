@@ -3,12 +3,6 @@ title: One-to-many relationships review
 description: A super-quick look at creating the Tag model and setting up the one-to-many relationship with Stores.
 ---
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 # One-to-many relationship between Tag and Store
 
 Since we've already learned how to set up one-to-many relationships with SQLAlchemy when we looked at Items and Stores, let's go quickly in this section.

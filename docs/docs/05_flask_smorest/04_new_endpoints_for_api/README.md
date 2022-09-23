@@ -5,12 +5,6 @@ description: "Let's add a few routes to our first REST API, so it better matches
 
 # New endpoints for our REST API
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 ## New endpoints
 
 We want to add some endpoints for added functionality:

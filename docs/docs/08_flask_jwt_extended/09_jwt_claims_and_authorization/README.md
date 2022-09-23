@@ -5,12 +5,6 @@ description: Learn how to add claims (extra info) to a JWT and use it for author
 
 # JWT Claims and Authorization
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 JWT claims are extra data we can add to the JWT. For example, we could store in the JWT whether the user whose ID is stored in the JWT is an "administrator" or not.
 
 By doing this, we only have to check the user's permissions once, when we create the JWT, and not every time the user makes a request.

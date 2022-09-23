@@ -5,12 +5,6 @@ description: "Add new error handling and code improvements to the REST API befor
 
 # Improvements to our first REST API
 
-- [x] Set metadata above
-- [x] Start writing!
-- [x] Create `start` folder
-- [x] Create `end` folder
-- [ ] Create per-file diff between `end` and `start` (use "Compare Folders")
-
 ## Using `flask_smorest.abort` instead of returning errors manually
 
 At the moment in our API we're doing things like these in case of an error:
