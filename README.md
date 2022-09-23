@@ -36,19 +36,7 @@ If you do this for the entire course, I guarantee you will learn how to make RES
 
 ## Section 2: A Full Python Refresher
 
-The code is in files numbered between 1 and 11, covering concepts ranging from beginner to advanced.
-
-1. Variables
-2. Methods
-3. Lists, tuples, and sets
-4. If statements
-5. List comprehension
-6. Dictionaries
-7. Classes and objects
-8. Static and class methods
-9. Args and Kwargs
-10. Passing functions as arguments
-11. Decorators
+This section (only available on Udemy) helps programmers who are new to Python get acquainted with the language. It is not a complete-beginner Python course!
 
 ## Section 3: Your first REST API
 
