@@ -6,3 +6,4 @@ __pycache__/
 .DS_Store
 venv/
 .venv/
+docs/docs/.nota/config.ini

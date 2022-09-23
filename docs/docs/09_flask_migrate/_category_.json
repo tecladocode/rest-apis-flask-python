@@ -1,0 +1,4 @@
+{
+    "label": "Database migrations with Alembic and Flask-Migrate",
+    "position": 9
+}

@@ -36,54 +36,42 @@ If you do this for the entire course, I guarantee you will learn how to make RES
 
 ## Section 2: A Full Python Refresher
 
-The code is in files numbered between 1 and 11, covering concepts ranging from beginner to advanced.
-
-1. Variables
-2. Methods
-3. Lists, tuples, and sets
-4. If statements
-5. List comprehension
-6. Dictionaries
-7. Classes and objects
-8. Static and class methods
-9. Args and Kwargs
-10. Passing functions as arguments
-11. Decorators
+This section (only available on Udemy) helps programmers who are new to Python get acquainted with the language. It is not a complete-beginner Python course!
 
 ## Section 3: Your first REST API
 
-The code in this section includes a simple Flask app and a HTML and JavaScript file which calls the Flask app endpoints.
+The code in this section includes a simple Flask app that accepts and returns JSON data.
 
-## Section 4: Flask-RESTful
+## Section 4: Docker
 
-The code in this section includes a Flask app which is an API that represents items. It also includes user registration and authentication.
+Introduction to Docker to run your REST APIs. We talk about images, containers, and how to run applications.
 
-We also introduce Flask-RESTful, which is a Flask extension that helps us develop APIs more easily.
+## Section 5: Flask-Smorest
 
-## Section 5: Working with SQL
-
-The code in this section extends the last section by adding persistent storage of Items to a SQLite database.
+We introduce the Flask-Smorest extension, a library that greatly simplifies writing REST APIs using Flask. It also provides things like automated documentation generation.
 
 ## Section 6: Flask-SQLAlchemy
 
-The code in this section extends the previous section by replacing the manual integration with SQLite, with SQLAlchemy—an ORM (Object-Relational Mapping)—which allows us to easily replace SQLite with something like PostgreSQL or MySQL.
+The code in this section extends the previous section by replacing the data storage in Python lists with SQLAlchemy, an ORM (Object-Relational Mapping which simplifies connecting to and interacting with a database.
 
-## Section 7: Git for version control
+## Section 7: Many-to-many relationships
 
-In this section we introduce Git, a tool for code sharing and collaboration. In this course we'll use it to store the application code and then send it to our deployment tools, Heroku and DigitalOcean.
+In this section we talk about many-to-many relationships using SQLAlchemy.
 
-## Section 8: Deploying Flask Apps to Heroku
+## Section 8: Authentication with Flask-JWT-Extended
 
-Learn how to use GitHub and Heroku to deploy your Flask applications and make them available publicly to your users.
+Learn how to perform user authentication using JWTs and the Flask-JWT-Extended library. Here we talk about access token JWTs, as well as refresh tokens, JWT claims, blocklists, password hashing, and more.
 
-## Section 9: Deploying Flask Apps to our own servers
+## Section 9: Flask-Migrate
 
-Learn how to rent a server using DigitalOcean and run our Flask app in it. This is an alternative to Heroku. It's much cheaper, but requires a lot more work to get it set up.
+After deploying your apps, making changes to the database can be really tricky because you have to log in to the database server and manually update the database tables using SQL commands.
 
-## Section 10: Security in your REST APIs
+Flask-Migrate and the Alembic libraries simplify this job by creating migration scripts.
 
-In this section we learn about https and how to enable it in your own server running with DigitalOcean.
+## Section 10: Git Crash Course
 
-## Section 11: Token Refreshing and Flask-JWT-Extended
+A quick and intense course on Git and GitHub for code sharing.
 
-Learn about token freshness and how to implement refresh tokens using Flask-JWT-Extended.
+## Section 11: Deploying to Render.com
+
+Learn how to get your code running in the cloud and make it publicly accessible. In this section we use Render.com for deployments and we also deploy a PostgreSQL database.
