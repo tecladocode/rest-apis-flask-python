@@ -78,6 +78,16 @@ To do so, stop the running container (if you have one running), and use this com
 docker run -dp 5000:5000 -w /app -v "$(pwd):/app" flask-smorest-api
 ```
 
+:::info Windows command
+The command on Windows is the same, but the paths have to be passed in differently:
+
+```
+docker run -dp 5000:5000 -w /app -v "/c/Documents/yourproject:/app" flask-smorest-api
+```
+
+Instead of `/c/Documents/yourproject`, use the path to your project (but remember to use `/c/` instead of `C:/`).
+:::
+
 - `-dp 5000:5000` - same as before. Run in detached (background) mode and create a port mapping.
 - `-w /app` - sets the container's present working directory where the command will run from.
 - `-v "$(pwd):/app"` - bind mount (link) the host's present directory to the container's `/app` directory. Note: Docker requires absolute paths for binding mounts, so in this example we use `pwd` for printing the absolute path of the working directory instead of typing it manually.

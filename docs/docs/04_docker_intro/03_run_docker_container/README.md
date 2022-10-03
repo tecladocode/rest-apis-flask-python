@@ -6,7 +6,7 @@ Docker Desktop is an application to help you manage your images and containers. 
 
 ## Create your Docker image
 
-Next, download the REST API code from Section 3. You can download it here: LINK.
+Next, download the REST API code from Section 3. You can download it [here](https://www.dropbox.com/s/qs28amk2h420f2y/s03-final-code.zip?dl=0).
 
 If you want to use the code you wrote while following the videos, that's fine! Just make sure it works by running the Flask app locally and testing it with Insomnia REST Client or Postman.
 

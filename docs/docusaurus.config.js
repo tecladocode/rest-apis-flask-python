@@ -7,9 +7,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "REST APIs with Flask and Python",
-  tagline:
-    "Build and deploy REST APIs using Flask, PostgreSQL, Docker, and Celery",
-  url: "https://rest-apis.teclado.com",
+  tagline: "Build and deploy REST APIs using Flask, PostgreSQL, and Docker",
+  url: "https://rest-apis-flask.teclado.com",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -40,7 +39,7 @@ const config = {
       }),
     ],
   ],
-
+  plugins: [require.resolve("@cmfcmf/docusaurus-search-local")],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
