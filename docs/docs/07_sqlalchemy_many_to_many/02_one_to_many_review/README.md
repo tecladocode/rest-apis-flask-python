@@ -83,7 +83,6 @@ class TagSchema(PlainTagSchema):
 
 Let's add the Tag endpoints that aren't related to Items:
 
-
 | Method     | Endpoint              | Description                                             |
 | ---------- | --------------------- | ------------------------------------------------------- |
 | ✅ `GET`    | `/store/{id}/tag`     | Get a list of tags in a store.                          |
@@ -177,8 +176,7 @@ def create_app(db_url=None):
     db.init_app(app)
     api = Api(app)
 
-    @app.before_first_request
-    def create_tables():
+    with app.app_context():
         db.create_all()
 
     api.register_blueprint(ItemBlueprint)

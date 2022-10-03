@@ -9,7 +9,7 @@ Adding Flask-Migrate to our app is simple, just install it and add a couple line
 
 To install:
 
-```
+```bash
 pip install flask-migrate
 ```
 
@@ -33,7 +33,6 @@ migrate = Migrate(app, db)
 # highlight-end
 api = Api(app)
 
-@app.before_first_request
-def create_tables():
+with app.app_context():
     db.create_all()
 ```

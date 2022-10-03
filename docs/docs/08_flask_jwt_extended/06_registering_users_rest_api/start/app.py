@@ -28,8 +28,7 @@ def create_app(db_url=None):
     app.config["JWT_SECRET_KEY"] = "jose"
     jwt = JWTManager(app)
 
-    @app.before_first_request
-    def create_tables():
+    with app.app_context():
         import models  # noqa: F401
 
         db.create_all()
