@@ -30,7 +30,7 @@ def create_item():
 
 @app.get("/item")
 def get_all_items():
-    return {"items": list(items.value())}
+    return {"items": list(items.values())}
 
 
 @app.get("/store/<string:id>")
@@ -54,4 +54,4 @@ def create_store():
 
 @app.get("/store")
 def get_stores():
-    return {"stores": list(stores.value())}
+    return {"stores": list(stores.values())}
