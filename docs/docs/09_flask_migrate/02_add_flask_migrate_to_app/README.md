@@ -36,3 +36,12 @@ api = Api(app)
 with app.app_context():
     db.create_all()
 ```
+
+Since we will be using Flask-Migrate to create our database, we no longer need to tell Flask-SQLAlchemy to do it when we create the app.
+
+Delete these two lines:
+
+```py
+with app.app_context():
+    db.create_all()
+```
