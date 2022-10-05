@@ -275,4 +275,15 @@ class Tag(MethodView):
 
 And with that, we're done!
 
+## Making sure Store ID matches when linking tags
+
+If you wanted to, you can make sure that you can only link a tag that belongs to a certain store, with an item of that same store.
+
+Something like this would work:
+
+```py
+if item.store.id != tag.store.id:
+    abort(400, message="Make sure item and tag belong to the same store before linking.")
+```
+
 Now we're ready to look at securing API endpoints with user authentication.
