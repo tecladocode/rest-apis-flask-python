@@ -31,7 +31,8 @@ const config = {
           sidebarPath: require.resolve("./sidebars.js"),
           exclude: ["**/start/**", "**/end/**"],
           // Please change this to your repo.
-          editUrl: "https://github.com/tecladocode/rest-apis-flask-python/",
+          editUrl:
+            "https://github.com/tecladocode/rest-apis-flask-python/tree/develop/docs/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),

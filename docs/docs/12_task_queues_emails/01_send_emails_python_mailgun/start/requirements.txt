@@ -1,0 +1,10 @@
+flask==2.1.3
+flask-smorest
+python-dotenv
+sqlalchemy
+flask-sqlalchemy
+flask-jwt-extended
+passlib
+flask-migrate
+gunicorn
+psycopg2
