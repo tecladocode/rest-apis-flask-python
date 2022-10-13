@@ -108,14 +108,14 @@ Next, let's create the `.flaskenv` file:
 
 ```txt title=".flaskenv"
 FLASK_APP=app
-FLASK_ENV=development
+FLASK_DEBUG=True
 ```
 
 If we have the `python-dotenv` library installed, when we run the `flask run` command, Flask will read the variables inside `.flaskenv` and use them to configure the Flask app.
 
-The configuration that we'll do is to define the Flask app file (here, `app.py`). Then we'll also set the Flask environment to `development`, which does a couple things:
+The configuration that we'll do is to define the Flask app file (here, `app.py`). Then we'll also set the `FLASK_DEBUG` flag to `True`, which does a couple things:
 
-- Sets debug mode to true, which makes the app give us better error messages
+- Makes the app give us better error messages and return a traceback when we make requests if there's an error.
 - Sets the app reloading to true, so the app restarts when we make code changes
 
 We don't want debug mode to be enabled in production (when we deploy our app), but while we're doing development it's definitely a time-saving tool!
