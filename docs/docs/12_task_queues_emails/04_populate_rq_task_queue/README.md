@@ -76,10 +76,10 @@ def send_user_registration_email(email, username):
 Remember to change "Your Name" in `from` to whatever name you want your emails to come from!
 :::
 
-Next up, let's get our Redis connection string and add it to the `.env` file:
+Next up, add the Redis connection string that we got in the [previous section](../what_is_task_queue) to the `.env` file:
 
 ```text title=".env"
-REDIS_URL="rediss://red-ct8aen0hkl10:MnLs0mmrX7MBXWRkdrh49@frankfurt-redis.render.com:6379"
+REDIS_URL="<insert your Redis url here>"
 ```
 
 And then let's go to our User resource and add a couple of imports:
