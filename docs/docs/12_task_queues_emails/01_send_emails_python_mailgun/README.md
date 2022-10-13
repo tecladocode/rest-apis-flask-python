@@ -72,8 +72,14 @@ def send_simple_message(to, subject, body):
 Then let's go to the `.env` file and add your Mailgun API key and domain:
 
 ```text title=".env"
-MAILGUN_API_KEY="1f1ahfjhf4878797887187j-5ac54n"
-MAILGUN_DOMAIN="sandbox723b05d9.mailgun.org"
+MAILGUN_API_KEY="<insert your api key here>"
+MAILGUN_DOMAIN="<insert your domain here>"
 ```
+
+:::info
+The API Key should look something like this: `"1f1ahfjhf4878797887187j-5ac54n"`.
+
+The Domain should look something like this: `"sandbox723b05d9.mailgun.org"`
+:::
 
 With this, we're ready to actually send emails!
