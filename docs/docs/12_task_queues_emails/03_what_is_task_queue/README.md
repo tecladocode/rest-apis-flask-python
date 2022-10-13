@@ -25,3 +25,9 @@ Render.com can provide us with a free Redis database, so I recommend using that 
 Navigate to your Render.com dashboard, and create a new free Redis database. The free Redis provided doesn't have persistence enabled, but that's okay. It means we will lose data if the service is turned off, but since we're using it as a task queue that's not as big a deal as it otherwise could be.
 
 Later on if we want, we can upgrade to one of the paid plans.
+
+To be able to add tasks to the queue from your dev environment, make sure to [allow external connections](https://render.com/docs/redis#connecting-to-your-redis-from-outside-render) in your Redis database configuration.
+
+![Screenshot showing 0.0.0.0/0 as an allowed IP address when connecting to our Render Redis database](./assets/render-redis-allowing-outside.png)
+
+You should get a Redis URL that looks like this: `rediss://red-ct8aen0hkl10:MnLs0mmrX7MBXWRkdrh49@frankfurt-redis.render.com:6379`. Save it, for we'll need it in the next lecture!
