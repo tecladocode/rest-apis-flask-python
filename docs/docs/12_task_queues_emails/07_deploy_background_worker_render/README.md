@@ -30,6 +30,10 @@ Then, give it a name and fill in its basic settings. The default works for the m
 
 Add the environment variables it needs. Although in this case it doesn't need the `DATABASE_URL`, you can add it if you will be adding other tasks that do use the database in the near future. If not, leave it out.
 
+:::warning Internal URL
+If your Redis database is with Render.com, you'd want to use the Redis database **Internal URL**, but I encountered some issues with it where the `redis` package didn't recognise the URL. Try it, but fall back to the external URL if it doesn't work.
+:::
+
 ![Environment variables added in Render.com including DATABASE_URL, REDIS_URL, MAILGUN_API_KEY, and MAILGUN_DOMAIN, with their respective values](./assets/render-bg-worker-env-vars.png)
 
 Finally, this "background worker" is just a Python program without networking capabilities. So if we leave it as is, it will actually just run our Dockerfile and the Dockerfile's `CMD` command (which starts our web application). Therefore we want to give it a custom Docker command that starts the background worker.
