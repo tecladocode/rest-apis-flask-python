@@ -245,8 +245,6 @@ def create_store():
 <TabItem value="new" label="create_store (new)">
 
 ```py title="app.py"
-import uuid
-
 @app.post("/store")
 def create_store():
     store_data = request.get_json()
@@ -256,8 +254,6 @@ def create_store():
 
     return store
 ```
-
-Here we add a new import, [the `uuid` module](https://docs.python.org/3/library/uuid.html). We will be using it to create unique IDs for our items instead of relying on the uniqueness of their `names`.
 
 </TabItem>
 </Tabs>
