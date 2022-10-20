@@ -81,7 +81,7 @@ def missing_token_callback(error):
 
 
 @jwt.needs_fresh_token_loader
-def token_not_fresh_callback():
+def token_not_fresh_callback(jwt_header, jwt_payload):
     return (
         jsonify(
             {"description": "The token is not fresh.", "error": "fresh_token_required"}
@@ -91,7 +91,7 @@ def token_not_fresh_callback():
 
 
 @jwt.revoked_token_loader
-def revoked_token_callback():
+def revoked_token_callback(jwt_header, jwt_payload):
     return (
         jsonify(
             {"description": "The token has been revoked.", "error": "token_revoked"}
@@ -103,8 +103,7 @@ def revoked_token_callback():
 # JWT configuration ends
 
 
-@app.before_first_request
-def create_tables():
+with app.app_context():
     import models  # noqa: F401
 
     db.create_all()

@@ -27,8 +27,7 @@ def create_app(db_url=None):
     migrate = Migrate(app, db)
     api = Api(app)
 
-    @app.before_first_request
-    def create_tables():
+    with app.app_context():
         db.create_all()
 
     api.register_blueprint(ItemBlueprint)

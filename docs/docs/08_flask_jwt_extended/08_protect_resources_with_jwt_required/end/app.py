@@ -68,8 +68,7 @@ def create_app(db_url=None):
 
     # JWT configuration ends
 
-    @app.before_first_request
-    def create_tables():
+    with app.app_context():
         import models  # noqa: F401
 
         db.create_all()

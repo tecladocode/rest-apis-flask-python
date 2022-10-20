@@ -89,8 +89,7 @@ def create_app(db_url=None):
     api = Api(app)
 
     # highlight-start
-    @app.before_first_request
-    def create_tables():
+    with app.app_context():
         db.create_all()
     # highlight-end
 
@@ -104,7 +103,7 @@ We've done three things:
 
 1. Added the `db_url` parameter. This lets us create an app with a certain database URL, or alternatively try to fetch the database URL from the environment variables. The default value will be a local SQLite file, if we don't pass a value ourselves and it isn't in the environment.
 2. Added two SQLAlchemy values to `app.config`. One is the database URL (or URI), the other is a [configuration option](https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/) which improves performance.
-3. Registered a function to run before our Flask app handles its first request. The function will tell SQLAlchemy to use what it knows in order to create all the database tables we need.
+3. When the app is created, tell SQLAlchemy to create all the database tables we need.
 
 :::tip How does SQLAlchemy know what tables to create?
 The line `import models` lets SQLAlchemy know what models exist in our application. Because they are `db.Model` instances, SQLAlchemy will look at their `__tablename__` and defined `db.Column` attributes to create the tables.
