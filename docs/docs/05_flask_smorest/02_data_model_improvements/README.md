@@ -257,7 +257,7 @@ def create_store():
     return store
 ```
 
-Here we add a new import, [the `uuid` module](https://docs.python.org/3/library/uuid.html). We will be using it to create unique IDs for our stores and items instead of relying on the uniqueness of their `names`.
+Here we add a new import, [the `uuid` module](https://docs.python.org/3/library/uuid.html). We will be using it to create unique IDs for our stores and items instead of relying on the uniqueness of their names.
 
 </TabItem>
 </Tabs>
