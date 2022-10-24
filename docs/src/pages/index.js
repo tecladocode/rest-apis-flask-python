@@ -41,6 +41,7 @@ export default function Home() {
             border: "4px solid black",
             maxWidth: "800px",
             margin: "4rem auto 4rem auto",
+            boxShadow: "0 5px 15px 0 rgba(0, 0, 0, 0.15)",
           }}
         >
           <VideoEmbed url="https://customer-zmitazl0ztnd2pvm.cloudflarestream.com/1c4db6119cf0c6e682a88a737af146eb/iframe?poster=https%3A%2F%2Fcustomer-zmitazl0ztnd2pvm.cloudflarestream.com%2F1c4db6119cf0c6e682a88a737af146eb%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600" />
