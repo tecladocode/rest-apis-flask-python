@@ -4,6 +4,10 @@ id: intro
 
 # REST APIs with Flask and Python
 
+import VideoEmbed from "@site/src/components/VideoEmbed";
+
+<VideoEmbed url="https://customer-zmitazl0ztnd2pvm.cloudflarestream.com/1c4db6119cf0c6e682a88a737af146eb/iframe?poster=https%3A%2F%2Fcustomer-zmitazl0ztnd2pvm.cloudflarestream.com%2F1c4db6119cf0c6e682a88a737af146eb%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600" />
+
 Hi, and welcome!
 
 REST APIs with Flask and Python is a complete course that teaches you how to develop complete, professional REST APIs using **Flask**, **PostgreSQL**, and **Docker**.
