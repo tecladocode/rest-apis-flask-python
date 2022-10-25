@@ -58,11 +58,19 @@ const config = {
             label: "Tutorial",
           },
           {
-            href: "https://go.tecla.do/rest-apis-sale",
+            href: "https://go.tecla.do/rest-apis-ebook",
             label: "Get the course",
             position: "right",
           },
         ],
+      },
+      announcementBar: {
+        id: "support_us",
+        content:
+          '<span style="font-weight: 600">Unlock all video lessons and support us by <a target="_blank" style="background-image: linear-gradient(90deg, #FF7D82, #50e3c2); background-clip: text; color: transparent; " rel="noopener noreferrer" href="https://go.tecla.do/rest-apis-ebook">buying the course</a>!</span>',
+        backgroundColor: "#1c2023",
+        textColor: "#fff",
+        isCloseable: false,
       },
       footer: {
         style: "dark",
@@ -71,7 +79,7 @@ const config = {
             title: "Learn",
             items: [
               {
-                href: "https://go.tecla.do/rest-apis-sale",
+                href: "https://go.tecla.do/rest-apis-ebook",
                 label: "Get the course",
               },
               {
