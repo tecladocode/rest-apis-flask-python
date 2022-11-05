@@ -37,7 +37,7 @@ class ItemSchema(Schema):
     id = fields.Str(dump_only=True)
     name = fields.Str(required=True)
     price = fields.Float(required=True)
-    store_id = fields.Int(required=True)
+    store_id = fields.Str(required=True)
 ```
 
 A couple of weird things maybe!
