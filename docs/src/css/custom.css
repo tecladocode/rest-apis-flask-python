@@ -56,13 +56,25 @@
 
 .menu {
   font-weight: normal;
-  font-size: 0.9rem;
-  line-height: 1.4em
 }
 
-.menu__caret::before {
-  width: 1.25em;
-  height: 1.25em;
+.menu__caret::before, .menu__link--sublist-caret::after {
+  background: url("/img/folder-closed.svg") no-repeat;
+  transform: none;
+}
+
+.menu__list-item--collapsed .menu__link--sublist::after, .menu__list-item--collapsed .menu__caret::before {
+  transform: none;
+}
+
+.menu__list-item-collapsible .menu__link--sublist[aria-expanded='true']::after,
+.menu__list-item-collapsible .menu__link--sublist[aria-expanded='true'] + button::before {
+  background: url("/img/folder-open.svg") no-repeat;
+}
+
+.menu__list-item-collapsible .menu__link--sublist[aria-expanded='false']:hover::after,
+.menu__list-item-collapsible .menu__link--sublist[aria-expanded='false'] + button:hover::before {
+  fill: var(--ifm-color-primary-lightest);
 }
 
 .menu__link {
@@ -88,11 +100,15 @@
   font-weight: var(--ifm-font-weight-semibold);
 }
 
+.theme-doc-sidebar-item-category-level-1 .menu__list-item .menu__link--active:hover {
+  color: var(--ifm-color-primary);
+}
+
 .menu__link--active:not(.menu__link--sublist), .menu__list-item-collapsible--active {
   background: unset;
 }
 
-.menu__link:hover {
+.menu__link:hover, .menu__caret:hover {
   background: inherit;
 }
 
@@ -100,7 +116,7 @@
   margin-top: 0;
 }
 
-.menu__link[href]:hover {
+.menu__link[href]:hover, .menu__caret:hover {
   color: var(--ifm-color-primary);
 }
 

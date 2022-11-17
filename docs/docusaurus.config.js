@@ -30,7 +30,6 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          sidebarCollapsible: false,
           exclude: ["**/start/**", "**/end/**"],
           // Please change this to your repo.
           editUrl:
