@@ -56,7 +56,7 @@ const config = {
         // Public API key: it is safe to commit it
         apiKey: "882167549d623413f9b5314788a0d900",
 
-        indexName: "restApisFlask_ebook_teclado",
+        indexName: "docusaurus-2",
 
         // Optional: see doc section below
         // contextualSearch: true,
