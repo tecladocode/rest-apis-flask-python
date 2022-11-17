@@ -17,9 +17,10 @@ const config = {
   projectName: "rest-apis-flask-python", // Usually your repo name.
   scripts: [
     {
-      src: "https://plausible.io/js/plausible.js",
+      src: "https://plau-prox.teclado.workers.dev/get/script.outbound-links.js",
       defer: true,
       "data-domain": "rest-apis-flask.teclado.com",
+      "data-api": "https://plau-prox.teclado.workers.dev/send/event",
     },
   ],
   presets: [
