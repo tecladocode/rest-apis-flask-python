@@ -53,3 +53,73 @@
   background-color: rgba(46, 133, 85, 0.15);
   border-radius: 8px;
 }
+
+.menu {
+  font-weight: normal;
+}
+
+.menu__caret::before, .menu__link--sublist-caret::after {
+  background: url("/img/folder-closed.svg") no-repeat;
+  transform: none;
+}
+
+.menu__list-item--collapsed .menu__link--sublist::after, .menu__list-item--collapsed .menu__caret::before {
+  transform: none;
+}
+
+.menu__list-item-collapsible .menu__link--sublist[aria-expanded='true']::after,
+.menu__list-item-collapsible .menu__link--sublist[aria-expanded='true'] + button::before {
+  background: url("/img/folder-open.svg") no-repeat;
+}
+
+.menu__list-item-collapsible .menu__link--sublist[aria-expanded='false']:hover::after,
+.menu__list-item-collapsible .menu__link--sublist[aria-expanded='false'] + button:hover::before {
+  fill: var(--ifm-color-primary-lightest);
+}
+
+.menu__link {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.menu__list-item-collapsible, .theme-doc-sidebar-item-link-level-1 {
+  font-weight: var(--ifm-font-weight-bold);
+}
+
+.theme-doc-sidebar-item-category-level-1 .menu__list-item .menu__link {
+  border-left: 1px solid var(--ifm-color-gray-200);
+}
+
+.theme-doc-sidebar-item-category-level-1 .menu__list-item .menu__link:hover {
+  border-left: 1px solid var(--ifm-color-gray-600);
+  color: var(--ifm-color-gray-900);
+}
+
+.theme-doc-sidebar-item-category-level-1 .menu__list-item .menu__link--active {
+  border-left: 1px solid var(--ifm-color-primary-lightest);
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+.theme-doc-sidebar-item-category-level-1 .menu__list-item .menu__link--active:hover {
+  color: var(--ifm-color-primary);
+}
+
+.menu__link--active:not(.menu__link--sublist), .menu__list-item-collapsible--active {
+  background: unset;
+}
+
+.menu__link:hover, .menu__caret:hover {
+  background: inherit;
+}
+
+.menu__list-item:not(:first-child) {
+  margin-top: 0;
+}
+
+.menu__link[href]:hover, .menu__caret:hover {
+  color: var(--ifm-color-primary);
+}
+
+.menu__list-item-collapsible:hover {
+  background: inherit;
+}

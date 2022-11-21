@@ -17,9 +17,10 @@ const config = {
   projectName: "rest-apis-flask-python", // Usually your repo name.
   scripts: [
     {
-      src: "https://plausible.io/js/plausible.js",
+      src: "https://plau-prox.teclado.workers.dev/get/script.outbound-links.js",
       defer: true,
       "data-domain": "rest-apis-flask.teclado.com",
+      "data-api": "https://plau-prox.teclado.workers.dev/send/event",
     },
   ],
   presets: [
@@ -40,10 +41,35 @@ const config = {
       }),
     ],
   ],
-  plugins: [require.resolve("@cmfcmf/docusaurus-search-local")],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      docs: {
+        sidebar: {
+          hideable: true,
+        },
+      },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: "1BEGBIP9SH",
+
+        // Public API key: it is safe to commit it
+        apiKey: "882167549d623413f9b5314788a0d900",
+
+        indexName: "docusaurus-2",
+
+        // Optional: see doc section below
+        // contextualSearch: true,
+
+        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        // externalUrlRegex: "external\\.com|domain\\.com",
+
+        // Optional: Algolia search parameters
+        searchParameters: {},
+
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: "search",
+      },
       navbar: {
         title: "REST APIs with Flask and Python",
         logo: {
