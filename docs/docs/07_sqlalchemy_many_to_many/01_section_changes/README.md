@@ -5,6 +5,10 @@ description: In this section we add Tags to our Stores, and link these to Items 
 
 # Changes in this section
 
+:::tip Insomnia files
+Remember to get the Insomnia files for this section or for all sections [here](/insomnia-files/)!
+:::
+
 It's common for online stores to use "tags" to group items and to be able to search for them a bit more easily.
 
 For example, an item "Chair" could be tagged with "Furniture" and "Office".
