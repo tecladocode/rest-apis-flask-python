@@ -21,6 +21,10 @@ In this section we'll make a simple REST API that allows us to:
 
 This is how the interaction will go!
 
+:::tip Insomnia files
+Remember to get the Insomnia files for this section or for all sections [here](/insomnia-files/)!
+:::
+
 ## Create stores
 
 Request:

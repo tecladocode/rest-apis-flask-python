@@ -5,6 +5,10 @@ description: Overview of the API endpoints we'll use for user registration and a
 
 # Changes in this section
 
+:::tip Insomnia files
+Remember to get the Insomnia files for this section or for all sections [here](/insomnia-files/)!
+:::
+
 In this section we will add the following endpoints:
 
 | Method         | Endpoint          | Description                                           |

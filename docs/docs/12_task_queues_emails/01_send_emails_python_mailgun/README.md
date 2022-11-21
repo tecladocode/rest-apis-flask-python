@@ -1,5 +1,9 @@
 # How to send emails with Python and Mailgun
 
+:::tip Insomnia files
+Remember to get the Insomnia files for this section or for all sections [here](/insomnia-files/)!
+:::
+
 To send e-mails using Python, we are going to use Mailgun, a third party service which actually delivers the messages.
 
 You could use [your own personal account and the built-in `email` and `smtp` libraries](https://blog.teclado.com/learn-python-send-emails/), but most personal e-mail providers will limit how many e-mails you can send per day. Plus, you won't get analytics and a host of other features that you can get with an email service like Mailgun.

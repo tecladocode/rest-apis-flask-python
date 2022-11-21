@@ -84,6 +84,11 @@ const config = {
             label: "Tutorial",
           },
           {
+            href: "/insomnia-files/",
+            position: "left",
+            label: "Insomnia files",
+          },
+          {
             href: "https://go.tecla.do/rest-apis-ebook",
             label: "Get the course",
             position: "right",

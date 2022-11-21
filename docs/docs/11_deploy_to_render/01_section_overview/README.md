@@ -1,5 +1,9 @@
 # Overview of this section
 
+:::tip Insomnia files
+Remember to get the Insomnia files for this section or for all sections [here](/insomnia-files/)!
+:::
+
 In this section, we will figure out how to get our Flask app and put it on a public server so other people can interact with it! This is called "deploying".
 
 There are many services we can use to deploy our app. Most of them have some sort of "free tier" so that you can try the deployment without having to pay anything. Usually, if you want better performance or unlimited usage, you have to pay.

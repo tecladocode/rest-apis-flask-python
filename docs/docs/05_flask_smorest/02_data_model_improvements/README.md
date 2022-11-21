@@ -89,8 +89,13 @@ CMD ["flask", "run", "--host", "0.0.0.0"]
 </Tabs>
 </div>
 
-
 ## New files
+
+:::tip Insomnia files
+Remember to get the Insomnia files for this section or for all sections [here](/insomnia-files/)!
+
+There are two Insomnia files for this section: one for lectures 1-5 (before adding Docker), and one for the other lectures (after adding Docker).
+:::
 
 Let's start off by creating a `requirements.txt` file with all our dependencies:
 
