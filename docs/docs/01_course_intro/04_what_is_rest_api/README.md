@@ -84,7 +84,7 @@ An API client can be any device, such as a web app or a mobile app.
 
 ### Making an API for your own consumption
 
-Make software companies make APIs that only they use (so they aren't fully public).
+Many software companies make APIs that only they use (so they aren't fully public).
 
 Here's an example. You're making a multiplayer mobile game, and you need to store information about the moves that your character is making.
 
@@ -109,7 +109,7 @@ REST APIs deal in resources, so every individual "thing" that can be named is a 
 The main characteristics (or constraints) of a REST API are:
 
 1. **Uniform interface**. Whichever way clients should access a certain resource should also be the way the access other resources. Clients should have a single way to retrieve resources.
-2. **Client-server**. Clients should know the endpoints of the API, but they should not be coupled to the development of the API. A client or a servevr may be swapped out for a different implementation without the other noticing.
+2. **Client-server**. Clients should know the endpoints of the API, but they should not be coupled to the development of the API. A client or a server may be swapped out for a different implementation without the other noticing.
 3. **Stateless**. The server (API) doesn't store anything about previous client requests. Each client request is treated as a brand new client. If the client needs the server to personalize the response, then the client must send the server whatever information the server needs in order to do so.
 4. **Cacheable**. The client or server must be able to cache the resources returned by the API. This is a very general constraint, but it's an important one.
 5. **Layered system**. REST APIs may be developed as multiple layers, where each layer interacts [only with the layer above and below it](https://excalidraw.com/#json=or3Umoigss4yIeuKg3cO8,qH6uDDCXc7DSjweqNvlmzw).
@@ -156,7 +156,7 @@ We'll deal with user authentication in a later section, but that's what the lock
 | `GET`  | `/store`      | Get a list of all stores.                |
 | `POST` | `/store`      | Create a store.                          |
 | `GET`  | `/store/{id}` | Get a single store, given its unique id. |
-| `POST` | `/store/{id}` | Delete a store, given its unique id.     |
+| `DELETE` | `/store/{id}` | Delete a store, given its unique id.     |
 
 ### Items
 
