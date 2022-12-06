@@ -5,6 +5,10 @@ description: Learn how to define a REST API endpoint using Flask.
 
 # Your First REST API Endpoint
 
+import LockedVideoEmbed from "@site/src/components/LockedVideoEmbed";
+
+<LockedVideoEmbed />
+
 Let's start off by defining where we'll store our data. In most REST APIs, you'd store your data in a database. For now, and for simplicity, we'll store it in a Python list.
 
 Later on we'll work on making this data dynamic. For now let's use some sample data.

@@ -89,8 +89,13 @@ CMD ["flask", "run", "--host", "0.0.0.0"]
 </Tabs>
 </div>
 
-
 ## New files
+
+:::tip Insomnia files
+Remember to get the Insomnia files for this section or for all sections [here](/insomnia-files/)!
+
+There are two Insomnia files for this section: one for lectures 1-5 (before adding Docker), and one for the other lectures (after adding Docker).
+:::
 
 Let's start off by creating a `requirements.txt` file with all our dependencies:
 
@@ -245,6 +250,8 @@ def create_store():
 <TabItem value="new" label="create_store (new)">
 
 ```py title="app.py"
+import uuid
+
 @app.post("/store")
 def create_store():
     store_data = request.get_json()
@@ -254,6 +261,8 @@ def create_store():
 
     return store
 ```
+
+Here we add a new import, [the `uuid` module](https://docs.python.org/3/library/uuid.html). We will be using it to create unique IDs for our stores and items instead of relying on the uniqueness of their names.
 
 </TabItem>
 </Tabs>
