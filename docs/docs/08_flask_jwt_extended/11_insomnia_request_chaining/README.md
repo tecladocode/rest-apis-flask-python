@@ -15,11 +15,11 @@ Instead of passing the JWT in every request, you can access the `Headers`  secti
 
 After you've selected it, you'll see an error that looks like this:
 
-![Response error](./assets/error.png)
+![Response error in the Authorization field](./assets/error.png)
 
 If you click on the error, you'll see a modal window:
 
-![Empty modal window](./assets/modal.png)
+![Modal window with empty fields](./assets/modal.png)
 
 Inside of this window, you will first need to select a request that you want to get the data from. Click on `Select item` inside the `Request` field and choose the `POST /login` endpoint. After you've done that, go to the `Filter` field. In this field, we are telling Insomnia which part of the response we want to get from it. The prompt is started with the dollar sign `$` and then we can use the dot to access the attributes of the response. If we only type `$` or `$.`, we'll get a list of all the attributes of the response:
 
@@ -27,7 +27,7 @@ Inside of this window, you will first need to select a request that you want to 
 
 In our case, we want to get the `access_token` attribute from the response, so we type `$.access_token`. If there was something else inside the `access_token` that you wanted to access like some value for example, you could do `$.access_token.value` and so on. After you've added the filter, you can set the `Trigger Behavior`. For example, you can set it to `When expired` and set time to 300 seconds. This means that the token will be refreshed every 5 minutes. The filled out window should look like this:
 
-![Filled out modal window](./assets/filled_out.png)
+![Filled out modal window with attributes recieved from request using a dollar sign followed by .access_token](./assets/filled_out.png)
 
 You can now press `Done` and you'll see that the error is gone and that the `Authorization` field is filled out with the `Bearer` token:
 
@@ -37,7 +37,7 @@ Since we use multiple protected endpoints, we would need to use the same method 
 
 To do this, you need to create a new environment variable. Click on the `No Environment` button in the top left corner of the Insomnia window and then click on the `Manage Environments` button, you will see a base environment that looks like this:
 
-![Base environment with url env variable only](./assets/base_environment.png)
+![Base environment with url environment variable only](./assets/base_environment.png)
 
 Add a new environment variable called `access_token`, and for its value you should follow the same process from above. As a quick reminder, you should press `CTRL + SPACE` to get the contextual menu and then select the `Response -> Body Attribute` field. Click on the error that will show up and fill out the modal window as we've done before. Make sure to wrap the `Response -> Body Attribute` with quotation marks, as shown in the screenshot. When the variable is created, your environment should look like this:
 
@@ -45,6 +45,6 @@ Add a new environment variable called `access_token`, and for its value you shou
 
 You will now be able to use this environment variable in all of the endpoints by simply writing `{{access_token}}` in the field that you want to use it in. Coming back to the first example, you can use the access token in the `Authorization` field by writing `Bearer {{access_token}}` and this will be the result:
 
-![Bearer with access_token env variable](./assets/result.png)
+![Bearer with access_token environment variable](./assets/result.png)
 
 If you try and make the request, you will see that it works just like before, without needing to copy and paste the access token.
