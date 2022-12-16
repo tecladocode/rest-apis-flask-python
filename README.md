@@ -16,7 +16,7 @@
 
 ## Getting started
 
-Enrol in the course by going to [this link](https://go.tecla.do/rest-apis-ebook).
+Enroll in the course by going to [this link](https://go.tecla.do/rest-apis-ebook).
 
 Then you can come back here to download the repository. This repository contains the code that we develop in each section of the course.
 
