@@ -127,9 +127,9 @@ class Item(MethodView):
 
     def put(self, item_id):
         item_data = request.get_json()
-        # There's  more validation to do here!
-        # Like making sure price is a number, and also both items are optional
-        # Difficult to do with an if statement...
+        # Note that there's still more validation to do here!
+        # Like making sure that price is a number, and also that both items are optional
+        # This is difficult to do with an if statement...
         if "price" not in item_data or "name" not in item_data:
             abort(
                 400,
@@ -153,9 +153,9 @@ class ItemList(MethodView):
 
     def post(self):
         item_data = request.get_json()
-        # Here not only we need to validate data exists,
-        # But also what type of data. Price should be a float,
-        # for example.
+        # Here we're only making sure the needed data exists,
+        # But later we'll also need to validate the data's type.
+        # For example, we'll make sure price is a float.
         if (
             "price" not in item_data
             or "store_id" not in item_data
