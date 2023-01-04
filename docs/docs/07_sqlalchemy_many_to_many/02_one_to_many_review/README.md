@@ -117,9 +117,6 @@ class TagsInStore(MethodView):
     @blp.arguments(TagSchema)
     @blp.response(201, TagSchema)
     def post(self, tag_data, store_id):
-        if TagModel.query.filter(TagModel.store_id == store_id).first():
-            abort(400, message="A tag with that name already exists in that store.")
-
         tag = TagModel(**tag_data, store_id=store_id)
 
         try:
