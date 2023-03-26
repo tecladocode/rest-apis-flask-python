@@ -66,5 +66,5 @@ def create_app(db_url=None):
 :::caution
 The secret key set here, `"jose"`, is **not very safe**.
 
-Instead you should generate a long and random secret key using something like `secrets.SystemRandom().getrandbits(128)`.
+Instead you should generate a long and random secret key using something like `str(secrets.SystemRandom().getrandbits(128))`.
 :::

@@ -24,7 +24,7 @@ class TagModel(db.Model):
     __tablename__ = "tags"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
+    name = db.Column(db.String(80), unique=False, nullable=False)
     store_id = db.Column(db.Integer(), db.ForeignKey("stores.id"), nullable=False)
 
     store = db.relationship("StoreModel", back_populates="tags")
@@ -117,7 +117,7 @@ class TagsInStore(MethodView):
     @blp.arguments(TagSchema)
     @blp.response(201, TagSchema)
     def post(self, tag_data, store_id):
-        if TagModel.query.filter(TagModel.store_id == store_id).first():
+        if TagModel.query.filter(TagModel.store_id == store_id, TagModel.name == tag_data["name"]).first():
             abort(400, message="A tag with that name already exists in that store.")
 
         tag = TagModel(**tag_data, store_id=store_id)
