@@ -40,6 +40,11 @@ While on the free plan, deployments are a bit slow. It has to build your image a
 
 Now, you can access your service URL and try it out using Insomnia or Postman!
 
+:::warning
+if data.db is part of the .gitignore file you need to call  *flask db migrate* to populate the sqlite database. Since the free plan does not provide the CLI, you can do this in the Dockerfile by adding
+*RUN flask db upgrade* after *COPY . .*
+:::
+
 ![](./assets/insomnia-test-prod.png)
 
 :::warning
