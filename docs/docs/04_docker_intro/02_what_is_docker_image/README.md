@@ -1,3 +1,7 @@
+---
+slug: what-is-a-docker-image
+---
+
 # What is a Docker image?
 
 A Docker image is a snapshot of source code, libraries, dependencies, tools, and everything else (except the Operating System kernel!) that a container needs to run.

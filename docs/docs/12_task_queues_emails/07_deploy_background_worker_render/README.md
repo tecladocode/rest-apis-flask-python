@@ -1,3 +1,7 @@
+---
+slug: deploy-the-rq-background-worker-to-render-com
+---
+
 # Deploy the rq background worker to Render.com
 
 When deploying to Render.com, it's much easier if we don't have to pass the `REDIS_URL` and the queue name directly to the command.

@@ -1,3 +1,7 @@
+---
+slug: what-is-a-docker-container
+---
+
 # What is a Docker container?
 
 I'm sure you have heard of the term "Virtual Machine". A virtual machine is an emulation of an Operating System. For example, if you run a Windows virtual machine on your MacOS computer, it will run a whole copy of Windows so you can run Windows programs.

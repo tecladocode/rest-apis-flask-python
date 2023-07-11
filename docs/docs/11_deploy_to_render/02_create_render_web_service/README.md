@@ -1,3 +1,7 @@
+---
+slug: creating-a-render-com-web-service
+---
+
 # Creating a Render.com web service
 
 Let's start by going to [https://render.com](https://render.com) and signing up to an account. You can "Log in with GitHub" to make things easier.

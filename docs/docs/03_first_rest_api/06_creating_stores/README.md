@@ -1,6 +1,7 @@
 ---
 title: How to create stores
 description: Learn how to add data to our REST API.
+slug: how-to-create-stores
 ---
 
 # How to create stores in our REST API

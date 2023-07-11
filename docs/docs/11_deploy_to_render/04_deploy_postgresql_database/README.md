@@ -1,3 +1,7 @@
+---
+slug: how-to-get-a-deployed-postgresql-database
+---
+
 # How to get a deployed PostgreSQL database for our app
 
 There are many PostgreSQL-as-a-Service providers (that means, services that handle creating and maintaining your database for you).

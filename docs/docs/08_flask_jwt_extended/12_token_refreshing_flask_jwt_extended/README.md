@@ -1,6 +1,8 @@
 ---
 title: Token refreshing with Flask-JWT-Extended
 description: Learn about fresh and non-fresh tokens, as well as how to use a refresh token to generate a new, non-fresh access token.
+
+slug: token-refreshing-with-flask-jwt-extended
 ---
 
 # Token refreshing with Flask-JWT-Extended

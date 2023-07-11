@@ -1,6 +1,7 @@
 ---
 title: "What is a REST API?"
 description: "There's a lot of confusion around what is and isn't a REST API. Let's take a look!"
+slug: what-is-an-rest-api
 ---
 
 # What is a REST API?

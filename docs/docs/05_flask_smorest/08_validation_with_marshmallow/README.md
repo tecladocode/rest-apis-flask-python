@@ -1,6 +1,8 @@
 ---
 title: Validation with marshmallow
 description: We can use the marshmallow library to validate request data from our API clients.
+
+slug: validation-with-marshmallow
 ---
 
 # Validation with marshmallow

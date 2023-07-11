@@ -1,6 +1,8 @@
 ---
 title: Retrieve a list of all models
 description: Get more than one model and return it as a list from the API.
+
+Slug: retrieve-a-list-of-all-models
 ---
 
 # Retrieve a list of all models

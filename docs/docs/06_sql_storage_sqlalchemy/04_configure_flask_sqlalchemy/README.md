@@ -1,6 +1,8 @@
 ---
 title: Configure Flask-SQLAlchemy
 description: Link Flask-SQLAlchemy with our Flask app and create the initial tables.
+
+slug: configure-flask-sqlalchemy
 ---
 
 # Configure Flask-SQLAlchemy

@@ -1,6 +1,7 @@
 ---
 title: How to install Python
 description: A brief description of the lecture goes here.
+slug: how-to-install-python
 ---
 
 # How to install Python on your computer

@@ -1,3 +1,7 @@
+---
+slug: in-depth-docker-tutorial
+---
+
 # In-depth Docker Tutorial
 
 Like I mentioned earlier on in this section, this course is not a Docker course!

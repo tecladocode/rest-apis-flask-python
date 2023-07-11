@@ -1,6 +1,8 @@
 ---
 title: How to add logout to the REST API
 description: Create a logout endpoint that blocks certain JWTs from making further authenticated requests.
+
+slug: how-to-add-logout-to-the-rest-api
 ---
 
 # How to add logout to the REST API

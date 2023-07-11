@@ -1,6 +1,8 @@
 ---
 title: Change SQLAlchemy models and generate a migration
 description: Use Flask-Migrate to generate a new database migration after changing your SQLAlchemy models.
+
+slug: change-sqlalchemy-models-generate-migration
 ---
 
 # Change SQLAlchemy models and generate a migration

@@ -1,3 +1,7 @@
+--- 
+slug: what-is-a-task-queue
+---
+
 # What is a task queue?
 
 A queue is a data structure to which you can add and remove data, but a key aspect of it is that when you want to remove a piece of data from it, the piece of data removed is the first piece of data that was added.

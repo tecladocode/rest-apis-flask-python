@@ -1,6 +1,7 @@
 ---
 title: How to interact with your REST API
 description: Use Postman and Insomnia REST Client to interact with your REST API.
+slug: how-to-interact-with-your-rest-api
 ---
 
 # How to make a request to a REST API
