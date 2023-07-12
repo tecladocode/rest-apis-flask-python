@@ -1,3 +1,7 @@
+---
+ctslug: how-to-use-environment-variables-in-render-com
+---
+
 # How to use Environment Variables in Render.com
 
 A common way to configure applications before they start up is by using environment variables.

@@ -1,6 +1,7 @@
 ---
 title: How to use Blueprints and MethodViews
 description: Flask-Smorest MethodViews allow us to simplify API Resources by defining all methods that interact with the resource in one Python class.
+ctslug: how-to-use-flask-smorest-methodviews-blueprints
 ---
 
 # How to use Flask-Smorest MethodViews and Blueprints

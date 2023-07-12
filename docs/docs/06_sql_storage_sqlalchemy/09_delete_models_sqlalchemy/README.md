@@ -1,6 +1,7 @@
 ---
 title: Delete models with SQLAlchemy
 description: Use SQLAlchemy to handle removal of a specific model.
+ctslug: delete-models-with-sqlalchemy
 ---
 
 # Delete models with SQLAlchemy

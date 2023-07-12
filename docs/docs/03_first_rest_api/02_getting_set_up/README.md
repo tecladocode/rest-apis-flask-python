@@ -1,6 +1,7 @@
 ---
 title: Getting set up
 description: Set up a Flask project and create the Flask app.
+ctslug: getting-set-up
 ---
 
 # Getting set up

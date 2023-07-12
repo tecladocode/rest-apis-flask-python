@@ -1,6 +1,7 @@
 ---
 title: How are JWTs used?
 description: Learn who uses JWTs and how they are used by clients and servers to perform authentication.
+ctslug: how-are-jwts-used
 ---
 
 # How are JWTs used?

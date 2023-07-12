@@ -1,3 +1,7 @@
+---
+ctslug: sending-html-emails-with-mailgun
+---
+
 # Sending HTML emails with Mailgun
 
 Until now, we've been sending exclusively text emails. These have a clear advantage: text is simple! They'll look the same in every email client and device, and for many things, text is good enough.

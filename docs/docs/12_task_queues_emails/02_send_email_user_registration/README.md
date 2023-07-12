@@ -1,3 +1,7 @@
+---
+ctslug: sending-emails-when-users-register
+---
+
 # Sending emails when users register
 
 If we want to be able to send emails to users when they register, we'll need to:

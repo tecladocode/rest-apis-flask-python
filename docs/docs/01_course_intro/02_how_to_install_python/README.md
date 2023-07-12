@@ -1,6 +1,7 @@
 ---
 title: How to install Python
 description: A brief description of the lecture goes here.
+ctslug: how-to-install-python
 ---
 
 # How to install Python on your computer
@@ -25,7 +26,7 @@ If you have multiple versions of Python installed, such as a version you install
 C:\\Users\\yourname\\AppData\\Local\\Programs\\Python\\Python39-32\\python.exe
 ```
 
-When you use an IDE, such as [Visual Studio Code](../how_to_install_ide), you can use the integrated terminal instead of `cmd.exe`.
+When you use an IDE, such as [Visual Studio Code](../how_to_install_ide/), you can use the integrated terminal instead of `cmd.exe`.
 
 ## On Mac
 

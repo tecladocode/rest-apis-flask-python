@@ -1,6 +1,7 @@
 ---
 title: How to create items in each store
 description: A brief description of the lecture goes here.
+ctslug: how-to-create-items-in-each-store
 ---
 
 # How to create items in our REST API

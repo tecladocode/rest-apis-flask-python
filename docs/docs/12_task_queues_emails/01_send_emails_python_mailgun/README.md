@@ -1,3 +1,7 @@
+---
+ctslug: how-to-send-emails-with-python-mailgun
+---
+
 # How to send emails with Python and Mailgun
 
 :::tip Insomnia files
