@@ -8,7 +8,7 @@ I'm sure you have heard of the term "Virtual Machine". A virtual machine is an e
 
 This diagram shows what happens in that case:
 
-![Virtual Machine Diagram stack](./assets/vm.drawio.png)
+![Virtual Machine Diagram stack](https://res.cloudinary.com/teclado/image/upload/v1689180716/courses/rest-apis-flask-python/vm.drawio_nlrxmx.png)
 
 When you run a Virtual Machine, you can configure what hardware it has access to (e.g. 50% of the host's RAM, 2 CPU cores, etc).
 
@@ -18,7 +18,7 @@ Containers have their own storage and networking, but because they don't have to
 
 This diagram shows how Linux containers run in a Linux host:
 
-![Docker Diagram stack](./assets/docker-linux.drawio.png)
+![Docker Diagram stack](https://res.cloudinary.com/teclado/image/upload/v1689180716/courses/rest-apis-flask-python/docker-linux.drawio_ebvff5.png)
 
 Looks similar, but the `docker -> container` section is much more efficient than running a VM because it **uses the host's kernel** instead of running its own.
 

@@ -102,4 +102,4 @@ Using this kind of volume mapping only makes sense _during development_. When yo
 
 Just to recap, here are the two ways we've seen to run your Docker container:
 
-![Diagram showing two ways of running a Docker container from a built image, with and without volume mapping](./assets/build-with-without-volume.png)
+![Diagram showing two ways of running a Docker container from a built image, with and without volume mapping](https://res.cloudinary.com/teclado/image/upload/v1689180724/courses/rest-apis-flask-python/build-with-without-volume_a7mig8.png)
