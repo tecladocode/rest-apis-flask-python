@@ -1,8 +1,7 @@
 ---
 title: "Reloading API code in Docker container"
 description: "Learn how to get your code instantly synced up to the Docker container, so that every time you make a code change it restarts the app in the container and uses the latest code."
-
-slugs: reloading-api-code-in-docker-container
+slug: reloading-api-code-in-docker-container
 ---
 
 # Reloading API code in Docker container
