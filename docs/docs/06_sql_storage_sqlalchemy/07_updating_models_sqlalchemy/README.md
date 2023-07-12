@@ -1,7 +1,6 @@
 ---
 title: Updating models with SQLAlchemy
 description: How to make changes to an existing model, or insert one if it doesn't already exist.
-
 slug: updating-models-with-sqlalchemy
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: Insert models in the database with SQLAlchemy
 description: Learn how to use SQLAlchemy to add new rows to our SQL database.
-
 slug: insert-models-in-database-with-sqlalchemy
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: Protect endpoints by requiring a JWT
 description: Use jwt_required from Flask-JWT-Extended to prevent unauthorised users from making requests to certain endpoints in a REST API.
-
 slug: protect-endpoints-by-requiring-a-jwt
 ---
 

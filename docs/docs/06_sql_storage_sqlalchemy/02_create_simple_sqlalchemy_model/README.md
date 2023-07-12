@@ -1,7 +1,6 @@
 ---
 title: Create a simple SQLAlchemy Model
 description: Lecture description goes here.
-
 slug: create-a-simple-sqlalchemy-model
 ---
 

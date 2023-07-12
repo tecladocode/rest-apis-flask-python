@@ -1,7 +1,6 @@
 ---
 title: How to add a register endpoint to the REST API
 description: Learn how to add a registration endpoint to a REST API using Flask-Smorest and Flask-JWT-Extended.
-
 slug: how-to-add-a-register-endpoint-to-the-rest-api
 ---
 

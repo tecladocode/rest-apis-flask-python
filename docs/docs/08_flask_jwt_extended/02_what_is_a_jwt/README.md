@@ -1,7 +1,6 @@
 ---
 title: What is a JWT?
 description: Understand what a JWT is, what data it contains, and how it may be used.
-
 slug: what-is-a-jwt
 ---
 

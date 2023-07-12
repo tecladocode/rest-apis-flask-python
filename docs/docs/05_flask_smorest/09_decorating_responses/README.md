@@ -1,7 +1,6 @@
 ---
 title: Decorating responses with Flask-Smorest
 description: Add response serialization and status code to API endpoints, and add to your documentation in the process.
-
 slug: decorating-responses-with-flask-smorest
 ---
 

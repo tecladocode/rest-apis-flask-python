@@ -1,7 +1,6 @@
 ---
 title: How to add Flask-Migrate to our Flask app
 description: Integrating your Flask app with Flask-Migrate is relatively straightforward. Learn how to do it in this lecture.
-
 slug: how-to-add-flask-migrate-to-our-flask-app
 ---
 

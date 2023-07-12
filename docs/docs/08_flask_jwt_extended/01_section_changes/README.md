@@ -1,8 +1,7 @@
 ---
 title: Changes in this section
 description: Overview of the API endpoints we'll use for user registration and authentication.
-
-slug: changes-in-this-section
+slug: changes-in-jwt-extended-section
 ---
 
 # Changes in this section
