@@ -1,7 +1,7 @@
 ---
 title: "Improvements to our first REST API"
 description: "Add new error handling and code improvements to the REST API before adding any new endpoints."
-slug: improvements-to-our-first-rest-api
+ctslug: improvements-to-our-first-rest-api
 ---
 
 # Improvements to our first REST API
