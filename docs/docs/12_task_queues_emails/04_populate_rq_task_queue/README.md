@@ -1,5 +1,5 @@
 ---
-slug: populating-consuming-the-task-queue-with-rq
+ctslug: populating-consuming-the-task-queue-with-rq
 ---
 
 # Populating and consuming the task queue with rq

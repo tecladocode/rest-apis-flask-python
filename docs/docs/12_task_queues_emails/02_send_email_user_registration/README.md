@@ -1,5 +1,5 @@
 ---
-slug: sending-emails-when-users-register
+ctslug: sending-emails-when-users-register
 ---
 
 # Sending emails when users register

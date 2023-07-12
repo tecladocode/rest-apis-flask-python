@@ -1,5 +1,5 @@
 ---
-slug: sending-html-emails-with-mailgun
+ctslug: sending-html-emails-with-mailgun
 ---
 
 # Sending HTML emails with Mailgun

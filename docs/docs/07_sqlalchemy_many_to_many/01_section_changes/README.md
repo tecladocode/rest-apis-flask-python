@@ -1,7 +1,7 @@
 ---
 title: Changes in this section
 description: In this section we add Tags to our Stores, and link these to Items using a many-to-many relationship.
-slug: changes-in-many-to-many-section
+ctslug: changes-in-many-to-many-section
 ---
 
 # Changes in this section

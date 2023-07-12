@@ -1,5 +1,5 @@
 ---
-slug: what-is-a-docker-container
+ctslug: what-is-a-docker-container
 ---
 
 # What is a Docker container?

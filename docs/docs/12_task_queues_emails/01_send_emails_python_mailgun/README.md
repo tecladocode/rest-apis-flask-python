@@ -1,5 +1,5 @@
 ---
-slug: how-to-send-emails-with-python-mailgun
+ctslug: how-to-send-emails-with-python-mailgun
 ---
 
 # How to send emails with Python and Mailgun

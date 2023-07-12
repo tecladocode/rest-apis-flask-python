@@ -1,7 +1,7 @@
 ---
 title: "Data model improvements"
 description: "Use dictionaries instead of lists for data storage, and store stores and items separately."
-slug: data-model-improvements
+ctslug: data-model-improvements
 ---
 
 # Data model improvements

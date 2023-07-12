@@ -1,5 +1,5 @@
 ---
-slug: run-our-flask-app-with-gunicorn
+ctslug: run-our-flask-app-with-gunicorn
 ---
 
 # Run our Flask app with gunicorn in Docker

@@ -1,7 +1,7 @@
 ---
 title: Project Overview
 description: A first look at the project we'll build in this section.
-slug: overview-of-your-first-rest-api
+ctslug: overview-of-your-first-rest-api
 ---
 
 # Overview of your first REST API

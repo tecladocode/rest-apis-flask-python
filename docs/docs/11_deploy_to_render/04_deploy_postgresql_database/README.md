@@ -1,5 +1,5 @@
 ---
-slug: how-to-get-a-deployed-postgresql-database
+ctslug: how-to-get-a-deployed-postgresql-database
 ---
 
 # How to get a deployed PostgreSQL database for our app

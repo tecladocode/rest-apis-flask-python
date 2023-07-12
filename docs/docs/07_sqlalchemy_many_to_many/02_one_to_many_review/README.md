@@ -1,7 +1,7 @@
 ---
 title: One-to-many relationships review
 description: A super-quick look at creating the Tag model and setting up the one-to-many relationship with Stores.
-slug: one-to-many-relationship-between-tag-store
+ctslug: one-to-many-relationship-between-tag-store
 ---
 
 # One-to-many relationship between Tag and Store

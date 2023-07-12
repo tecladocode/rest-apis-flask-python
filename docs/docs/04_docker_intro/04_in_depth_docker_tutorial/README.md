@@ -1,5 +1,5 @@
 ---
-slug: in-depth-docker-tutorial
+ctslug: in-depth-docker-tutorial
 ---
 
 # In-depth Docker Tutorial

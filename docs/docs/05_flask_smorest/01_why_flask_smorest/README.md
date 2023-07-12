@@ -1,5 +1,5 @@
 ---
-slug: why-use-flask-smorest
+ctslug: why-use-flask-smorest
 ---
 
 # Why use Flask-Smorest

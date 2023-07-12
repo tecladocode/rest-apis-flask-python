@@ -1,7 +1,7 @@
 ---
 title: Initialize your database with Flask-Migrate
 description: "Learn the first steps when starting with Flask-Migrate: initializing the database."
-slug: initialize-database-with-flask-migrate
+ctslug: initialize-database-with-flask-migrate
 ---
 
 # Initialize the database with Flask-Migrate

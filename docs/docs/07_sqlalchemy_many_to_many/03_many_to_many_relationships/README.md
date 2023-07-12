@@ -1,7 +1,7 @@
 ---
 title: Many-to-many relationships
 description: Learn to set up a many-to-many relationship between two models using SQLAlchemy.
-slug: many-to-many-relationships
+ctslug: many-to-many-relationships
 ---
 
 # Many-to-many relationships

@@ -1,5 +1,5 @@
 ---
-slug: deploy-the-rq-background-worker-to-render-com
+ctslug: deploy-the-rq-background-worker-to-render-com
 ---
 
 # Deploy the rq background worker to Render.com

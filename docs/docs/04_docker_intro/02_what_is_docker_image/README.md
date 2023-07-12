@@ -1,5 +1,5 @@
 ---
-slug: what-is-a-docker-image
+ctslug: what-is-a-docker-image
 ---
 
 # What is a Docker image?

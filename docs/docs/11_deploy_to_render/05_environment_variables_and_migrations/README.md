@@ -1,5 +1,5 @@
 ---
-slug: how-to-use-environment-variables-in-render-com
+ctslug: how-to-use-environment-variables-in-render-com
 ---
 
 # How to use Environment Variables in Render.com

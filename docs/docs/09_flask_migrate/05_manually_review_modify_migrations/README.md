@@ -1,7 +1,7 @@
 ---
 title: Manually review and modify database migrations
 description: Alembic can generate database migrations parting from model changes, but sometimes we need to modify them manually.
-slug: manually-review-modify-database-migrations
+ctslug: manually-review-modify-database-migrations
 ---
 
 # Manually review and modify database migrations

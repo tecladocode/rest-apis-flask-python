@@ -1,7 +1,7 @@
 ---
 title: How to add a login endpoint to the REST API
 description: Learn how to add a login endpoint that returns a JWT to a REST API using Flask-Smorest and Flask-JWT-Extended.
-slug: how-to-add-a-login-endpoint
+ctslug: how-to-add-a-login-endpoint
 ---
 
 # How to add a login endpoint to the REST API
