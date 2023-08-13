@@ -98,7 +98,7 @@ const config = {
       announcementBar: {
         id: "support_us",
         content:
-          '<span style="font-weight: 600">Unlock all video lessons and support us by <a target="_blank" style="background-image: linear-gradient(90deg, #FF7D82, #50e3c2); background-clip: text; color: transparent; " rel="noopener noreferrer" href="https://go.tecla.do/rest-apis-ebook">buying the course</a>!</span>',
+          '<span style="font-weight: 600">Unlock all video lessons and support us by <a target="_blank" style="background-color: #ff7d82; background-image: linear-gradient(90deg, #FF7D82, #50e3c2); background-clip: text; color: transparent; -webkit-background-clip: text; -moz-background-clip: text; -webkit-text-fill-color: transparent; -moz-text-fill-color: transparent; " rel="noopener noreferrer" href="https://go.tecla.do/rest-apis-ebook">buying the course</a>!</span>',
         backgroundColor: "#1c2023",
         textColor: "#fff",
         isCloseable: false,
