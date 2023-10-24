@@ -1,5 +1,6 @@
 ---
 ctslug: how-to-run-a-docker-container
+description: Learn how to run a Docker container with your REST API using Docker Desktop.
 ---
 
 # How to run a Docker container
