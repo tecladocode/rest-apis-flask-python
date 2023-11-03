@@ -5,7 +5,7 @@ from flask_smorest import Blueprint, abort
 from schemas import ItemSchema, ItemUpdateSchema
 from db import items
 
-blp = Blueprint("Items", "items", description="Operations on items")
+blp = Blueprint("Items", __name__, description="Operations on items")
 
 
 @blp.route("/item/<string:item_id>")
