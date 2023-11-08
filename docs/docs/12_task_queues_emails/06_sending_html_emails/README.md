@@ -246,7 +246,7 @@ def send_user_registration_email(email, username):
         "Successfully signed up",
         f"Hi {username}! You have successfully signed up to the Stores REST API.",
         # highlight-start
-        render_template("email/registration.html", username=username),
+        render_template("email/action.html", username=username),
         # highlight-end
     )
 ```
