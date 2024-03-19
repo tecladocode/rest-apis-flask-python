@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 from db import db
 from models import StoreModel
-from schemas import StoreSchema
+from schemas import StoreSchema, ItemSchema
 
 
 blp = Blueprint("Stores", __name__, description="Operations on stores")
