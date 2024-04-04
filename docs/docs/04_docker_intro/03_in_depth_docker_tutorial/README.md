@@ -1,3 +1,8 @@
+---
+ctslug: in-depth-docker-tutorial
+description: My notes from the official Docker tutorial.
+---
+
 # In-depth Docker Tutorial
 
 Like I mentioned earlier on in this section, this course is not a Docker course!

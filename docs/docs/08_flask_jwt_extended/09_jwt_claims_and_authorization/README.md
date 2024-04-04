@@ -1,6 +1,7 @@
 ---
 title: JWT claims and authorization
 description: Learn how to add claims (extra info) to a JWT and use it for authorization in endpoints of a REST API.
+ctslug: jwt-claims-and-authorization
 ---
 
 # JWT Claims and Authorization

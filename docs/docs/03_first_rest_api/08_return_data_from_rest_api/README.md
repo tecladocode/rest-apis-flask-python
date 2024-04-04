@@ -1,6 +1,7 @@
 ---
 title: Get a specific store and its items
 description: How to use Flask to return data from your REST API to your client.
+ctslug: get-a-specific-store-and-its-items
 ---
 
 # How to get a specific store and its items

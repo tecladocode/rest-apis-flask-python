@@ -1,6 +1,7 @@
 ---
 title: Your First REST API Endpoint
 description: Learn how to define a REST API endpoint using Flask.
+ctslug: your-first-rest-api-endpoint
 ---
 
 # Your First REST API Endpoint

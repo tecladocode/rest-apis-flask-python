@@ -1,6 +1,7 @@
 ---
 title: Why use database migrations?
 description: Learn about database migrations and what they are useful for.
+ctslug: why-use-database-migrations
 ---
 
 # Why use database migrations?

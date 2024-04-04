@@ -1,3 +1,7 @@
+---
+ctslug: how-to-use-environment-variables-in-render-com
+---
+
 # How to use Environment Variables in Render.com
 
 A common way to configure applications before they start up is by using environment variables.
@@ -356,11 +360,11 @@ Now that our Flask app is using environment variables, all we have to do is add 
 
 To add environment variables in Render.com, go to the service settings and then on the left you'll see "Environment":
 
-![Render.com screenshot showing the button to add a environment variables](./assets/render-add-env-var.png)
+![Render.com screenshot showing the button to add a environment variables](https://res.cloudinary.com/teclado/image/upload/v1689180783/courses/rest-apis-flask-python/render-add-env-var_lodpee.png)
 
 Click on "Add Environment Variable", and there put `DATABASE_URL` as the key, and your ElephantSQL Database URL as the value:
 
-![Render.com screenshot showing DATABASE_URL added with a pixelated value](./assets/render-database-url-env-var.png)
+![Render.com screenshot showing DATABASE_URL added with a pixelated value](https://res.cloudinary.com/teclado/image/upload/v1689180784/courses/rest-apis-flask-python/render-database-url-env-var_wrxgjl.png)
 
 :::warning
 Again, make sure to use `postgresql://...` here.

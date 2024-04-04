@@ -1,3 +1,7 @@
+---
+ctslug: why-use-flask-smorest
+---
+
 # Why use Flask-Smorest
 
 There are many different REST API libraries for Flask. In a previous version of this course, we used Flask-RESTful. Now, I recommend using [Flask-Smorest](https://github.com/marshmallow-code/flask-smorest).

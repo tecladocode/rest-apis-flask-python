@@ -1,3 +1,7 @@
+--- 
+ctslug: process-background-tasks-with-the-rq-worker
+---
+
 # Process background tasks with the rq worker
 
 We've got our queue and we've added tasks to it, but they won't run until we start consuming them and popping them off the queue.

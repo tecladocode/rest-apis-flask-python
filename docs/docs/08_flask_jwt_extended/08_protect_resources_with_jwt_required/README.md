@@ -1,6 +1,7 @@
 ---
 title: Protect endpoints by requiring a JWT
 description: Use jwt_required from Flask-JWT-Extended to prevent unauthorised users from making requests to certain endpoints in a REST API.
+ctslug: protect-endpoints-by-requiring-a-jwt
 ---
 
 # Protect endpoints by requiring a JWT
@@ -25,7 +26,7 @@ from db import db
 from models import ItemModel
 from schemas import ItemSchema, ItemUpdateSchema
 
-blp = Blueprint("Items", "items", description="Operations on items")
+blp = Blueprint("Items", __name__, description="Operations on items")
 
 
 @blp.route("/item/<string:item_id>")

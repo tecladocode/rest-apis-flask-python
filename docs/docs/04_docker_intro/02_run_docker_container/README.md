@@ -1,3 +1,8 @@
+---
+ctslug: how-to-run-a-docker-container
+description: Learn how to run a Docker container with your REST API using Docker Desktop.
+---
+
 # How to run a Docker container
 
 ## Install Docker Desktop
@@ -122,6 +127,6 @@ docker run -dp 5001:5000 rest-apis-flask-python
 
 Try making requests using the URL `127.0.0.1:5000` with Insomnia REST Client or Postman, and you should see it working well!
 
-![Insomnia REST Client successfully made a request to the API running in Docker](assets/running-app-docker.png)
+![Insomnia REST Client successfully made a request to the API running in Docker](https://res.cloudinary.com/teclado/image/upload/v1689180719/courses/rest-apis-flask-python/running-app-docker_mkosjm.png)
 
 [^1]: [Docker `EXPOSE` command (Official Documentation)](https://docs.docker.com/engine/reference/builder/#expose)

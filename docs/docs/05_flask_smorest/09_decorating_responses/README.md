@@ -1,6 +1,7 @@
 ---
 title: Decorating responses with Flask-Smorest
 description: Add response serialization and status code to API endpoints, and add to your documentation in the process.
+ctslug: decorating-responses-with-flask-smorest
 ---
 
 # Decorating responses with Flask-Smorest
@@ -122,7 +123,7 @@ from db import stores
 from schemas import StoreSchema
 
 
-blp = Blueprint("Stores", "stores", description="Operations on stores")
+blp = Blueprint("Stores", __name__, description="Operations on stores")
 
 
 @blp.route("/store/<string:store_id>")
