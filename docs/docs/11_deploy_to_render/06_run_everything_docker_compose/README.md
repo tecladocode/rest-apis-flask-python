@@ -1,6 +1,6 @@
 # How to run the app and database with Docker Compose
 
-Up until now we've been running `docker-compose up` to start the REST API container.
+Up until now we've been running `docker compose up` to start the REST API container.
 
 Now let's modify our `docker-compose.yml` file to include spinning up a new PostgreSQL database.
 
