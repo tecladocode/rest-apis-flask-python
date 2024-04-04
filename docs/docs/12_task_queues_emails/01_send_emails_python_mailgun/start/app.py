@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 
 from db import db
 from blocklist import BLOCKLIST
-import models
 
 from resources.item import blp as ItemBlueprint
 from resources.store import blp as StoreBlueprint
@@ -96,10 +95,6 @@ def create_app(db_url=None):
             ),
             401,
         )
-
-    @app.before_first_request
-    def create_tables():
-        db.create_all()
 
     api.register_blueprint(ItemBlueprint)
     api.register_blueprint(StoreBlueprint)
