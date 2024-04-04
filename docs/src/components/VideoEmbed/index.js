@@ -14,7 +14,7 @@ export default function VideoEmbed({ url }) {
           width: "100%",
         }}
         allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-        allowfullscreen="true"
+        allowFullScreen={true}
       ></iframe>
     </div>
   );
