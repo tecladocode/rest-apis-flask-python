@@ -1,8 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/okaidia");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+import { Highlight, themes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -145,11 +144,11 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Teclado Ltd. Built with Docusaurus.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: themes.okaidia,
+        darkTheme: themes.dracula,
         additionalLanguages: ["docker"],
       },
     }),
 };
 
-module.exports = config;
+export default config;
