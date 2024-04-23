@@ -58,6 +58,8 @@ def create_app():
 ## Add Flask-SQLAlchemy code to the app factory
 
 ```python title="app.py"
+import os
+
 from flask import Flask
 from flask_smorest import Api
 
