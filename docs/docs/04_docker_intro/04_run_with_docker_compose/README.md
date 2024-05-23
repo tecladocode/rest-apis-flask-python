@@ -13,7 +13,6 @@ If you have Docker Desktop installed, you already have Docker Compose. If you wa
 Create a file called `docker-compose.yml` in the root of your project (alongside your `Dockerfile`). Inside it, add the following contents:
 
 ```yaml
-version: '3'
 services:
   web:
     build: .

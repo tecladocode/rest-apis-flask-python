@@ -5,7 +5,6 @@ Up until now we've been running `docker compose up` to start the REST API contai
 Now let's modify our `docker-compose.yml` file to include spinning up a new PostgreSQL database.
 
 ```yaml
-version: '3'
 services:
   web:
     build: .
