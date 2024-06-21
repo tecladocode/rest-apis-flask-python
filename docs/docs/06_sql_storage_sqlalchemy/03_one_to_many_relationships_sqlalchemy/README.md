@@ -1,6 +1,7 @@
 ---
 title: One-to-many relationships with SQLAlchemy
 description: Model relationships let us easily retrieve information about a related model, without having to do SQL JOINs manually.
+ctslug: one-to-many-relationships-with-sqlalchemy
 ---
 
 # One-to-many relationships with SQLAlchemy

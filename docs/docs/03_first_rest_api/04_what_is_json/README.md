@@ -1,6 +1,7 @@
 ---
 title: "What is JSON?"
 description: JSON is the way we normally transfer data to and from REST APIs.
+ctslug: what-is-json
 ---
 
 # What is JSON?

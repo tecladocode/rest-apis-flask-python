@@ -1,6 +1,7 @@
 ---
 title: How to install an IDE
 description: What IDE should you use? How do you install it? Let me show you in this quick guide.
+ctslug: how-to-install-an-ide
 ---
 
 # How to install an IDE

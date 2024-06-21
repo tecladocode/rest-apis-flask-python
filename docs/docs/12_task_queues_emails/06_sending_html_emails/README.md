@@ -1,3 +1,7 @@
+---
+ctslug: sending-html-emails-with-mailgun
+---
+
 # Sending HTML emails with Mailgun
 
 Until now, we've been sending exclusively text emails. These have a clear advantage: text is simple! They'll look the same in every email client and device, and for many things, text is good enough.
@@ -242,7 +246,7 @@ def send_user_registration_email(email, username):
         "Successfully signed up",
         f"Hi {username}! You have successfully signed up to the Stores REST API.",
         # highlight-start
-        render_template("email/registration.html", username=username),
+        render_template("email/action.html", username=username),
         # highlight-end
     )
 ```
@@ -251,7 +255,7 @@ Now remember to restart your app _and_ your background worker, then try to regis
 
 You should get the HTML email delivered!
 
-![HTML email with button to go to the API documentation](./assets/html-email.png)
+![HTML email with button to go to the API documentation](https://res.cloudinary.com/teclado/image/upload/v1689180798/courses/rest-apis-flask-python/html-email_dyxasi.png)
 
 :::info Spam or junk?
 If your emails are going to spam, it's likely because you're using the sandbox domain. When you use an actual domain, you have to go through various [domain verification steps](https://help.mailgun.com/hc/en-us/articles/360011702394-Why-Do-My-Emails-Go-to-Spam-) which reduce the likelihood of your emails ending up in spam.

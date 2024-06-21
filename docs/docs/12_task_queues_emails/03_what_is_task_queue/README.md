@@ -1,8 +1,12 @@
+--- 
+ctslug: what-is-a-task-queue
+---
+
 # What is a task queue?
 
 A queue is a data structure to which you can add and remove data, but a key aspect of it is that when you want to remove a piece of data from it, the piece of data removed is the first piece of data that was added.
 
-![New elements are added at the end, called pushing, and removed from the start, called popping, of a queue](./assets/queues.drawio.png)
+![New elements are added at the end, called pushing, and removed from the start, called popping, of a queue](https://res.cloudinary.com/teclado/image/upload/v1689180793/courses/rest-apis-flask-python/queues.drawio_yqgtvg.png)
 
 This is identical to how people queuing works. The first person to arrive at the queue (i.e. the first in line), is the first person removed from the queue when they reach the ticket counter.
 
@@ -28,6 +32,6 @@ Later on if we want, we can upgrade to one of the paid plans.
 
 To be able to add tasks to the queue from your dev environment, make sure to [allow external connections](https://render.com/docs/redis#connecting-to-your-redis-from-outside-render) in your Redis database configuration.
 
-![Screenshot showing 0.0.0.0/0 as an allowed IP address when connecting to our Render Redis database](./assets/render-redis-allowing-outside.png)
+![Screenshot showing 0.0.0.0/0 as an allowed IP address when connecting to our Render Redis database](https://res.cloudinary.com/teclado/image/upload/v1689180794/courses/rest-apis-flask-python/render-redis-allowing-outside_tkxsls.png)
 
 You should get a Redis URL that looks like this: `rediss://red-ct8aen0hkl10:MnLs0mmrX7MBXWRkdrh49@frankfurt-redis.render.com:6379`. Save it, for we'll need it in the next lecture!

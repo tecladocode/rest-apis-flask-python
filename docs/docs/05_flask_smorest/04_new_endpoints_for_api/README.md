@@ -1,6 +1,7 @@
 ---
 title: "New endpoints for our REST API"
 description: "Let's add a few routes to our first REST API, so it better matches what a production REST API would look like."
+ctslug: new-endpoints-for-our-rest-api
 ---
 
 # New endpoints for our REST API

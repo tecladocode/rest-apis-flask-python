@@ -1,6 +1,7 @@
 ---
 title: How are JWTs used?
 description: Learn who uses JWTs and how they are used by clients and servers to perform authentication.
+ctslug: how-are-jwts-used
 ---
 
 # How are JWTs used?
@@ -17,7 +18,7 @@ Here is a diagram of the interaction between client and API to generate an acces
 
 <div style={{maxWidth: '600px'}}>
 
-![Diagram showing the flow between client and server to generate an access token](./assets/access-token-flow.drawio.png)
+![Diagram showing the flow between client and server to generate an access token](https://res.cloudinary.com/teclado/image/upload/v1689180750/courses/rest-apis-flask-python/access-token-flow.drawio_gdr9oo.png)
 
 </div>
 
@@ -55,7 +56,7 @@ Here is a rather long diagram depicting what happens:
 
 <div style={{maxWidth: '600px'}}>
 
-![Diagram showing flow of data when user wants to load their information but aren't logged in](./assets/my-info-flow.drawio.png)
+![Diagram showing flow of data when user wants to load their information but aren't logged in](https://res.cloudinary.com/teclado/image/upload/v1689180750/courses/rest-apis-flask-python/my-info-flow.drawio_pzfjh7.png)
 
 </div>
 

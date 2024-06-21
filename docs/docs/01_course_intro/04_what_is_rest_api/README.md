@@ -1,6 +1,7 @@
 ---
 title: "What is a REST API?"
 description: "There's a lot of confusion around what is and isn't a REST API. Let's take a look!"
+ctslug: what-is-an-rest-api
 ---
 
 # What is a REST API?
@@ -151,11 +152,11 @@ We'll deal with user authentication in a later section, but that's what the lock
 
 ### Stores
 
-| Method | Endpoint      | Description                              |
-| ------ | ------------- | ---------------------------------------- |
-| `GET`  | `/store`      | Get a list of all stores.                |
-| `POST` | `/store`      | Create a store.                          |
-| `GET`  | `/store/{id}` | Get a single store, given its unique id. |
+| Method   | Endpoint      | Description                              |
+| -------- | ------------- | ---------------------------------------- |
+| `GET`    | `/store`      | Get a list of all stores.                |
+| `POST`   | `/store`      | Create a store.                          |
+| `GET`    | `/store/{id}` | Get a single store, given its unique id. |
 | `DELETE` | `/store/{id}` | Delete a store, given its unique id.     |
 
 ### Items

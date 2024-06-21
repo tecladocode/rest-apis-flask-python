@@ -1,6 +1,7 @@
 ---
 title: Changes in this section
 description: In this section we add Tags to our Stores, and link these to Items using a many-to-many relationship.
+ctslug: changes-in-many-to-many-section
 ---
 
 # Changes in this section
@@ -30,7 +31,7 @@ This means that tags will have:
 
 Here's a diagram to illustrate what this looks like:
 
-![ER database model showing relationships](./assets/db_model.drawio.png)
+![ER database model showing relationships](https://res.cloudinary.com/teclado/image/upload/v1689180742/courses/rest-apis-flask-python/db_model.drawio_ilgupm.png)
 
 ## New API endpoints to be added
 

@@ -1,6 +1,7 @@
 ---
 title: How to interact with your REST API
 description: Use Postman and Insomnia REST Client to interact with your REST API.
+ctslug: how-to-interact-with-your-rest-api
 ---
 
 # How to make a request to a REST API
@@ -28,11 +29,11 @@ Start by [downloading Insomnia REST Client](https://insomnia.rest/).
 
 Once you've opened it, create a Project. I would call it "REST APIs with Flask and Python".
 
-![Creating the Project for this course](assets/creating-project.png)
+![Creating the Project for this course](https://res.cloudinary.com/teclado/image/upload/v1689180715/courses/rest-apis-flask-python/creating-project_qsyxlg.png)
 
 Then, create a new Request Collection. Call it "Stores REST API".
 
-![Creating the Stores REST API Request Collection](assets/making-request-collection.png)
+![Creating the Stores REST API Request Collection](https://res.cloudinary.com/teclado/image/upload/v1689180710/courses/rest-apis-flask-python/making-request-collection_lcthlv.png)
 
 In the Request Collection, we can now add requests! Each request has a few parts:
 
@@ -45,19 +46,19 @@ Let's create our first request, `GET /store`.
 
 Make a new request using the Insomnia interface. First, use the dropdown to start:
 
-![How to make a request using the Insomnia interface](assets/making-request.png)
+![How to make a request using the Insomnia interface](https://res.cloudinary.com/teclado/image/upload/v1689180711/courses/rest-apis-flask-python/making-request_hmiptl.png)
 
 Then enter the request name. Leave the method as `GET`:
 
-![Enter the request name and method](assets/set-request-name-and-method.png)
+![Enter the request name and method](https://res.cloudinary.com/teclado/image/upload/v1689180712/courses/rest-apis-flask-python/set-request-name-and-method_bc6smy.png)
 
 Once you're done, you will see your request in the collection:
 
-![The request is shown in the collection](assets/before-setting-url.png)
+![The request is shown in the collection](https://res.cloudinary.com/teclado/image/upload/v1689180711/courses/rest-apis-flask-python/before-setting-url_qjxvyr.png)
 
 Next up, enter the URL for your request. Here we will be requesting the `/store` endpoint. Remember to include your Base URL as well:
 
-![Entering the full URL for the request in Insomnia](assets/url-set.png)
+![Entering the full URL for the request in Insomnia](https://res.cloudinary.com/teclado/image/upload/v1689180714/courses/rest-apis-flask-python/url-set_fgp9s9.png)
 
 Once you're done, make sure that your Flask app is running! If it isn't, remember to activate your virtual environment first and then run the app:
 
@@ -74,6 +75,6 @@ If you get an error, read it carefully and make sure that no other Flask app is 
 
 Once your Flask app is running, you can hit "Send" on the Insomnia client, and you should see the JSON come back from your API!
 
-![Making a request to our API using Insomnia](assets/after-pressing-send.png)
+![Making a request to our API using Insomnia](https://res.cloudinary.com/teclado/image/upload/v1689180712/courses/rest-apis-flask-python/after-pressing-send_okjkjq.png)
 
 If that worked and you can see your JSON, you're good to go! You've made your first API request. Now we can continue developing our REST API, remembering to always create new Requests in Insomnia and test our code as we go along!

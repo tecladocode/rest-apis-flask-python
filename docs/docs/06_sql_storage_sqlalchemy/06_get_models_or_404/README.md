@@ -1,6 +1,7 @@
 ---
-title: Get models by ID from the database
+title: Get models by ID from the database using SQLAlchemy
 description: Learn how to fetch a specific model using its primary key column, and how to return a 404 page if it isn't found.
+ctslug: get-models-by-id-from-the-database
 ---
 
 # Get models by ID from the database using SQLAlchemy

@@ -1,6 +1,7 @@
 ---
 title: "Reloading API code in Docker container"
 description: "Learn how to get your code instantly synced up to the Docker container, so that every time you make a code change it restarts the app in the container and uses the latest code."
+ctslug: reloading-api-code-in-docker-container
 ---
 
 # Reloading API code in Docker container
@@ -101,4 +102,4 @@ Using this kind of volume mapping only makes sense _during development_. When yo
 
 Just to recap, here are the two ways we've seen to run your Docker container:
 
-![Diagram showing two ways of running a Docker container from a built image, with and without volume mapping](./assets/build-with-without-volume.png)
+![Diagram showing two ways of running a Docker container from a built image, with and without volume mapping](https://res.cloudinary.com/teclado/image/upload/v1689180724/courses/rest-apis-flask-python/build-with-without-volume_a7mig8.png)

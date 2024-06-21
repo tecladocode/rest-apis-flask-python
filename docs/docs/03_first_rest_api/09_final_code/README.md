@@ -1,6 +1,7 @@
 ---
 title: Final code of this section
 description: Overview of the project we've built and all the code in it.
+ctslug: final-code-of-this-section
 ---
 
 # Final code of this section

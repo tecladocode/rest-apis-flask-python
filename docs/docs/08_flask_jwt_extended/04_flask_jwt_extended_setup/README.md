@@ -1,6 +1,7 @@
 ---
 title: Flask-JWT-Extended setup
 description: Install and set up the Flask-JWT-Extended extension with our REST API.
+ctslug: flask-jwt-extended-setup
 ---
 
 # Flask-JWT-Extended setup

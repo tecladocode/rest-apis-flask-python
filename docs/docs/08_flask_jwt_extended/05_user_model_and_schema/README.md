@@ -1,6 +1,7 @@
 ---
 title: The User model and schema
 description: Create the SQLAlchemy User model and marshmallow schema.
+ctslug: the-user-model-and-schema
 ---
 
 # The User model and schema

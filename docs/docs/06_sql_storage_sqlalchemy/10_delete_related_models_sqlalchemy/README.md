@@ -1,6 +1,7 @@
 ---
-title: Delete models with relationships
+title: Delete models with relationships using cascades
 description: Tell SQLAlchemy what to do with related models when you delete the parent.
+ctslug: delete-models-with-relationships-using-cascades
 ---
 
 # Delete models with relationships using cascades

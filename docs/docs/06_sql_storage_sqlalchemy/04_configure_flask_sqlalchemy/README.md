@@ -1,6 +1,7 @@
 ---
 title: Configure Flask-SQLAlchemy
 description: Link Flask-SQLAlchemy with our Flask app and create the initial tables.
+ctslug: configure-flask-sqlalchemy
 ---
 
 # Configure Flask-SQLAlchemy
@@ -58,6 +59,8 @@ def create_app():
 ## Add Flask-SQLAlchemy code to the app factory
 
 ```python title="app.py"
+import os
+
 from flask import Flask
 from flask_smorest import Api
 

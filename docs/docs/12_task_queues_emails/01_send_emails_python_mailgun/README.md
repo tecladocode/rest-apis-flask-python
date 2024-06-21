@@ -1,3 +1,7 @@
+---
+ctslug: how-to-send-emails-with-python-mailgun
+---
+
 # How to send emails with Python and Mailgun
 
 :::tip Insomnia files
@@ -34,7 +38,7 @@ You will get an email to confirm. Click the button that you see in that email to
 
 Next up, grab your API key. You can find it by clicking on this button (my domain and API key are blurred in this screenshot):
 
-![Click the 'Select' button to reveal your Mailgun API key](./assets/mailgun-api-key.png)
+![Click the 'Select' button to reveal your Mailgun API key](https://res.cloudinary.com/teclado/image/upload/v1689180789/courses/rest-apis-flask-python/mailgun-api-key_mc8bjz.png)
 
 ## Sending emails with Mailgun
 

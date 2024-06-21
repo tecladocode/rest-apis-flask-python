@@ -1,3 +1,7 @@
+---
+ctslug: populating-consuming-the-task-queue-with-rq
+---
+
 # Populating and consuming the task queue with rq
 
 We'll be using the [`rq` library](https://python-rq.org/) for our task queue implementation. Another popular option is `celery`, which is substantially more complex. For most workloads, `rq` is sufficient and it's much easier to work with.
