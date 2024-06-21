@@ -31,7 +31,7 @@ volumes:
 The `postgres` image accepts various environment variables, among them:
 
 - `POSTGRES_PASSWORD`, defaulting to `postgres`
-- `POSTGERS_DB`, defaulting to `postgres`
+- `POSTGRES_DB`, defaulting to `postgres`
 - `POSTGRES_USER`, defaulting to `postgres`
 - `POSTGRES_HOST`, defaulting to `localhost`
 - `POSTGRES_PORT`, defaulting to `5432`
