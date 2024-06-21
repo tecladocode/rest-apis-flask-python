@@ -12,7 +12,8 @@ services:
     ports:
       - "5000:80"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     env_file:
       - ./.env
     volumes:
@@ -24,6 +25,10 @@ services:
       - POSTGRES_DB=myapp
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -d $${POSTGRES_DB} -U postgres
+      interval: 2s
+      retries: 10
 volumes:
   postgres_data:
 ```
@@ -47,6 +52,12 @@ DATABASE_URL=postgresql://postgres:password@db/myapp
 
 When Docker Compose runs, it creates a virtual network[^1] which allows you to connect to `db`, which connects to the running `db` service container.
 :::
+
+In the `docker-compose.yml` file above you can also see that the `web` service depends on the `db` service, with the condition that it is healthy. A service is deemed "healthy" when its healthcheck passes.
+
+We've added a healthcheck to the `db` service which runs the `pg_isready`[^2] program using the supplied database and PostgreSQL user. This just tells us whether the PostgreSQL server is ready to respond to requests.
+
+Adding this means the `web` service won't start until the `db` service is ready to respond to requests.
 
 ## Named volumes in Docker Compose
 
@@ -114,3 +125,4 @@ Running `docker compose down` will **not** delete your named volumes. You need t
 :::
 
 [^1]: [Networking in Compose (official docs)](https://docs.docker.com/compose/networking/)
+[^2]: [pg_isready (PostgreSQL documentation)](https://www.postgresql.org/docs/current/app-pg-isready.html)
