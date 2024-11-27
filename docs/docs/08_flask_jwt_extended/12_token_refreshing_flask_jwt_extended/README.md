@@ -64,13 +64,15 @@ class UserLogin(MethodView):
 
         if user and pbkdf2_sha256.verify(user_data["password"], user.password):
             # highlight-start
-            access_token = create_access_token(identity=user.id, fresh=True)
+            access_token = create_access_token(identity=str(user.id), fresh=True)
             refresh_token = create_refresh_token(user.id)
             return {"access_token": access_token, "refresh_token": refresh_token}, 200
             # highlight-end
 
         abort(401, message="Invalid credentials.")
 ```
+
+**Update Nov 2024**: Before now, we used `identity=user.id`, but now we have to convert it to a string first.
 
 ## Writing the token refresh endpoint
 
@@ -90,6 +92,8 @@ class TokenRefresh(MethodView):
         BLOCKLIST.add(jti)
         return {"access_token": new_token}, 200
 ```
+
+**Note**: here we don't need to call `str(current_user)` because `get_jwt_identity()` returns what we previously stored, which is a string.
 
 Note that above, we've told Flask-JWT-Extended that a refresh token is required with `@jwt_required(refresh=True)`. We'll do something similar for requiring fresh tokens in a second!
 
