@@ -29,10 +29,12 @@ class UserLogin(MethodView):
         ).first()
 
         if user and pbkdf2_sha256.verify(user_data["password"], user.password):
-            access_token = create_access_token(identity=user.id)
+            access_token = create_access_token(identity=str(user.id))
             return {"access_token": access_token}, 200
 
         abort(401, message="Invalid credentials.")
 ```
 
-Here you can see the when we call `create_access_token(identity=user.id)` we pass in the user's `id`. This is what gets stored (among other things) inside the JWT, so when the client sends the JWT back on every request, we can tell who the JWT belongs to.
+Here you can see the when we call `create_access_token(identity=str(user.id))` we pass in the user's `id`. This is what gets stored (among other things) inside the JWT, so when the client sends the JWT back on every request, we can tell who the JWT belongs to.
+
+**Update Nov 2024**: Before now, we used `identity=user.id`, but now we have to convert it to a string first.
