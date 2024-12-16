@@ -80,13 +80,25 @@ docker run -dp 5000:5000 -w /app -v "$(pwd):/app" flask-smorest-api
 ```
 
 :::info Windows command
-The command on Windows is the same, but the paths have to be passed in differently:
+The command on Windows varies depending on what terminal application you use. Here are some of the most popular ones!
+
+**PowerShell**
 
 ```
-docker run -dp 5000:5000 -w /app -v "/c/Documents/yourproject:/app" flask-smorest-api
+docker run -dp 5000:5000 -w //app -v "$(Get-Location)://app" flask-smorest-api
 ```
 
-Instead of `/c/Documents/yourproject`, use the path to your project (but remember to use `/c/` instead of `C:/`).
+**Git Bash**
+
+```
+docker run -dp 5000:5000 -w //app -v "//$(pwd)://app" flask-smorest-api
+```
+
+**Command Prompt (CMD)**
+
+```
+docker run -dp 5000:5000 -w //app -v "%cd%://app" flask-smorest-api
+```
 :::
 
 - `-dp 5000:5000` - same as before. Run in detached (background) mode and create a port mapping.
